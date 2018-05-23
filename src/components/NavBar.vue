@@ -1,5 +1,5 @@
 <template>
-<div class="navBar">
+<div class="navBar" :class="{ noShadow: !isShadow }">
 	<div id="nav" ref="nav">
 		<span>Components</span>
 		<span>Guide</span>
@@ -21,6 +21,7 @@
 
 <script>
 export default {
+	props: ['isShadow'],
 	name: '',
 	data () {
 		return {
@@ -47,6 +48,9 @@ export default {
 	justify-content: space-around;
 	background: #fff;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+}
+.noShadow {
+	box-shadow: none;
 }
 #nav {
 	font-family: 'Roboto', sans-serif;
@@ -119,7 +123,7 @@ export default {
 @media (max-width: 768px) {
 	.navBar {
 		width: 100%;
-		height: 80px;
+		height: 70px;
 		display: flex;
 		align-items: center;
 		justify-content: left;
