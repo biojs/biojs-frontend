@@ -24,19 +24,19 @@ export default {
 	name: '',
 	data () {
 		return {
-		}
+		};
 	},
 	methods: {
 		openMenu: function () {
-			this.$refs.nav.style.left = '0vw'
-			return 0
+			this.$refs.nav.style.left = '0vw';
+			return 0;
 		},
 		closeMenu: function () {
-			this.$refs.nav.style.left = '-100vw'
-			return 0
+			this.$refs.nav.style.left = '-100vw';
+			return 0;
 		}
 	}
-}
+};
 </script>
 
 <style lang="scss" scoped>
