@@ -1,11 +1,11 @@
 <template>
-<div class="navBar">
+<div class="navBar" :class="{ noShadow: !isShadow }">
 	<div id="nav" ref="nav">
-		<span>Components</span>
-		<span>Guide</span>
-		<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
-		<span>About</span>
-		<span>Contact</span>
+		<router-link class="navLink" to="/components"><span>Components</span></router-link>
+		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
+		<router-link class="navLink" to="/"><span class="navLogo"><img src="../../static/logo.png" height="50px"></span></router-link>
+		<router-link class="navLink" to="/about"><span>About</span></router-link>
+		<router-link class="navLink" to="/contact"><span>Contact</span></router-link>
 		<div class="close">
 			<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
 		</div>
@@ -21,22 +21,23 @@
 
 <script>
 export default {
+	props: ['isShadow'],
 	name: '',
 	data () {
 		return {
-		}
+		};
 	},
 	methods: {
 		openMenu: function () {
-			this.$refs.nav.style.left = '0vw'
-			return 0
+			this.$refs.nav.style.left = '0vw';
+			return 0;
 		},
 		closeMenu: function () {
-			this.$refs.nav.style.left = '-100vw'
-			return 0
+			this.$refs.nav.style.left = '-100vw';
+			return 0;
 		}
 	}
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -47,8 +48,17 @@ export default {
 	justify-content: space-around;
 	background: #fff;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+	z-index: 999;
+}
+.noShadow {
+	box-shadow: none;
+}
+.navLink {
+	text-decoration: none;
+	color: #007E3A;
 }
 #nav {
+	z-index: 999;
 	font-family: 'Roboto', sans-serif;
 	margin-top: 10px;
 	line-height: 50px;
@@ -56,38 +66,40 @@ export default {
 	width: 80%;
 	display: flex;
 	justify-content: space-around;
-}
-#nav span {
-	font-size: 17px;
-	cursor: pointer;
-	transition: 0.2s all ease-in-out;
-}
-#nav span:hover::after {
-	width: 105%;
-}
-#nav .active::after {
-	width: 105%;
-}
-#nav span::after {
-	content: '';
-	display: block;
-	width: 0;
-	height: 2px;
-	background: #007E3A;
-	transition: width .3s;
-}
-#nav .navLogo::after {
-	display: none;
+	span {
+		font-size: 17px;
+		cursor: pointer;
+		transition: 0.2s all ease-in-out;
+	}
+	span:hover::after {
+		width: 105%;
+	}
+	.active::after {
+		width: 105%;
+	}
+	span::after {
+		content: '';
+		display: block;
+		width: 0;
+		height: 2px;
+		background: #007E3A;
+		transition: width .3s;
+	}
+	.navLogo::after {
+		display: none;
+	}
 }
 #mobileNav {
 	display: none;
 	align-items: center;
-}
-#mobileNav h2 {
-	color: #007e3a;
-}
-#mobileNav h2 span {
-	color: #000;
+	h2 {
+		color: #007e3a;
+		margin: 0;
+		padding: 0;
+	}
+	span {
+		color: #000;
+	}
 }
 .hamburger {
 	display: none;
@@ -96,10 +108,10 @@ export default {
 	margin: 0 5px 0 20px;
 	align-items: center;
 	justify-content: center;
-}
-.hamburger img {
-	height: 100%;
-	width: 100%;
+	img {
+		height: 100%;
+		width: 100%;
+	}
 }
 .close {
 	position: absolute;
@@ -108,10 +120,10 @@ export default {
 	height: 40px;
 	width: 40px;
 	display: none;
-}
-.close img {
-	height: 100%;
-	width: 100%;
+	img {
+		height: 100%;
+		width: 100%;
+	}
 }
 /*
 	Responsive design
@@ -119,7 +131,7 @@ export default {
 @media (max-width: 768px) {
 	.navBar {
 		width: 100%;
-		height: 80px;
+		height: 70px;
 		display: flex;
 		align-items: center;
 		justify-content: left;
@@ -146,19 +158,19 @@ export default {
 		-moz-transition: 0.3s all cubic-bezier(0,.47,.37,.37);
 		-o-transition: 0.3s all cubic-bezier(0,.47,.37,.37);
 		transition: 0.3s all cubic-bezier(0,.47,.37,.37);
-	}
-	#nav span {
-		padding-left: 30px;
-		line-height: 60px;
-		font-size: 20px;
-		cursor: pointer;
-		transition: 0.2s all ease-in-out;
-	}
-	#nav span:hover::after {
-		width: 0%;
-	}
-	#nav span:hover {
-		background-color: #efefef;
+		span {
+			padding-left: 30px;
+			line-height: 60px;
+			font-size: 20px;
+			cursor: pointer;
+			transition: 0.2s all ease-in-out;
+		}
+		span:hover::after {
+			width: 0%;
+		}
+		span:hover {
+			background-color: #efefef;
+		}
 	}
 	.navLogo {
 		display: none;
@@ -173,9 +185,11 @@ export default {
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
 }
 @media (max-width: 481px) {
-	#nav span {
-		font-size: 15px;
-		line-height: 40px;
+	#nav {
+		span {
+			font-size: 15px;
+			line-height: 40px;
+		}
 	}
 }
 </style>
