@@ -9,6 +9,7 @@
 					<button type="button" class="btn btn-success btn-sm">Explore</button>
 					<button type="button" class="btn btn-success btn-sm">Learn More</button>
 				</div>
+				<img src="@/../static/phone.png" id="phone" />
 			</div>
 		</div>
 		<div id="visualize">
@@ -114,6 +115,66 @@ export default {
 		button:first-child {
 			margin-right: 10px;
 		}
+	}
+}
+#phone {
+	max-height: 60vh;
+	max-width: 40vw;
+	position: absolute;
+	bottom: 0;
+	right: 10%;
+}
+@media (max-width: 700px) {
+	#coverContainer {
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 20px;
+	}
+	#coverContent {
+		width: 95%;
+		text-align: center;
+	}
+	#phone {
+		position: static;
+		right: 0;
+		overflow: hidden;
+		max-height: 50vh;
+		max-width: 80vw;
+	}
+	#coverContent {
+		h1 {
+			color: #000;
+			font-family: 'Roboto', sans-serif;
+			font-weight: bolder;
+			span {
+				color: #007E3A;
+			}
+			font-size: 30px;
+		}
+		p {
+			font-size: 15px;
+		}
+	}
+}
+@media (max-height: 520px) and (max-width: 700px) {
+	#phone {
+		display: none;
+	}
+	#coverContainer {
+		justify-content: center;
+	}
+}
+@media (min-width: 700px) and (max-height: 500px) {
+	#phone {
+		display: none;
+	}
+	#coverContainer {
+		justify-content: center;
+		text-align: center;
+	}
+	#coverContent {
+		width: 80%;
 	}
 }
 </style>

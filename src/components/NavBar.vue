@@ -48,11 +48,13 @@ export default {
 	justify-content: space-around;
 	background: #fff;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+	z-index: 999;
 }
 .noShadow {
 	box-shadow: none;
 }
 #nav {
+	z-index: 999;
 	font-family: 'Roboto', sans-serif;
 	margin-top: 10px;
 	line-height: 50px;
@@ -88,6 +90,8 @@ export default {
 	align-items: center;
 	h2 {
 		color: #007e3a;
+		margin: 0;
+		padding: 0;
 	}
 	span {
 		color: #000;

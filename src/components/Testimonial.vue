@@ -19,7 +19,7 @@ export default {
 		return {
 			testimonials: [
 				{'id': 0, 'stars': 5, 'testimonial': 'I have always been looking for a smooth way to represent my data outside of PowerPoint. I like to use BioJS for my sequence alignments and it works just great!', 'author': 'J. Smith', 'specialization': 'Molecular Biologist'},
-				{'id': 1, 'stars': 4, 'testimonial': 'This library is so easy to use if you know your way around JavaScript a bit. I just created an interactive sequence viewer for my working group last week - my colleagues love it!', 'author': 'C. Ronley', 'specialization': 'Bioinformatician'},
+				{'id': 1, 'stars': 5, 'testimonial': 'This library is so easy to use if you know your way around JavaScript a bit. I just created an interactive sequence viewer for my working group last week - my colleagues love it!', 'author': 'C. Ronley', 'specialization': 'Bioinformatician'},
 				{'id': 2, 'stars': 4, 'testimonial': 'Quite a nice set of components already out there - I often find a solution for my visualization needs in just a couple of lines of code.', 'author': 'A. Rose', 'specialization': 'PhD Student Systems Biology'}
 			]
 		};
