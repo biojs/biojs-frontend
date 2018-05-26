@@ -26,6 +26,14 @@
 			<heading title="Why biologists love BioJS!" color="#FFFFFF" />
 			<testimonial />
 		</div>
+		<div id="about">
+			<heading title="Get to know BioJS" />
+			<p>{{ aboutBioJS }}</p>
+			<div id="aboutButtons">
+				<button type="button" class="btn btn-success btn-sm">Learn More</button>
+				<button type="button" class="btn btn-success btn-sm">View Guide</button>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
@@ -42,7 +50,8 @@ export default {
 	},
 	data () {
 		return {
-			intro: 'BioJS is a library of over hundred JavaScript components enabling you to visualize and process data using current web technologies.'
+			intro: 'BioJS is a library of over hundred JavaScript components enabling you to visualize and process data using current web technologies.',
+			aboutBioJS: 'BioJS unites users and developers from all around the globe to create outstanding biological data representations. The open-source character of the BioJS project makes it easy for anyone to follow and discuss current developments in the project, as well as to contribute and share their code with others.'
 		};
 	}
 };
@@ -87,5 +96,24 @@ export default {
 }
 #testimonials {
 	background: linear-gradient(#007E3A, #0C8C46, #00AF66);
+}
+#about {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 30px;
+	p {
+		font-size: 18px;
+		width: 70%;
+		text-align: center;
+	}
+	#aboutButtons {
+		button {
+			font-size: 15px;
+		}
+		button:first-child {
+			margin-right: 10px;
+		}
+	}
 }
 </style>
