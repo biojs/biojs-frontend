@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import NavBar from '@/components/Home.vue';
+import Home from '@/components/Home.vue';
+// import Components from '@/components/Components.vue';
+// import Guide from '@/components/Guide.vue';
+// import About from '@/components/About.vue';
+// import Contact from '@/components/Contact.vue';
 
 Vue.use(Router);
 
@@ -9,7 +13,27 @@ export default new Router({
 		{
 			path: '/',
 			name: 'Home',
-			component: NavBar
+			component: Home
 		}
+		// {
+		// 	path: '/components',
+		// 	name: 'Components',
+		// 	component: Components
+		// },
+		// {
+		// 	path: '/guide',
+		// 	name: 'Guide',
+		// 	component: Guide
+		// },
+		// {
+		// 	path: '/about',
+		// 	name: 'About',
+		// 	component: About
+		// },
+		// {
+		// 	path: '/contact',
+		// 	name: 'Contact',
+		// 	component: Contact
+		// }
 	]
 });

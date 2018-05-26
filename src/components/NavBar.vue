@@ -1,11 +1,11 @@
 <template>
 <div class="navBar" :class="{ noShadow: !isShadow }">
 	<div id="nav" ref="nav">
-		<span>Components</span>
-		<span>Guide</span>
-		<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
-		<span>About</span>
-		<span>Contact</span>
+		<router-link class="navLink" to="/components"><span>Components</span></router-link>
+		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
+		<router-link class="navLink" to="/"><span class="navLogo"><img src="../../static/logo.png" height="50px"></span></router-link>
+		<router-link class="navLink" to="/about"><span>About</span></router-link>
+		<router-link class="navLink" to="/contact"><span>Contact</span></router-link>
 		<div class="close">
 			<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
 		</div>
@@ -52,6 +52,10 @@ export default {
 }
 .noShadow {
 	box-shadow: none;
+}
+.navLink {
+	text-decoration: none;
+	color: #007E3A;
 }
 #nav {
 	z-index: 999;
