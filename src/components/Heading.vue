@@ -1,5 +1,5 @@
 <template>
-	<h1><u>{{ title }}</u></h1>
+	<h1 :style="{color: color}"><u>{{ title }}</u></h1>
 </template>
 <script>
 export default {
@@ -7,6 +7,16 @@ export default {
 		title: {
 			type: String,
 			required: true
+		},
+		color: {
+			default: '#007E3A',
+			type: String,
+			required: false
+		}
+	},
+	computed: {
+		computedColor: function () {
+			return this.color;
 		}
 	}
 };

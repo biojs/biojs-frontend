@@ -4,7 +4,7 @@
 			<nav-bar :isShadow="false" />
 			<div id="coverContainer">
 				<div id="coverContent">
-					<h2>Welcome to <span>BioJS</span></h2>
+					<h1>Welcome to <span>BioJS</span></h1>
 					<p>{{ intro }}</p>
 					<button type="button" class="btn btn-success btn-sm">Explore</button>
 					<button type="button" class="btn btn-success btn-sm">Learn More</button>
@@ -22,17 +22,23 @@
 				<component-table title="Most Recent" components="top_dwnld" />
 			</div>
 		</div>
+		<div id="testimonials">
+			<heading title="Why biologists love BioJS!" color="#FFFFFF" />
+			<testimonial />
+		</div>
 	</div>
 </template>
 <script>
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import ComponentTable from './ComponentTable.vue';
+import Testimonial from './Testimonial.vue';
 export default {
 	components: {
 		'nav-bar': NavBar,
 		'heading': Heading,
-		'component-table': ComponentTable
+		'component-table': ComponentTable,
+		'testimonial': Testimonial
 	},
 	data () {
 		return {
@@ -55,16 +61,19 @@ export default {
 	padding: 0 10% 0 10%;
 }
 #coverContent {
-	width: 30%;
+	width: 40%;
 }
 #coverContent {
-	h2 {
+	h1 {
 		color: #000;
 		font-family: 'Roboto', sans-serif;
 		font-weight: bolder;
 		span {
 			color: #007E3A;
 		}
+	}
+	p {
+		font-size: 20px;
 	}
 }
 #visualize {
@@ -75,5 +84,8 @@ export default {
 	width: 100%;
 	justify-content: center;
 	flex-wrap: wrap;
+}
+#testimonials {
+	background: linear-gradient(#007E3A, #0C8C46, #00AF66);
 }
 </style>
