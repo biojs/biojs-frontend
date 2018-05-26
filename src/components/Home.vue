@@ -16,9 +16,11 @@
 		</div>
 		<div id="components">
 			<heading title="Popular Components" />
-			<component-table title="Top Downloads" />
-			<component-table title="Top Starred" />
-			<component-table title="Most Recent" />
+			<div id="componentsTable">
+				<component-table title="Top Downloads" components="most_recent" />
+				<component-table title="Top Starred" components="top_starred" />
+				<component-table title="Most Recent" components="top_dwnld" />
+			</div>
 		</div>
 	</div>
 </template>
@@ -67,5 +69,11 @@ export default {
 }
 #visualize {
 	background: #efefef;
+}
+#componentsTable {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 </style>
