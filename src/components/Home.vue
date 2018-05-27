@@ -43,6 +43,10 @@ import Heading from './Heading.vue';
 import ComponentTable from './ComponentTable.vue';
 import Testimonial from './Testimonial.vue';
 export default {
+	name: 'Home',
+	introduction: 'The home component is a master component which combines most of the other components and renders the landing page.',
+	description: 'It uses various major components and compiles them to produce the home page: nav-bar, heading, visualization, component-table, testimonial.',
+	token: '<div id="cover">\n\t...\n</div>\n<div id="visualize">\n\t...\n</div>\n<div id="components">\n\t...\n</div>\n<div id="testimonials">\n\t...\n</div>\n<div id="about">\n\t...\n</div>',
 	components: {
 		'nav-bar': NavBar,
 		'heading': Heading,

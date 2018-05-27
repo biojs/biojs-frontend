@@ -15,6 +15,10 @@
 <script>
 import '@/../static/heart_icon/flaticon.css';
 export default {
+	name: 'Testimonial',
+	introduction: 'Testimonials for the BioJS landing page written by awesome bioinformaticians!',
+	description: 'The testimonial component consists of three static testimonials as seen in the home page. It implements core vue-bootstrap design, the b-card template.',
+	token: '<b-card-groups>\n\t<b-card v-for="" :key="">\n\t...\n\t</b-card>\n</b-card-groups>',
 	data () {
 		return {
 			testimonials: [

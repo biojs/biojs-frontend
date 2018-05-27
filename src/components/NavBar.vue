@@ -21,8 +21,18 @@
 
 <script>
 export default {
-	props: ['isShadow'],
-	name: '',
+	name: 'NavBar',
+	introduction: 'A custom navigation bar for the website',
+	description: 'The navigation bar is made up with pure CSS. Vue-Router <router-link> has been used for links to various pages.',
+	token: '<div class="navBar">\n\t<div id="nav">\n\t\t<router-link to="/"><span>..</span></router-link>\n\t</div>\n</div>',
+	props: {
+		isShadow: {
+			type: Boolean,
+			required: true,
+			default: true,
+			note: 'The navigation can either have a shadow at the bottom as observed in this page or it can be without a shadow as observed in the landing page.'
+		}
+	},
 	data () {
 		return {
 		};
@@ -56,6 +66,7 @@ export default {
 .navLink {
 	text-decoration: none;
 	color: #007E3A;
+	font-weight: bolder;
 }
 #nav {
 	z-index: 999;
