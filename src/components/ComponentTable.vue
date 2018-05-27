@@ -17,6 +17,10 @@
 import axios from 'axios';
 const URL = 'http://139.59.93.32/api/datatest/index/';
 export default {
+	name: 'ComponentTable',
+	introduction: 'Component table for loading the top 3 components for various categories: Most downloaded, Top starred, and Most recent.',
+	description: 'This component is a dynamic table to load and render the top 3 components of the desired category. An API call is made through Axios (npm package) for the desired category once the component is mounted.',
+	token: '<div id="componentTable">\n\t<div id="table">\n\t\t...\n\t</div>\n</div>',
 	data () {
 		return {
 			most_recent: [],
@@ -27,11 +31,15 @@ export default {
 	props: {
 		title: {
 			type: String,
-			required: true
+			required: true,
+			default: 'undefined',
+			note: 'Title defines the heading of the table which is the category desired.'
 		},
 		components: {
 			type: String,
-			required: true
+			required: true,
+			default: 'undefined',
+			note: 'Components prop accepts the category required. For example, passing "most_recent" would render the three most recent components.'
 		}
 	},
 	computed: {
