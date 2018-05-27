@@ -6,7 +6,7 @@
 				<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="component in computedComponents" :key="component.id">
 					{{ component.name }}
 					<b-badge variant="primary"  style="margin-left: 20px;" pill>
-						123
+						{{ getProperty(component.property) }}
 					</b-badge>
 				</b-list-group-item>
 			</b-list-group>
@@ -50,6 +50,15 @@ export default {
 				return this.top_starred;
 			} else if (this.components === 'top_dwnld') {
 				return this.top_dwnld;
+			}
+		}
+	},
+	methods: {
+		getProperty (property) {
+			if (this.components === 'most_recent') {
+				return property.split('T')[0];
+			} else {
+				return property;
 			}
 		}
 	},
