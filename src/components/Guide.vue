@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="guide">
 	<navbar :isShadow="true" />
 	<heading title="Documentation" />
 	<div id="documentation">
@@ -49,6 +49,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#guide {
+	background: #efefef57;
+}
 #documentation {
 	display: flex;
 	flex-direction: column;
