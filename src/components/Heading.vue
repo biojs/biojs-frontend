@@ -1,5 +1,7 @@
 <template>
+<div>
 	<h1 :style="{color: color}"><u>{{ title }}</u></h1>
+</div>
 </template>
 <script>
 export default {
@@ -30,10 +32,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 	$green: #007E3A;
+	div {
+		display: flex;
+		justify-content: center;
+	}
 	h1 {
 		font-family: 'Roboto', sans-serif;
 		color: $green;
 		text-align: center;
 		padding: 30px 0 30px 0;
+	}
+	@media (max-width: 600px) {
+		h1 {
+			width: 80%;
+			text-align: center;
+		}
 	}
 </style>
