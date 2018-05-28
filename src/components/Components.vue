@@ -135,6 +135,8 @@ export default {
     padding: 5px;
     border-radius: 1px;
     margin: 0 2.5px;
+	display: inline-block;
+	margin-bottom: 5px;
 }
 #properties {
 	display: flex;
