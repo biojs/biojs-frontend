@@ -22,6 +22,7 @@
 				<component-table title="Top Starred" components="top_starred" />
 				<component-table title="Most Recent" components="top_dwnld" />
 			</div>
+			<search-component />
 		</div>
 		<div id="testimonials">
 			<heading title="Why biologists love BioJS!" color="#FFFFFF" />
@@ -42,6 +43,7 @@ import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import ComponentTable from './ComponentTable.vue';
 import Testimonial from './Testimonial.vue';
+import SearchComponent from './SearchComponent.vue';
 export default {
 	name: 'Home',
 	introduction: 'The home component is a master component which combines most of the other components and renders the landing page.',
@@ -51,7 +53,8 @@ export default {
 		'nav-bar': NavBar,
 		'heading': Heading,
 		'component-table': ComponentTable,
-		'testimonial': Testimonial
+		'testimonial': Testimonial,
+		'search-component': SearchComponent
 	},
 	data () {
 		return {

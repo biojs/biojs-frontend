@@ -13,7 +13,6 @@
 	</b-card-groups>
 </template>
 <script>
-import '@/../static/heart_icon/flaticon.css';
 export default {
 	name: 'Testimonial',
 	introduction: 'Testimonials for the BioJS landing page written by awesome bioinformaticians!',
@@ -31,6 +30,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import url("../../static/heart_icon/flaticon.css");
+
 .testimonialContainer {
 	display: flex;
 	width: 100%;
@@ -50,9 +51,13 @@ export default {
 }
 #hearts i {
 	display: inline;
+	margin: 0 3px;
 }
 #hearts i:last-child {
 	margin-right: 20px;
+}
+#hearts i:before {
+	margin: 0 !important;
 }
 @media (max-width: 400px) {
 	.testimonial {

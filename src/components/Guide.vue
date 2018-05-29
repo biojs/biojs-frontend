@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="guide">
 	<navbar :isShadow="true" />
 	<heading title="Documentation" />
 	<div id="documentation">
@@ -13,7 +13,7 @@
 </div>
 </template>
 <script>
-import propDoc from 'propdoc';
+import propDoc from '@/../static/node_modules/propdoc';
 import '@/../static/node_modules/propdoc/style.scss';
 import ComponentTable from './ComponentTable.vue';
 import Guide from './Guide.vue';
@@ -49,6 +49,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#guide {
+	background: #efefef57;
+}
 #documentation {
 	display: flex;
 	flex-direction: column;
