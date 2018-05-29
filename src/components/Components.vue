@@ -185,6 +185,7 @@ i::before {
 	.image {
 		height: 100px;
 		width: 100px;
+		margin-right: 0;
 	}
 	#componentInfo {
 		display: flex;
