@@ -1,7 +1,18 @@
+# specify language
 language: node_js
+
+# specify NodeJS version
 node_js:
  - "8.11.0"
+
+# install dependencies
 install:
  - npm install
+
+# run unit tests only
+script:
+ - npm run unit
+
+# get notified through email
 notifications:
  email: true
