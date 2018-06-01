@@ -1,3 +1,8 @@
+# configure chrome
+dist: trust
+sudo: required
+addons:
+  chrome: stable
 # specify language
 language: node_js
 
