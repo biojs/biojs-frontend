@@ -6,7 +6,7 @@
 var webpackConfig = require('../../build/webpack.test.conf')
 
 module.exports = function karmaConfig (config) {
-  config.set({
+  var cfg = {
     // to run in additional browsers:
     // 1. install corresponding karma launcher
     //    http://karma-runner.github.io/0.13/config/browsers.html
@@ -35,5 +35,9 @@ module.exports = function karmaConfig (config) {
         { type: 'text-summary' }
       ]
     }
-  })
+  };
+  if (process.env.TRAVIS) {
+    cfg.browsers = ['Chrome_without_security'];
+  };
+  config.set(cfg);
 }
