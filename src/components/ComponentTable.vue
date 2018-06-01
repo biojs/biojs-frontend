@@ -1,6 +1,6 @@
 <template>
 	<div id="componentTable">
-		<h2>{{ title }}</h2>
+		<h2 class="title">{{ title }}</h2>
 		<div id="table">
 			<b-list-group>
 				<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="component in computedComponents" :key="component.id">
