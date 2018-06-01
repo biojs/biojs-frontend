@@ -17,6 +17,26 @@
 				<span class="tag" v-for="tag in tags" :key="tag.id"> {{ tag }}</span>
 			</div>
 		</div>
+		<div id="social" class="section">
+			<div class="title">Social</div>
+			<div class="content">
+			</div>
+		</div>
+		<div id="stats" class="section">
+			<div class="title">Stats</div>
+			<div class="content">
+			</div>
+		</div>
+		<div id="contributors" class="section">
+			<div class="title">Contributors</div>
+			<div class="content">
+			</div>
+		</div>
+		<div id="legal" class="section">
+			<div class="title">Legal</div>
+			<div class="content">
+			</div>
+		</div>
 	</div>
 </div>
 </template>
@@ -127,6 +147,13 @@ export default {
 		margin: 0 2.5px;
 		display: inline-block;
 		margin-bottom: 5px;
+	}
+}
+@media (max-width: 700px) {
+	#content {
+		p {
+			width: 100%;
+		}
 	}
 }
 </style>
