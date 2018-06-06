@@ -12,7 +12,7 @@
 						{{ component.name }}
 					</div>
 					<div class="author">
-						{{ component.author }}
+						Author Name
 					</div>
 					<div class="description">
 						{{ component.short_description }}
@@ -53,9 +53,10 @@ import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import SearchComponent from './SearchComponent.vue';
 import ComponentTable from './ComponentTable';
+import '@/../static/property-icons/flaticon.css';
 
 import axios from 'axios';
-const URL = 'http://139.59.93.32/api/top/';
+const URL = 'http://139.59.93.32/api/datatest/top/';
 
 export default {
 	data () {
@@ -79,8 +80,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import url("../../static/property-icons/flaticon.css");
-
 #components {
 	background: #efefef57;
 }
