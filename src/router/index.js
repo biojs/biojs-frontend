@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home.vue';
 import Components from '@/components/Components.vue';
 import Guide from '@/components/Guide.vue';
+import Component from '@/components/Component.vue';
 // import About from '@/components/About.vue';
 // import Contact from '@/components/Contact.vue';
 
@@ -24,6 +25,11 @@ export default new Router({
 			path: '/guide',
 			name: 'Guide',
 			component: Guide
+		},
+		{
+			path: '/component/:id',
+			name: 'Component',
+			component: Component
 		}
 		// {
 		// 	path: '/about',
