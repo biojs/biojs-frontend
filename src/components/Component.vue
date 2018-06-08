@@ -19,13 +19,14 @@
 		</div>
 		<div id="social" class="section">
 			<div class="title">Social</div>
-			<div class="content">
-
+			<div id="socialContent" class="content">
+				<component-stat v-for="stat in social" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" />
 			</div>
 		</div>
 		<div id="stats" class="section">
 			<div class="title">Stats</div>
-			<div class="content">
+			<div id="statsContent" class="content">
+				<component-stat v-for="stat in stats" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" />
 			</div>
 		</div>
 		<div id="contributors" class="section">
@@ -46,6 +47,7 @@
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import axios from 'axios';
+import ComponentStat from './ComponentStat.vue';
 
 export default {
 	data () {
@@ -55,12 +57,14 @@ export default {
 			urlName: '',
 			visualizations: [],
 			tags: [],
-			social: []
+			social: [],
+			stats: []
 		};
 	},
 	components: {
 		'nav-bar': NavBar,
-		'heading': Heading
+		'heading': Heading,
+		'component-stat': ComponentStat
 	},
 	mounted () {
 		this.fetchData();
@@ -78,10 +82,16 @@ export default {
 				this.urlName = details.url_name;
 				this.tags = details.tags;
 				this.social = [
-					{prop: 'stars', image: '../assets/component/stars.png', value: details.stars},
-					{prop: 'watchers', image: '../assets/component/watchers.png', value: details.watchers},
-					{prop: 'contributors', image: '../assets/component/contributors.png', value: details.no_of_contributors},
-					{prop: 'forks', image: '../assets/component/forks.png', value: details.forks}
+					{prop: 'stars', image: require('../assets/component/stars.png'), value: details.stars},
+					{prop: 'watchers', image: require('../assets/component/watchers.png'), value: details.watchers},
+					{prop: 'contributors', image: require('../assets/component/contributors.png'), value: details.no_of_contributors},
+					{prop: 'forks', image: require('../assets/component/fork.png'), value: details.forks}
+				];
+				this.stats = [
+					{prop: 'downloads', image: require('../assets/component/download.png'), value: details.downloads},
+					{prop: 'last modified', image: require('../assets/component/modified.png'), value: details.modified_time.split('T')[0]},
+					{prop: 'commits', image: require('../assets/component/commit.png'), value: details.commits},
+					{prop: 'version', image: require('../assets/component/version.png'), value: details.version}
 				];
 			}, error => {
 				console.error(error);
@@ -157,6 +167,12 @@ export default {
 		display: inline-block;
 		margin-bottom: 5px;
 	}
+}
+#socialContent, #statsContent {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 @media (max-width: 700px) {
 	#content {

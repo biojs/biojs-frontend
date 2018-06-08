@@ -1,6 +1,6 @@
 <template>
 	<div id="stat">
-		<img :src="imageURL" />
+		<img :src="imageURL" :alt="propName" />
 		<span>{{ propValue }} {{ propName }}</span>
 	</div>
 </template>
@@ -33,10 +33,13 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin: 15px;
 	img {
-		max-height: 60px;
-		max-width: 60px;
-		margin-bottom: 5px;
+		height: 50px;
+		margin: 10px;
+	}
+	span {
+		text-align: center;
 	}
 }
 </style>
