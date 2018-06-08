@@ -31,7 +31,8 @@
 		</div>
 		<div id="contributors" class="section">
 			<div class="title">Contributors</div>
-			<div class="content">
+			<div id="contributorsContent" class="content">
+				<contributor v-for="contributor in contributors" :key="contributor.id" :imageURL="contributor.avatar_url" :name="contributor.username" />
 			</div>
 		</div>
 		<div id="legal" class="section">
@@ -46,8 +47,9 @@
 <script>
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
-import axios from 'axios';
 import ComponentStat from './ComponentStat.vue';
+import Contributor from './Contributor.vue';
+import axios from 'axios';
 
 export default {
 	data () {
@@ -58,13 +60,15 @@ export default {
 			visualizations: [],
 			tags: [],
 			social: [],
-			stats: []
+			stats: [],
+			contributors: []
 		};
 	},
 	components: {
 		'nav-bar': NavBar,
 		'heading': Heading,
-		'component-stat': ComponentStat
+		'component-stat': ComponentStat,
+		'contributor': Contributor
 	},
 	mounted () {
 		this.fetchData();
@@ -93,6 +97,7 @@ export default {
 					{prop: 'commits', image: require('../assets/component/commit.png'), value: details.commits},
 					{prop: 'version', image: require('../assets/component/version.png'), value: details.version}
 				];
+				this.contributors = result.data.contributors.map((obj) => obj.contributor);
 			}, error => {
 				console.error(error);
 			});
@@ -173,6 +178,12 @@ export default {
 	width: 100%;
 	justify-content: center;
 	flex-wrap: wrap;
+}
+#contributorsContent {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: center;
 }
 @media (max-width: 700px) {
 	#content {
