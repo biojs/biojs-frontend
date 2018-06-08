@@ -38,6 +38,7 @@
 		<div id="legal" class="section">
 			<div class="title">Legal</div>
 			<div class="content">
+				License: {{ computeLicense() }}
 			</div>
 		</div>
 	</div>
@@ -61,7 +62,8 @@ export default {
 			tags: [],
 			social: [],
 			stats: [],
-			contributors: []
+			contributors: [],
+			license: ''
 		};
 	},
 	components: {
@@ -98,6 +100,7 @@ export default {
 					{prop: 'version', image: require('../assets/component/version.png'), value: details.version}
 				];
 				this.contributors = result.data.contributors.map((obj) => obj.contributor);
+				this.license = details.license;
 			}, error => {
 				console.error(error);
 			});
@@ -108,6 +111,12 @@ export default {
 			// } else {
 			// 	return true;
 			// }
+		},
+		computeLicense () {
+			if(this.license == '')
+				return 'Not available';
+			else
+				return this.license;
 		}
 	}
 };
