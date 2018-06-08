@@ -15,7 +15,7 @@
 </template>
 <script>
 import axios from 'axios';
-const URL = 'http://139.59.93.32/api/datatest/index/';
+const URL = 'http://139.59.93.32/api/';
 export default {
 	name: 'ComponentTable',
 	introduction: 'Component table for loading the top 3 components for various categories: Most downloaded, Top starred, and Most recent.',
