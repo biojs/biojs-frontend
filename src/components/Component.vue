@@ -20,6 +20,7 @@
 		<div id="social" class="section">
 			<div class="title">Social</div>
 			<div class="content">
+
 			</div>
 		</div>
 		<div id="stats" class="section">
@@ -53,7 +54,8 @@ export default {
 			description: '',
 			urlName: '',
 			visualizations: [],
-			tags: []
+			tags: [],
+			social: []
 		};
 	},
 	components: {
@@ -68,22 +70,29 @@ export default {
 	},
 	methods: {
 		fetchData () {
-			axios({ method: 'GET', 'url': 'http://139.59.93.32/api/datatest/details/component' + this.$route.params.id + '/' }).then(result => {
-				this.visualizations = result.data.visualizations;
-				this.name = result.data.details.name;
-				this.description = result.data.details.short_description;
-				this.urlName = result.data.details.url_name;
-				this.tags = result.data.details.tags;
+			axios({ method: 'GET', 'url': 'http://139.59.93.32/api/details/' + this.$route.params.name + '/' }).then(result => {
+				// this.visualizations = result.data.visualizations;
+				let details = result.data.details;
+				this.name = details.name;
+				this.description = details.short_description;
+				this.urlName = details.url_name;
+				this.tags = details.tags;
+				this.social = [
+					{prop: 'stars', image: '../assets/component/stars.png', value: details.stars},
+					{prop: 'watchers', image: '../assets/component/watchers.png', value: details.watchers},
+					{prop: 'contributors', image: '../assets/component/contributors.png', value: details.no_of_contributors},
+					{prop: 'forks', image: '../assets/component/forks.png', value: details.forks}
+				];
 			}, error => {
 				console.error(error);
 			});
 		},
 		computeVisualization () {
-			if (this.visualizations.length === 0) {
-				return false;
-			} else {
-				return true;
-			}
+			// if (this.visualizations.length === 0) {
+			// 	return false;
+			// } else {
+			// 	return true;
+			// }
 		}
 	}
 };
