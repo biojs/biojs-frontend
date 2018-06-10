@@ -4,8 +4,8 @@
 		<router-link class="navLink" to="/components"><span>Components</span></router-link>
 		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
 		<router-link class="navLink" to="/"><span class="navLogo"><img src="../../static/logo.png" height="50px"></span></router-link>
-		<router-link class="navLink" to="/component/500"><span>About</span></router-link>
-		<router-link class="navLink" to="/component/74"><span>Contact Us</span></router-link>
+		<router-link class="navLink" to="/about"><span>About</span></router-link>
+		<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
 		<div class="close">
 			<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
 		</div>

@@ -18,9 +18,9 @@
 		<div id="components">
 			<heading title="Popular Components" />
 			<div id="componentsTable">
-				<component-table title="Top Downloads" components="most_recent" />
+				<component-table title="Top Downloads" components="top_dwnld" />
 				<component-table title="Top Starred" components="top_starred" />
-				<component-table title="Most Recent" components="top_dwnld" />
+				<component-table title="Most Recent" components="most_recent" />
 			</div>
 			<search-component />
 		</div>

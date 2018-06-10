@@ -27,7 +27,7 @@ export default new Router({
 			component: Guide
 		},
 		{
-			path: '/component/:id',
+			path: '/component/:name',
 			name: 'Component',
 			component: Component
 		}
