@@ -97,7 +97,9 @@ export default {
 					{prop: 'downloads', image: require('../assets/component/download.png'), value: details.downloads},
 					{prop: 'last modified', image: require('../assets/component/modified.png'), value: details.modified_time.split('T')[0]},
 					{prop: 'commits', image: require('../assets/component/commit.png'), value: details.commits},
-					{prop: 'version', image: require('../assets/component/version.png'), value: details.version}
+					{prop: 'version', image: require('../assets/component/version.png'), value: details.version},
+					{prop: 'created at', image: require('../assets/component/created.png'), value: details.created_time.split('T')[0]},
+					{prop: 'open issues', image: require('../assets/component/issues.png'), value: details.open_issues}
 				];
 				this.contributors = result.data.contributors.map((obj) => obj.contributor);
 				this.license = details.license;
@@ -113,10 +115,11 @@ export default {
 			// }
 		},
 		computeLicense () {
-			if(this.license == '')
+			if (this.license === '') {
 				return 'Not available';
-			else
+			} else {
 				return this.license;
+			}
 		}
 	}
 };
