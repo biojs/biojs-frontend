@@ -9,7 +9,7 @@
 		<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
 		<p>{{ description }}</p>
 		<div id="install" class="section">
-			<span class="code">npm install {{ urlName }}</span>
+			<span class="code">npm install {{ name }}</span>
 		</div>
 		<div id="visualization" class="section" v-if="computeVisualization()">
 			<div class="title">Visualization</div>
