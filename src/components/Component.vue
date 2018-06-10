@@ -2,7 +2,11 @@
 <div id="container">
 	<nav-bar></nav-bar>
 	<heading :title="name"></heading>
+	<a :href="githubURL" target="_blank">
+		<img src="../assets/component/fork_banner.png" alt="Fork me on GitHub" id="githubFork" />
+	</a>
 	<div id="content">
+		<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
 		<p>{{ description }}</p>
 		<div id="install" class="section">
 			<span class="code">npm install {{ urlName }}</span>
@@ -63,7 +67,9 @@ export default {
 			social: [],
 			stats: [],
 			contributors: [],
-			license: ''
+			license: '',
+			author: '',
+			githubURL: 'https://www.github.com/'
 		};
 	},
 	components: {
@@ -87,6 +93,8 @@ export default {
 				this.description = details.short_description;
 				this.urlName = details.url_name;
 				this.tags = details.tags;
+				this.author = details.author;
+				this.githubURL = details.github_url;
 				this.social = [
 					{prop: 'stars', image: require('../assets/component/stars.png'), value: details.stars},
 					{prop: 'watchers', image: require('../assets/component/watchers.png'), value: details.watchers},
@@ -119,6 +127,13 @@ export default {
 				return 'Not available';
 			} else {
 				return this.license;
+			}
+		},
+		isAuthor () {
+			if (this.author === '') {
+				return false;
+			} else {
+				return true;
 			}
 		}
 	}
@@ -196,6 +211,19 @@ export default {
 	flex-wrap: wrap;
 	width: 100%;
 	justify-content: center;
+}
+#githubFork {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 150px;
+	width: 150px;
+	cursor: pointer;
+	z-index: 9999;
+}
+#author {
+	margin-top: -20px;
+	color: rgba(0,0,0,0.7);
 }
 @media (max-width: 700px) {
 	#content {
