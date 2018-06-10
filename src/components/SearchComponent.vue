@@ -7,6 +7,24 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
+
+const URL = 'http://139.59.93.32/api/all/';
+
+export default {
+  data () {
+    return {
+      components: []
+    }
+  },
+  mounted () {
+		axios({ method: 'GET', 'url': URL }).then(result => {
+			this.components = result.data.all_components;
+		}, error => {
+			console.error(error);
+		});
+	}
+};
 </script>
 <style lang="scss">
 #searchForm {
