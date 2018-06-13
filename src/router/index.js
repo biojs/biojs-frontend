@@ -4,7 +4,7 @@ import Home from '@/components/Home.vue';
 import Components from '@/components/Components.vue';
 import Guide from '@/components/Guide.vue';
 import Component from '@/components/Component.vue';
-// import About from '@/components/About.vue';
+import About from '@/components/About.vue';
 // import Contact from '@/components/Contact.vue';
 
 Vue.use(Router);
@@ -30,12 +30,12 @@ export default new Router({
 			path: '/component/:name',
 			name: 'Component',
 			component: Component
+		},
+		{
+			path: '/about',
+			name: 'About',
+			component: About
 		}
-		// {
-		// 	path: '/about',
-		// 	name: 'About',
-		// 	component: About
-		// },
 		// {
 		// 	path: '/contact',
 		// 	name: 'Contact',
