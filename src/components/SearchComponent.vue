@@ -45,21 +45,37 @@ export default {
 		});
 	},
 	computed: {
+		// get results of the query using Fuzzaldrin Plus plugin. Read more: https://github.com/jeancroy/fuzz-aldrin-plus
+		// Read more: https://alligator.io/vuejs/vue-client-side-search/ (Date accessed: June 14, 2018)
 		queryResults () {
+			// Preparing the query before-hand lets fuzzaldrin-plus optimize things a bit.
 			const preparedQuery = fz.prepareQuery(this.query);
+			// We use this to keep track of the similarity for each option.
 			const scores = {};
-			return this.components.map((component, index) => {
+			return this.components
+			// Score each option & create a new array out of them.
+			.map((component, index) => {
+				// See how well each component compares to the query.
 				const componentScores = [
 					component.id,
 					component.name,
+					// join all the tags and create a string
 					component.tags.join(', ')
-				].map(toScore => fz.score(toScore, this.query, { preparedQuery }));
+					// Creating an array of fields and mapping is easier than writing
+					// fz.score(...) four times. Same idea.
+					// Scores are a non-normalized number
+					// representing how similar the query is to the field.
 
+				].map(toScore => fz.score(toScore, this.query, { preparedQuery }));
+				// Store the highest score for this option
+      			// so we can compare it to other options.
 				scores[component.id] = Math.max(...componentScores);
 
 				return component;
 			})
+				// Remove anything with a really low score.
 				.filter(component => scores[component.id] > 1)
+				// Finally, sort by the highest score.
 				.sort((a, b) => scores[b.id] - scores[a.id])
 			;
 		},
