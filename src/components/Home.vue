@@ -6,8 +6,8 @@
 				<div id="coverContent">
 					<h1>Welcome to <span>BioJS</span></h1>
 					<p>{{ intro }}</p>
-					<button type="button" class="btn btn-success btn-sm">Explore</button>
-					<button type="button" class="btn btn-success btn-sm">Learn More</button>
+					<router-link to="/components"><button type="button" class="btn btn-success btn-sm">Explore</button></router-link>
+					<router-link to="/about"><button type="button" class="btn btn-success btn-sm">Learn More</button></router-link>
 				</div>
 				<img src="@/../static/phone.png" id="phone" />
 			</div>
@@ -32,8 +32,8 @@
 			<heading title="Get to know BioJS" />
 			<p>{{ aboutBioJS }}</p>
 			<div id="aboutButtons">
-				<button type="button" class="btn btn-success btn-sm">Learn More</button>
-				<button type="button" class="btn btn-success btn-sm">View Guide</button>
+				<router-link to="/about"><button type="button" class="btn btn-success btn-sm">Learn More</button></router-link>
+				<router-link to="/guide"><button type="button" class="btn btn-success btn-sm">View Guide</button></router-link>
 			</div>
 		</div>
 	</div>

@@ -5,40 +5,42 @@
 	<search-component />
 	<div id="componentsContainer">
 		<div id="popComponents">
-			<div id="component" v-for="component in components" :key="component.id">
-				<div class="image" :style="{backgroundImage: 'url(' + component.icon_url + ')' }"></div>
-				<div id="componentInfo">
-					<div class="title">
-						{{ component.name }}
-					</div>
-					<div class="author">
-						{{ component.author }}
-					</div>
-					<div class="description">
-						{{ component.short_description }}
-					</div>
-					<div class="tags">
-						<span>Tags: </span>
-						<span class="tagName" v-for="tag in component.tags" :key="tag.id">
-							{{ tag }}
-						</span>
-					</div>
-					<div id="properties">
-						<div class="downloads property">
-							<i class="flaticon-cloud-computing"></i>
-							{{ component.downloads }}
+			<router-link v-for="component in components" :key="component.id" :to="computeURL(component.url_name)" class="link">
+				<div id="component">
+					<div class="image" :style="{backgroundImage: 'url(' + component.icon_url + ')' }"></div>
+					<div id="componentInfo">
+						<div class="title">
+							{{ component.name }}
 						</div>
-						<div class="stars property">
-							<i class="flaticon-star"></i>
-							{{ component.stars }}
+						<div class="author">
+							{{ component.author }}
 						</div>
-						<div class="modified property">
-							<i class="flaticon-passage-of-time"></i>
-							{{ component.modified_time.split('T')[0] }}
+						<div class="description">
+							{{ component.short_description }}
+						</div>
+						<div class="tags">
+							<span>Tags: </span>
+							<span class="tagName" v-for="tag in component.tags" :key="tag.id">
+								{{ tag }}
+							</span>
+						</div>
+						<div id="properties">
+							<div class="downloads property">
+								<i class="flaticon-cloud-computing"></i>
+								{{ component.downloads }}
+							</div>
+							<div class="stars property">
+								<i class="flaticon-star"></i>
+								{{ component.stars }}
+							</div>
+							<div class="modified property">
+								<i class="flaticon-passage-of-time"></i>
+								{{ component.modified_time.split('T')[0] }}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</router-link>
 		</div>
 		<div id="topComponents">
 			<component-table title="Top Downloads" components="top_dwnld" />
@@ -68,6 +70,11 @@ export default {
 		'heading': Heading,
 		'search-component': SearchComponent,
 		'component-table': ComponentTable
+	},
+	methods: {
+		computeURL (url) {
+			return '/component/' + url;
+		}
 	},
 	mounted () {
 		axios({ method: 'GET', 'url': URL }).then(result => {
@@ -106,6 +113,11 @@ export default {
 	padding: 10px;
 	border-bottom: 2px solid rgba(0,0,0,0.4);
 	padding-bottom: 20px;
+	transition: background 0.2s ease-in-out;
+	cursor: pointer;
+}
+#component:hover {
+	background: rgb(230, 230, 230);
 }
 .image {
 	height: 150px;
@@ -151,6 +163,14 @@ export default {
 }
 i::before {
 	margin: 0 !important;
+}
+.link {
+	text-decoration: none;
+	color: #000;
+}
+.link:hover {
+	text-decoration: none;
+	color: #000;
 }
 @media (max-width: 950px) {
 	#componentsContainer {
