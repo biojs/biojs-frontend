@@ -4,6 +4,7 @@
 	<heading title="Documentation" />
 	<div id="documentation">
 		<prop-doc :component="About"></prop-doc>
+		<prop-doc :component="Component"></prop-doc>
 		<prop-doc :component="ComponentTable"></prop-doc>
 		<prop-doc :component="Guide"></prop-doc>
 		<prop-doc :component="Heading"></prop-doc>
@@ -17,6 +18,7 @@
 import propDoc from '@/../static/node_modules/propdoc';
 import '@/../static/node_modules/propdoc/style.scss';
 import About from './About.vue';
+import Component from './Component.vue';
 import ComponentTable from './ComponentTable.vue';
 import Guide from './Guide.vue';
 import Heading from './Heading.vue';
@@ -32,6 +34,7 @@ export default {
 	components: {
 		propDoc,
 		'about': About,
+		'component': Component,
 		'componentTable': ComponentTable,
 		'guide': Guide,
 		'heading': Heading,
@@ -42,6 +45,7 @@ export default {
 	data () {
 		return {
 			About,
+			Component,
 			ComponentTable,
 			Guide,
 			Heading,
