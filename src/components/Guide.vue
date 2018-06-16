@@ -8,6 +8,7 @@
 		<prop-doc :component="Components"></prop-doc>
 		<prop-doc :component="ComponentStat"></prop-doc>
 		<prop-doc :component="ComponentTable"></prop-doc>
+		<prop-doc :component="Contributor"></prop-doc>
 		<prop-doc :component="Guide"></prop-doc>
 		<prop-doc :component="Heading"></prop-doc>
 		<prop-doc :component="Home"></prop-doc>
@@ -24,6 +25,7 @@ import Component from './Component.vue';
 import Components from './Components.vue';
 import ComponentStat from './ComponentStat.vue';
 import ComponentTable from './ComponentTable.vue';
+import Contributor from './Contributor.vue';
 import Guide from './Guide.vue';
 import Heading from './Heading.vue';
 import Home from './Home.vue';
@@ -42,6 +44,7 @@ export default {
 		'components': Components,
 		'componentStat': ComponentStat,
 		'componentTable': ComponentTable,
+		'contributor': Contributor,
 		'guide': Guide,
 		'heading': Heading,
 		'home': Home,
@@ -55,6 +58,7 @@ export default {
 			Components,
 			ComponentStat,
 			ComponentTable,
+			Contributor,
 			Guide,
 			Heading,
 			Home,
