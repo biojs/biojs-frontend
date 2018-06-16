@@ -13,6 +13,7 @@
 		<prop-doc :component="Heading"></prop-doc>
 		<prop-doc :component="Home"></prop-doc>
 		<prop-doc :component="NavBar"></prop-doc>
+		<prop-doc :component="SearchComponent"></prop-doc>
 		<prop-doc :component="Testimonial"></prop-doc>
 	</div>
 </div>
@@ -30,6 +31,7 @@ import Guide from './Guide.vue';
 import Heading from './Heading.vue';
 import Home from './Home.vue';
 import NavBar from './NavBar.vue';
+import SearchComponent from './SearchComponent.vue';
 import Testimonial from './Testimonial.vue';
 
 export default {
@@ -49,6 +51,7 @@ export default {
 		'heading': Heading,
 		'home': Home,
 		'navbar': NavBar,
+		'searchComponent': SearchComponent,
 		'testimonial': Testimonial
 	},
 	data () {
@@ -63,6 +66,7 @@ export default {
 			Heading,
 			Home,
 			NavBar,
+			SearchComponent,
 			Testimonial
 		};
 	}
