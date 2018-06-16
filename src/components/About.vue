@@ -14,6 +14,8 @@ import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 
 export default {
+	name: 'About',
+	introduction: 'The about section is an informational page which provides insights about BioJS and its foundation.',
 	data () {
 		return {
 			about: `BioJS is a community-based project compiling JavaScript widgets and modular components to visualize and process biological data using web technologies, making it easier to integrate them to your own website. BioJS provides a registry showcase so users can search components and see them in action.<br><br>

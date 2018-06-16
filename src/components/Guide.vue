@@ -3,6 +3,7 @@
 	<navbar :isShadow="true" />
 	<heading title="Documentation" />
 	<div id="documentation">
+		<prop-doc :component="About"></prop-doc>
 		<prop-doc :component="ComponentTable"></prop-doc>
 		<prop-doc :component="Guide"></prop-doc>
 		<prop-doc :component="Heading"></prop-doc>
@@ -15,6 +16,7 @@
 <script>
 import propDoc from '@/../static/node_modules/propdoc';
 import '@/../static/node_modules/propdoc/style.scss';
+import About from './About.vue';
 import ComponentTable from './ComponentTable.vue';
 import Guide from './Guide.vue';
 import Heading from './Heading.vue';
@@ -29,6 +31,7 @@ export default {
 	token: '<div id="documentation">\n\t<prop-doc :component="component_name"></prop-doc>\n</div>',
 	components: {
 		propDoc,
+		'about': About,
 		'componentTable': ComponentTable,
 		'guide': Guide,
 		'heading': Heading,
@@ -38,6 +41,7 @@ export default {
 	},
 	data () {
 		return {
+			About,
 			ComponentTable,
 			Guide,
 			Heading,
