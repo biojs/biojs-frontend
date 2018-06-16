@@ -6,24 +6,28 @@
 </template>
 <script>
 export default {
+	name: 'ComponentStat',
+	introduction: 'A component for displaying inidividual statistics like stars for a component under the "Social" and "Stats" category.',
+	description: 'The ComponentStat component renders the stat for each property. It renders an image and the statistic corresponding to that property.',
+	token: `<div id="stat">\n\t<img :src="imageURL" :alt="propName" />\n\t<span>{{ propValue }} {{ propName }}</span>\n</div>`,
 	props: {
 		propName: {
 			type: String,
 			required: false,
 			default: '',
-			note: ''
+			note: 'The name of the property. e.g.: stars, downloads, etc.'
 		},
 		imageURL: {
 			type: String,
 			required: true,
 			default: '',
-			note: ''
+			note: 'URL of the image of the property.'
 		},
 		propValue: {
 			type: String,
 			required: true,
 			default: '',
-			note: ''
+			note: 'Statistic of the property (a numerical in most cases).'
 		}
 	}
 };

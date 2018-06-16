@@ -6,6 +6,7 @@
 		<prop-doc :component="About"></prop-doc>
 		<prop-doc :component="Component"></prop-doc>
 		<prop-doc :component="Components"></prop-doc>
+		<prop-doc :component="ComponentStat"></prop-doc>
 		<prop-doc :component="ComponentTable"></prop-doc>
 		<prop-doc :component="Guide"></prop-doc>
 		<prop-doc :component="Heading"></prop-doc>
@@ -21,6 +22,7 @@ import '@/../static/node_modules/propdoc/style.scss';
 import About from './About.vue';
 import Component from './Component.vue';
 import Components from './Components.vue';
+import ComponentStat from './ComponentStat.vue';
 import ComponentTable from './ComponentTable.vue';
 import Guide from './Guide.vue';
 import Heading from './Heading.vue';
@@ -38,6 +40,7 @@ export default {
 		'about': About,
 		'component': Component,
 		'components': Components,
+		'componentStat': ComponentStat,
 		'componentTable': ComponentTable,
 		'guide': Guide,
 		'heading': Heading,
@@ -50,6 +53,7 @@ export default {
 			About,
 			Component,
 			Components,
+			ComponentStat,
 			ComponentTable,
 			Guide,
 			Heading,
