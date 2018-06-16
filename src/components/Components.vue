@@ -58,6 +58,19 @@ import axios from 'axios';
 const URL = 'http://139.59.93.32/api/top/';
 
 export default {
+	name: 'Components',
+	introduction: 'The components\' page',
+	description: 'The components\' page renders the top ten components (icon, name, author, description, tags, downloads, stars and last modified) from the data received by the API call.\nIt also has a search bar to search amongst all the components and displays top 3 component for each category.',
+	token: `<div id="component" v-for="component in components">
+				\n\t ..loop through the ten components..
+				\n\t<div class="image" \n\t:style="{backgroundImage: 'url(' + component.icon_url + ')' }">
+				\n\t..display the icon..
+				\n\t</div>
+				\n\t<div id="componentInfo">
+					\n\t\t..render all the other component information..
+				\n\t</div>
+			</div>
+			\n</div>`,
 	data () {
 		return {
 			components: []
