@@ -6,15 +6,17 @@
 	<div id="results" v-if="isSearching">
 		<heading title="Search results" />
 		<b-list-group id="resultsContent">
-			<b-list-group-item v-for="result in queryResults.slice(0, 10)" :key="result">
-				<span class="resultName">
-					{{result.name}}
-				</span>
-				<div class="tags">
-					Tags:
-					<span v-for="tag in result.tags" :key="tag" class="resultTag">{{tag}}</span>
-				</div>
-			</b-list-group-item>
+			<router-link v-for="result in queryResults.slice(0, 10)" :key="result" :to='computeURL(result.url_name)' class="link">
+				<b-list-group-item class="resultItem">
+					<span class="resultName">
+						{{result.name}}
+					</span>
+					<div class="tags">
+						Tags:
+						<span v-for="tag in result.tags" :key="tag" class="resultTag">{{tag}}</span>
+					</div>
+				</b-list-group-item>
+			</router-link>
 			<p id="noResult" v-if="queryResults.length === 0">No result found</p>
 		</b-list-group>
 	</div>
@@ -54,25 +56,25 @@ export default {
 			const scores = {};
 			return this.components
 			// Score each option & create a new array out of them.
-			.map((component, index) => {
-				// See how well each component compares to the query.
-				const componentScores = [
-					component.id,
-					component.name,
-					// join all the tags and create a string
-					component.tags.join(', ')
-					// Creating an array of fields and mapping is easier than writing
-					// fz.score(...) four times. Same idea.
-					// Scores are a non-normalized number
-					// representing how similar the query is to the field.
+				.map((component, index) => {
+					// See how well each component compares to the query.
+					const componentScores = [
+						component.id,
+						component.name,
+						// join all the tags and create a string
+						component.tags.join(', ')
+						// Creating an array of fields and mapping is easier than writing
+						// fz.score(...) three times. Same idea.
+						// Scores are a non-normalized number
+						// representing how similar the query is to the field.
 
-				].map(toScore => fz.score(toScore, this.query, { preparedQuery }));
-				// Store the highest score for this option
-      			// so we can compare it to other options.
-				scores[component.id] = Math.max(...componentScores);
+					].map(toScore => fz.score(toScore, this.query, { preparedQuery }));
+					// Store the highest score for this option
+					// so we can compare it to other options.
+					scores[component.id] = Math.max(...componentScores);
 
-				return component;
-			})
+					return component;
+				})
 				// Remove anything with a really low score.
 				.filter(component => scores[component.id] > 1)
 				// Finally, sort by the highest score.
@@ -85,6 +87,11 @@ export default {
 			} else {
 				return false;
 			}
+		}
+	},
+	methods: {
+		computeURL (url) {
+			return '/component/' + url;
 		}
 	}
 };
@@ -131,6 +138,21 @@ export default {
 	font-size: 20px;
 	font-weight: bolder;
 	text-align: center;
+}
+.resultItem {
+	transition: background 0.2s ease-in-out;
+	cursor: pointer;
+}
+.resultItem:hover {
+	background: rgb(230, 230, 230);
+}
+.link {
+	text-decoration: none;
+	color: #000;
+}
+.link:hover {
+	text-decoration: none;
+	color: #000;
 }
 @media (max-width: 700px) {
 	#searchForm {

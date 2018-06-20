@@ -3,12 +3,14 @@
 		<h2>{{ title }}</h2>
 		<div id="table">
 			<b-list-group>
-				<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="component in computedComponents" :key="component.id">
-					{{ component.name }}
-					<b-badge variant="primary"  style="margin-left: 20px;" pill>
-						{{ getProperty(component.property) }}
-					</b-badge>
-				</b-list-group-item>
+				<router-link class="link" v-for="component in computedComponents" :key="component.id" :to="componentURL(component.url_name)">
+					<b-list-group-item class="d-flex justify-content-between align-items-center tableItem">
+						{{ component.name }}
+						<b-badge variant="primary"  style="margin-left: 20px;" pill>
+							{{ getProperty(component.property) }}
+						</b-badge>
+					</b-list-group-item>
+				</router-link>
 			</b-list-group>
 		</div>
 	</div>
@@ -60,6 +62,9 @@ export default {
 			} else {
 				return property;
 			}
+		},
+		componentURL (url) {
+			return '/component/' + url;
 		}
 	},
 	mounted () {
@@ -84,5 +89,16 @@ b-list-group {
 	text-align: center;
 	margin: 0 2.5% 50px 2.5%;
 	min-width: 20%;
+}
+.tableItem {
+	transition: background 0.2s ease-in-out;
+}
+.tableItem:hover {
+	background: #eee;
+	cursor: pointer;
+}
+.link {
+	text-decoration: none;
+	color: #000;
 }
 </style>
