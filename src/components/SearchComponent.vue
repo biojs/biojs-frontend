@@ -30,6 +30,10 @@ import Heading from './Heading.vue';
 const URL = 'http://139.59.93.32/api/all/';
 
 export default {
+	name: 'SearchComponent',
+	introduction: 'Search bar to query across all the components.',
+	description: 'The SearchComponent component queries across all the components\' names and tags.\n A fuzzy search is implemented, more about which can be found here: https://github.com/jeancroy/fuzz-aldrin-plus \n\nAPI endpoint for all the components: http://139.59.93.32/api/all/',
+	token: '',
 	data () {
 		return {
 			query: '',

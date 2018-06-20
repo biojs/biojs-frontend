@@ -57,6 +57,21 @@ import Contributor from './Contributor.vue';
 import axios from 'axios';
 
 export default {
+	name: 'Component',
+	introduction: 'A dynamic page for each component.',
+	description: `The component page gets gets the data from backend through an API call and renders it to display all the information for a specific component.\nA watcher has been added to the component to render the details dynamically when the component changes.
+	\nVarious methods have been implemented:
+		\n1. fetchData() fetches the data from the database through an API call and stores it.
+		\n2. computeLicense() returns "Not available" is a license is not present in the data and returns the license otherwise.
+		\n3. isAuthor() shows the author under the component's name is an author is present in the data received otherwise it does not show the author.`,
+	token: `<p id="author" v-if="isAuthor()">..rendered if author is present..</p>
+	\n<p>{{description}}</p>
+	\n<div id="install">..renders the npm install command..</div>
+	\n<div id="tags">..renders the tags..</div>
+	\n<div id="social>..displays social stats (stars, watchers, contirbutors, forks)..</div>
+	\n<div id="stats>..displays general stats (downloads, last modified, commits, version, created at, open issues)..</div>
+	\n<div id="contributors></div>
+	\n<div id="legal>..displays the license information if it exists..</div>`,
 	data () {
 		return {
 			name: '',

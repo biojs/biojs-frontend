@@ -6,18 +6,22 @@
 </template>
 <script>
 export default {
+	name: 'Contributor',
+	introduction: 'Render each contributor in the list of contributors in the component page.',
+	description: 'The Contributor component renders an image and the name of the contributor.',
+	token: '<div id="contributor">\n\t<img :src="imageURL" :alt="name" />\n\t<span>{{ name }}</span>\n</div>',
 	props: {
 		imageURL: {
 			type: String,
 			required: true,
 			default: '',
-			note: ''
+			note: 'Circular icon of the contributor.'
 		},
 		name: {
 			type: String,
 			required: true,
 			default: '',
-			note: ''
+			note: 'Name of the contributor.'
 		}
 	}
 };
