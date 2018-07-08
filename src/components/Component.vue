@@ -13,7 +13,9 @@
 		</div>
 		<div id="visualization" class="section" v-if="computeVisualization()">
 			<div class="title">Visualization</div>
-			<div class="content"></div>
+			<div class="content">
+				<visualizations :sniperData="sniper_data" :js="js_dependencies" :css="css_dependencies" :snippets="snippets" :githubURL="githubURL" />
+			</div>
 		</div>
 		<div id="tags" class="section">
 			<div class="title">Tags</div>
@@ -54,24 +56,33 @@ import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import ComponentStat from './ComponentStat.vue';
 import Contributor from './Contributor.vue';
+import Visualizations from './Visualization.vue';
 import axios from 'axios';
 
 export default {
 	name: 'Component',
 	introduction: 'A dynamic page for each component.',
-	description: `The component page gets gets the data from backend through an API call and renders it to display all the information for a specific component.\nA watcher has been added to the component to render the details dynamically when the component changes.
-	\nVarious methods have been implemented:
-		\n1. fetchData() fetches the data from the database through an API call and stores it.
-		\n2. computeLicense() returns "Not available" is a license is not present in the data and returns the license otherwise.
-		\n3. isAuthor() shows the author under the component's name is an author is present in the data received otherwise it does not show the author.`,
-	token: `<p id="author" v-if="isAuthor()">..rendered if author is present..</p>
-	\n<p>{{description}}</p>
-	\n<div id="install">..renders the npm install command..</div>
-	\n<div id="tags">..renders the tags..</div>
-	\n<div id="social>..displays social stats (stars, watchers, contirbutors, forks)..</div>
-	\n<div id="stats>..displays general stats (downloads, last modified, commits, version, created at, open issues)..</div>
-	\n<div id="contributors></div>
-	\n<div id="legal>..displays the license information if it exists..</div>`,
+description: `
+The component page gets the data from backend through an API call and renders it to display all the information for a specific component.
+A watcher has been added to the component to render the details dynamically when the component changes.
+#### API structure
+![API Response](https://github.com/biojs/biojs-frontend/blob/guide-assets/guide-assets/API_RESPONSE.png)
+#### Various methods have been implemented:
+1. fetchData() fetches the data from the database through an API call and stores it.
+2. computeLicense() returns "Not available" is a license is not present in the data and returns the license otherwise.
+3. isAuthor() shows the author under the component's name is an author is present in the data received otherwise it does not show the author.
+`,
+token: `
+<p id="author" v-if="isAuthor()">..rendered if author is present..</p>
+<p>{{description}}</p>
+<div id="install">..renders the npm install command..</div>
+<div id="tags">..renders the tags..</div>
+<div id="social>..displays social stats (stars, watchers, contirbutors, forks)..</div>
+<div id="stats>..displays general stats (downloads, last modified, commits, version, created at, open issues)..</div>
+<div id="contributors></div>
+<div id="legal>..displays the license information if it exists..</div>
+`,
+
 	data () {
 		return {
 			name: '',
@@ -84,14 +95,19 @@ export default {
 			contributors: [],
 			license: '',
 			author: '',
-			githubURL: 'https://www.github.com/'
+			githubURL: 'https://www.github.com/',
+			sniper_data: {},
+			js_dependencies: [],
+			css_dependencies: [],
+			snippets: []
 		};
 	},
 	components: {
 		'nav-bar': NavBar,
 		'heading': Heading,
 		'component-stat': ComponentStat,
-		'contributor': Contributor
+		'contributor': Contributor,
+		'visualizations': Visualizations
 	},
 	mounted () {
 		this.fetchData();
@@ -126,16 +142,20 @@ export default {
 				];
 				this.contributors = result.data.contributors.map((obj) => obj.contributor);
 				this.license = details.license;
+				this.sniper_data = result.data.sniper_data;
+				this.js_dependencies = result.data.js_dependencies;
+				this.css_dependencies = result.data.css_dependencies;
+				this.snippets = result.data.snippets;
 			}, error => {
 				console.error(error);
 			});
 		},
 		computeVisualization () {
-			// if (this.visualizations.length === 0) {
-			// 	return false;
-			// } else {
-			// 	return true;
-			// }
+			if (this.snippets.length === 0) {
+				return false;
+			} else {
+				return true;
+			}
 		},
 		computeLicense () {
 			if (this.license === '') {
