@@ -5,6 +5,7 @@ import Components from '@/components/Components.vue';
 import Guide from '@/components/Guide.vue';
 import Component from '@/components/Component.vue';
 import About from '@/components/About.vue';
+import Visualization from '@/components/Visualization.vue';
 // import Contact from '@/components/Contact.vue';
 
 Vue.use(Router);
@@ -35,6 +36,11 @@ export default new Router({
 			path: '/about',
 			name: 'About',
 			component: About
+		},
+		{
+			path: '/visualization',
+			name: 'Visualization',
+			component: Visualization
 		}
 		// {
 		// 	path: '/contact',

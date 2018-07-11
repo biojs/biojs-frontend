@@ -49,6 +49,7 @@
 </div>
 </template>
 <script>
+/* eslint-disable */ 
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import SearchComponent from './SearchComponent.vue';
@@ -60,17 +61,27 @@ const URL = 'http://139.59.93.32/api/top/';
 export default {
 	name: 'Components',
 	introduction: 'The components\' page',
-	description: 'The components\' page renders the top ten components (icon, name, author, description, tags, downloads, stars and last modified) from the data received by the API call.\nIt also has a search bar to search amongst all the components and displays top 3 component for each category.',
-	token: `<div id="component" v-for="component in components">
-				\n\t ..loop through the ten components..
-				\n\t<div class="image" \n\t:style="{backgroundImage: 'url(' + component.icon_url + ')' }">
-				\n\t..display the icon..
-				\n\t</div>
-				\n\t<div id="componentInfo">
-					\n\t\t..render all the other component information..
-				\n\t</div>
-			</div>
-			\n</div>`,
+description: `
+The components\' page renders the top ten components (icon, name, author, description, tags, downloads, stars and last modified) from the data received by the API call.\nIt also has a search bar to search amongst all the components and displays top 3 component for each category.
+#### API Response
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/Top10_API_Response.png" width="500px" alt="API Response">
+
+#### Searchbar
+A fuzzy search has been implemented. You can find the details of the search component in its documentation.
+
+`,
+token: `
+<div id="component" v-for="component in components">
+\t ..loop through the ten components..
+\t<div class="image"
+\t:style="{backgroundImage: 'url(' + component.icon_url + ')' }">
+\t..display the icon..
+\t</div>
+\t<div id="componentInfo">
+\t\t..render all the other component information..
+\t</div>
+</div>
+`,
 	data () {
 		return {
 			components: []

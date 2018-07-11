@@ -52,6 +52,7 @@
 </template>
 
 <script>
+/* eslint-disable */ 
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import ComponentStat from './ComponentStat.vue';
@@ -66,7 +67,7 @@ description: `
 The component page gets the data from backend through an API call and renders it to display all the information for a specific component.
 A watcher has been added to the component to render the details dynamically when the component changes.
 #### API structure
-![API Response](https://github.com/biojs/biojs-frontend/blob/guide-assets/guide-assets/API_RESPONSE.png)
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/API_Response.png" width="500px" alt="API Response">
 #### Various methods have been implemented:
 1. fetchData() fetches the data from the database through an API call and stores it.
 2. computeLicense() returns "Not available" is a license is not present in the data and returns the license otherwise.
