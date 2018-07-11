@@ -12,7 +12,7 @@ export default {
 description: 
 `The ComponentStat component renders the stat for each property. It renders an image and the statistic corresponding to that property. It is used in the "Component" component and is used in the individual page of a component to show the stats.
 <br>
-<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentStat.png" alt="Component statistics">
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentStat.png" alt="Component statistics" height="80px">
 `,
 token: `
 <div id="stat">

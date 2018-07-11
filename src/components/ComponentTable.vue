@@ -23,9 +23,10 @@ export default {
 description: `
 This component is a dynamic table to load and render the top 3 components of the desired category. An API call is made through Axios (npm package) for the desired category once the component is mounted.
 #### API Response
-<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentTableAPI.png" width="500px" alt="API Response">
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentTableAPI.png" width="400px" alt="API Response">
+
 #### UI
-<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentTable.png" width="500px" alt="Component Table">
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentTable.png" width="300px" alt="Component Table">
 `,
 token: `
 <div id="componentTable">

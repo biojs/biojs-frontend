@@ -34,7 +34,7 @@ description: `
 The SearchComponent component queries across all the components\' names and tags.
 A fuzzy search is implemented, more about which can be found here: https://github.com/jeancroy/fuzz-aldrin-plus
 ### API response for all components:
-<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/SearchComponentAPI.png" width="500px" alt="API Response">
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/SearchComponentAPI.png" width="300px" alt="API Response">
 `,
 token: '',
 	data () {
