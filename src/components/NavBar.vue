@@ -4,8 +4,8 @@
 		<router-link class="navLink" to="/components"><span>Components</span></router-link>
 		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
 		<router-link class="navLink" to="/"><span class="navLogo"><img src="../../static/logo.png" height="50px"></span></router-link>
-		<router-link class="navLink" to="/component/500"><span>About</span></router-link>
-		<router-link class="navLink" to="/component/74"><span>Contact Us</span></router-link>
+		<router-link class="navLink" to="/about"><span>About</span></router-link>
+		<router-link class="navLink" to="/contact"><span>Contact</span></router-link>
 		<div class="close">
 			<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
 		</div>
@@ -28,7 +28,7 @@ export default {
 	props: {
 		isShadow: {
 			type: Boolean,
-			required: false,
+			required: true,
 			default: true,
 			note: 'The navigation can either have a shadow at the bottom as observed in this page or it can be without a shadow as observed in the landing page.'
 		}
