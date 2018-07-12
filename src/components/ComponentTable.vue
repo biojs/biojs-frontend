@@ -16,13 +16,27 @@
 	</div>
 </template>
 <script>
+/* eslint-disable */ 
 import axios from 'axios';
 const URL = 'http://139.59.93.32/api/';
 export default {
 	name: 'ComponentTable',
 	introduction: 'Component table for loading the top 3 components for various categories: Most downloaded, Top starred, and Most recent.',
-	description: 'This component is a dynamic table to load and render the top 3 components of the desired category. An API call is made through Axios (npm package) for the desired category once the component is mounted.',
-	token: '<div id="componentTable">\n\t<div id="table">\n\t\t...\n\t</div>\n</div>',
+description: `
+This component is a dynamic table to load and render the top 3 components of the desired category. An API call is made through Axios (npm package) for the desired category once the component is mounted.
+#### API Response
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentTableAPI.png" width="400px" alt="API Response">
+
+#### UI
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/ComponentTable.png" width="300px" alt="Component Table">
+`,
+token: `
+<div id="componentTable">
+	<div id="table">
+		...
+	</div>
+</div>
+`,
 	data () {
 		return {
 			most_recent: [],

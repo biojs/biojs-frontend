@@ -5,11 +5,19 @@
 	</div>
 </template>
 <script>
+/* eslint-disable */ 
 export default {
 	name: 'Contributor',
 	introduction: 'Render each contributor in the list of contributors in the component page.',
-	description: 'The Contributor component renders an image and the name of the contributor.',
-	token: '<div id="contributor">\n\t<img :src="imageURL" :alt="name" />\n\t<span>{{ name }}</span>\n</div>',
+description: `
+The Contributor component renders an image and the name of the contributor.
+`,
+token: `
+<div id="contributor">
+	<img :src="imageURL" :alt="name" />
+	<span>{{ name }}</span>
+</div>
+`,
 	props: {
 		imageURL: {
 			type: String,

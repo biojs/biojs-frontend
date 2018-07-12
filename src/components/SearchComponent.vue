@@ -32,8 +32,13 @@ const URL = 'http://139.59.93.32/api/all/';
 export default {
 	name: 'SearchComponent',
 	introduction: 'Search bar to query across all the components.',
-	description: 'The SearchComponent component queries across all the components\' names and tags.\n A fuzzy search is implemented, more about which can be found here: https://github.com/jeancroy/fuzz-aldrin-plus \n\nAPI endpoint for all the components: http://139.59.93.32/api/all/',
-	token: '',
+description: `
+The SearchComponent component queries across all the components\' names and tags.
+A fuzzy search is implemented, more about which can be found here: https://github.com/jeancroy/fuzz-aldrin-plus
+### API response for all components:
+<img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/SearchComponentAPI.png" width="300px" alt="API Response">
+`,
+token: '',
 	data () {
 		return {
 			query: '',
