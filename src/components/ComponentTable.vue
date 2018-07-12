@@ -1,6 +1,6 @@
 <template>
 	<div id="componentTable">
-		<h2>{{ title }}</h2>
+		<h2 class="title">{{ title }}</h2>
 		<div id="table">
 			<b-list-group>
 				<router-link class="link" v-for="component in computedComponents" :key="component.id" :to="componentURL(component.url_name)">
