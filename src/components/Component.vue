@@ -14,7 +14,16 @@
 		<div id="visualization" class="section" v-if="computeVisualization()">
 			<div class="title">Visualization</div>
 			<div class="content">
-				<visualizations :sniperData="sniper_data" :js="js_dependencies" :css="css_dependencies" :snippets="snippets" :githubURL="githubURL" />
+				<select id="visualizationSelect" v-model="selectedSnippet">
+					<option
+						v-for="(snippet, index) in visualizations"
+						:key="index"
+						:value="snippet.name"
+					>
+						{{ snippet.name }}
+					</option>
+				</select>
+				<visualization :snippet="selectedSnippet" :component="name"/>
 			</div>
 		</div>
 		<div id="tags" class="section">
@@ -57,7 +66,7 @@ import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import ComponentStat from './ComponentStat.vue';
 import Contributor from './Contributor.vue';
-import Visualizations from './Visualization.vue';
+import Visualization from './Visualization.vue';
 import axios from 'axios';
 
 export default {
@@ -100,7 +109,7 @@ token: `
 			sniper_data: {},
 			js_dependencies: [],
 			css_dependencies: [],
-			snippets: []
+			selectedSnippet: ''
 		};
 	},
 	components: {
@@ -108,18 +117,21 @@ token: `
 		'heading': Heading,
 		'component-stat': ComponentStat,
 		'contributor': Contributor,
-		'visualizations': Visualizations
+		'visualization': Visualization
 	},
 	mounted () {
 		this.fetchData();
 	},
 	watch: {
-		'$route': 'fetchData'
+		'$route': 'fetchData',
+		selectedSnippet: function (value) {
+			this.selectedSnippet = value;
+		}
 	},
 	methods: {
 		fetchData () {
 			axios({ method: 'GET', 'url': 'http://139.59.93.32/api/details/' + this.$route.params.name + '/' }).then(result => {
-				// this.visualizations = result.data.visualizations;
+				this.visualizations = result.data.snippets;
 				let details = result.data.details;
 				this.name = details.name;
 				this.description = details.short_description;
@@ -146,13 +158,16 @@ token: `
 				this.sniper_data = result.data.sniper_data;
 				this.js_dependencies = result.data.js_dependencies;
 				this.css_dependencies = result.data.css_dependencies;
-				this.snippets = result.data.snippets;
+				if(this.visualizations)
+					this.selectedSnippet = result.data.snippets[0].name;
+				else
+					this.selectedSnippet = '';
 			}, error => {
 				console.error(error);
 			});
 		},
 		computeVisualization () {
-			if (this.snippets.length === 0) {
+			if (!this.visualizations) {
 				return false;
 			} else {
 				return true;
