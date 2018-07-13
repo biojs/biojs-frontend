@@ -14,16 +14,19 @@
 		<div id="visualization" class="section" v-if="computeVisualization()">
 			<div class="title">Visualization</div>
 			<div class="content">
-				<select id="visualizationSelect" v-model="selectedSnippet">
-					<option
-						v-for="(snippet, index) in visualizations"
-						:key="index"
-						:value="snippet.name"
-					>
-						{{ snippet.name }}
-					</option>
-				</select>
-				<visualization :snippet="selectedSnippet" :component="name"/>
+				<visualization :snippet="selectedSnippet" :component="name" id="visualization" />
+				<div id="selectMenu">
+					<strong>Select visualization:</strong>
+					<select id="visualizationSelect" v-model="selectedSnippet">
+						<option
+							v-for="(snippet, index) in visualizations"
+							:key="index"
+							:value="snippet.name"
+						>
+							{{ snippet.name }}
+						</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div id="tags" class="section">
@@ -275,6 +278,10 @@ token: `
 #author {
 	margin-top: -20px;
 	color: rgba(0,0,0,0.7);
+}
+#selectMenu {
+	text-align: center;
+	margin-bottom: 20px;
 }
 @media (max-width: 700px) {
 	#content {
