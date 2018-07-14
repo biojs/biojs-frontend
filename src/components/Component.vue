@@ -14,7 +14,7 @@
 		<div id="visualization" class="section" v-if="computeVisualization()">
 			<div class="title">Visualization</div>
 			<div class="content">
-				<visualization :snippet="selectedSnippet" :component="name" id="visualization" />
+				<visualization :snippet="selectedSnippet" :component="urlName" id="visualization" />
 				<div id="selectMenu">
 					<strong>Select visualization:</strong>
 					<select id="visualizationSelect" v-model="selectedSnippet">
