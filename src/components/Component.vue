@@ -6,6 +6,11 @@
 		<img src="../assets/component/fork_banner.png" alt="Fork me on GitHub" id="githubFork" />
 	</a>
 	<div id="content">
+		<div id="biojsio">
+			<p v-if="biojsioURL!=='error' && biojsioURL!=='loading'" class="biojsio-found">URL to biojs.io website: <a  :href="biojsioURL">{{biojsioURL}}</a></p>
+			<p class="biojsio-notfound" v-if="biojsioURL==='error'">Component not found in biojs.io!</p>
+			<p v-if="biojsioURL==='loading'">Loading...</p>
+		</div>
 		<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
 		<p>{{ description }}</p>
 		<div id="install" class="section">
@@ -100,7 +105,8 @@ token: `
 			sniper_data: {},
 			js_dependencies: [],
 			css_dependencies: [],
-			snippets: []
+			snippets: [],
+			biojsioURL: 'loading'
 		};
 	},
 	components: {
@@ -147,12 +153,21 @@ token: `
 				this.js_dependencies = result.data.js_dependencies;
 				this.css_dependencies = result.data.css_dependencies;
 				this.snippets = result.data.snippets;
+
+				axios({method: 'GET', 'url': 'http://workmen.biojs.net/detail/'+this.name})
+				.then(result => {
+					if(result.data.error) {
+						this.biojsioURL = 'error';
+					} else {
+						this.biojsioURL = 'http://biojs.io/d/'+this.name;
+					}
+				});
 			}, error => {
 				console.error(error);
 			});
 		},
 		computeVisualization () {
-			if (this.snippets.length === 0) {
+			if (!this.snippets || this.snippets.length === 0) {
 				return false;
 			} else {
 				return true;
@@ -258,8 +273,28 @@ token: `
 	z-index: 9999;
 }
 #author {
-	margin-top: -20px;
+	// margin-top: -20px;
 	color: rgba(0,0,0,0.7);
+}
+#biojsio {
+	width: 80%;
+	border-radius: 3px;
+	background-color: #fff;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	p {
+		margin: 0;
+		padding: 5px;
+	}
+}
+.biojsio-found {
+	color: green;
+}
+.biojsio-notfound {
+	color: red;
 }
 @media (max-width: 700px) {
 	#content {
