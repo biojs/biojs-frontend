@@ -20,9 +20,11 @@
 						</div>
 						<div class="tags">
 							<span>Tags: </span>
-							<span class="tagName" v-for="tag in component.tags" :key="tag.id">
-								{{ tag }}
-							</span>
+							<router-link v-for="tag in component.tags" :key="tag.id" :to="'/search/'+tag">
+								<span class="tagName">
+									{{ tag }}
+								</span>
+							</router-link>
 						</div>
 						<div id="properties">
 							<div class="downloads property">
@@ -174,6 +176,11 @@ token: `
     margin: 0 2.5px;
 	display: inline-block;
 	margin-bottom: 5px;
+	transition: all 0.2s ease-in-out;
+}
+.tagName:hover {
+	background: #007E3A;
+	color: #fff;
 }
 #properties {
 	display: flex;
