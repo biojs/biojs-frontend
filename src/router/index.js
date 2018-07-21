@@ -6,6 +6,7 @@ import Guide from '@/components/Guide.vue';
 import Component from '@/components/Component.vue';
 import About from '@/components/About.vue';
 import Visualization from '@/components/Visualization.vue';
+import RandomSnippets from '@/components/RandomSnippets.vue';
 // import Contact from '@/components/Contact.vue';
 
 Vue.use(Router);
@@ -41,6 +42,11 @@ export default new Router({
 			path: '/visualization',
 			name: 'Visualization',
 			component: Visualization
+		},
+		{
+			path: '/random/:num',
+			name: 'Random Snippets',
+			component: RandomSnippets
 		}
 		// {
 		// 	path: '/contact',
