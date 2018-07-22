@@ -7,6 +7,7 @@ import Component from '@/components/Component.vue';
 import About from '@/components/About.vue';
 import Visualization from '@/components/Visualization.vue';
 import RandomSnippets from '@/components/RandomSnippets.vue';
+import SearchPage from '@/components/SearchPage.vue';
 // import Contact from '@/components/Contact.vue';
 
 Vue.use(Router);
@@ -47,6 +48,11 @@ export default new Router({
 			path: '/random/:num',
 			name: 'Random Snippets',
 			component: RandomSnippets
+		},
+		{
+			path: '/search/:tag',
+			name: 'Search for tag',
+			component: SearchPage
 		}
 		// {
 		// 	path: '/contact',

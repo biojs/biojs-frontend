@@ -13,7 +13,9 @@
 					</span>
 					<div class="tags">
 						Tags:
-						<span v-for="tag in result.tags" :key="tag" class="resultTag">{{tag}}</span>
+						<router-link v-for="tag in result.tags" :key="tag" :to="'/search/' + tag" id="tagLinkContainer">
+							<span class="resultTag">{{tag}}</span>
+						</router-link>
 					</div>
 				</b-list-group-item>
 			</router-link>
@@ -105,7 +107,7 @@ token: '',
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #searchForm {
   width: 100%;
   display: flex;
@@ -139,9 +141,25 @@ token: '',
 }
 .resultTag {
 	padding: 1px 5px;
+	margin: 0px 5px;
 	border-radius: 2px;
 	background: #eee;
 	margin: 5px;
+	transition: 0.2s all ease-in-out;
+	color: #000;
+	text-decoration: none;
+}
+.resultTag:hover {
+	background: #007E3A;
+	color: #fff;
+	text-decoration: none;
+}
+.resultTag:active, .resultTag:visited {
+	text-decoration: none;
+	color: #000;
+}
+#tagLinkContainer {
+	margin: 5px 0;
 }
 #noResult {
 	font-size: 20px;
