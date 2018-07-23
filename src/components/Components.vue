@@ -2,6 +2,12 @@
 <div id="components">
 	<navbar :isShadow="true" />
 	<heading title="Components" />
+	<div id="randomComponents">
+		<p id="">Generate</p>
+		<input type="number" v-model="randomComponentNum" />
+		<p>random components!</p>
+		<router-link :to="generateRandom()"><button type="button" class="btn btn-success btn-sm">Go</button></router-link>		
+	</div>
 	<search-component />
 	<div id="componentsContainer">
 		<div id="popComponents">
@@ -88,7 +94,8 @@ token: `
 `,
 	data () {
 		return {
-			components: []
+			components: [],
+			randomComponentNum: 5
 		};
 	},
 	components: {
@@ -100,6 +107,9 @@ token: `
 	methods: {
 		computeURL (url) {
 			return '/component/' + url;
+		},
+		generateRandom () {
+			return '/random/'+this.randomComponentNum;
 		}
 	},
 	mounted () {
@@ -202,6 +212,23 @@ i::before {
 .link:hover {
 	text-decoration: none;
 	color: #000;
+}
+#randomComponents {
+	display: flex;
+	align-items: center;
+	align-self: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	p {
+		margin: 0px 5px;
+		padding: 0;
+	}
+	input {
+		width: 50px;
+		border-radius: 3px;
+		border: 1px solid rgba(0,0,0,0.1);
+		padding: 3px;
+	}
 }
 @media (max-width: 950px) {
 	#componentsContainer {
