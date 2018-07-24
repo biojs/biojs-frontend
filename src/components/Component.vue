@@ -41,7 +41,11 @@
 		<div id="tags" class="section">
 			<div class="title">Tags</div>
 			<div class="content">
-				<span class="tag" v-for="tag in tags" :key="tag.id"> {{ tag }}</span>
+				<router-link v-for="tag in tags" :key="tag.id" :to="'/search/'+tag">
+					<span class="tag">
+						{{ tag }}
+					</span>
+				</router-link>
 			</div>
 		</div>
 		<div id="social" class="section">
@@ -288,6 +292,11 @@ token: `
 		margin: 0 2.5px;
 		display: inline-block;
 		margin-bottom: 5px;
+		transition: all 0.2s ease-in-out;
+	}
+	.tag:hover {
+		background: #007E3A;
+		color: #fff;
 	}
 }
 #socialContent, #statsContent {
