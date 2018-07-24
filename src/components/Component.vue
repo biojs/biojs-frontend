@@ -13,8 +13,12 @@
 		</div>
 		<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
 		<p>{{ description }}</p>
-		<div id="install" class="section">
-			<span class="code">npm install {{ name }}</span>
+		<div id="npm" class="section">
+			<div class="title">npm</div>
+			<div class="content">
+				<span class="code">npm install {{ name }}</span>
+				<a :href="'https://www.npmjs.com/package/tnt.genome' + name" target="_blank" id="npmLink">View package on npm</a>
+			</div>
 		</div>
 		<div id="visualization" class="section" v-if="computeVisualization() && biojsioURL!=='error' && biojsioURL!=='loading'">
 			<div class="title">Visualization</div>
@@ -254,13 +258,25 @@ token: `
 		}
 	}
 }
-#install {
-	padding: 10px 20px;
+#npm {
 	.code {
 		background: #efefef;
 		color: red;
 		padding: 0 5px;
 		border-radius: 2px;
+	}
+	.content {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	#npmLink {
+		color: #007bff;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	#npmLink:hover, #npmLink:active {
+		color: #0056b3;
 	}
 }
 #tags {
