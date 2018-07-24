@@ -36,6 +36,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 18px;
 }
 #content {
     width: 70%;
@@ -45,6 +46,7 @@ export default {
     font-weight: bold;
     button {
         font-weight: bold;
+        font-size: 18px;
     }
 }
 </style>
