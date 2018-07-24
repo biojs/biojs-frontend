@@ -1,8 +1,10 @@
 <template>
-	<div id="contributor">
-		<img :src="imageURL" :alt="name" />
-		<span>{{ name }}</span>
-	</div>
+	<a :href="'https://github.com/' + name" target="_blank">
+		<div id="contributor">
+			<img :src="imageURL" :alt="name" />
+			<span>{{ name }}</span>
+		</div>
+	</a>
 </template>
 <script>
 /* eslint-disable */ 
@@ -49,6 +51,11 @@ token: `
 
 	span {
 		text-align: center;
+		color: #000;
+	}
+	span:active, span:visited {
+		color: #000;
+		text-decoration: none;
 	}
 }
 </style>

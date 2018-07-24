@@ -13,8 +13,12 @@
 		</div>
 		<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
 		<p>{{ description }}</p>
-		<div id="install" class="section">
-			<span class="code">npm install {{ name }}</span>
+		<div id="npm" class="section">
+			<div class="title">npm</div>
+			<div class="content">
+				<span class="code">npm install {{ name }}</span>
+				<a :href="'https://www.npmjs.com/package/tnt.genome' + name" target="_blank" id="npmLink">View package on npm</a>
+			</div>
 		</div>
 		<div id="visualization" class="section" v-if="computeVisualization() && biojsioURL!=='error' && biojsioURL!=='loading'">
 			<div class="title">Visualization</div>
@@ -37,7 +41,11 @@
 		<div id="tags" class="section">
 			<div class="title">Tags</div>
 			<div class="content">
-				<span class="tag" v-for="tag in tags" :key="tag.id"> {{ tag }}</span>
+				<router-link v-for="tag in tags" :key="tag.id" :to="'/search/'+tag">
+					<span class="tag">
+						{{ tag }}
+					</span>
+				</router-link>
 			</div>
 		</div>
 		<div id="social" class="section">
@@ -175,11 +183,16 @@ token: `
 					} else {
 						this.biojsioURL = 'http://biojs.io/d/'+this.name;
 					}
+				}, error => {
+					this.biojsioURL = 'error';
+					console.error(error);
 				});
+				
 				if(this.visualizations)
 					this.selectedSnippet = result.data.snippets[0].name;
 				else
 					this.selectedSnippet = '';
+			
 			}, error => {
 				console.error(error);
 			});
@@ -249,13 +262,25 @@ token: `
 		}
 	}
 }
-#install {
-	padding: 10px 20px;
+#npm {
 	.code {
 		background: #efefef;
 		color: red;
 		padding: 0 5px;
 		border-radius: 2px;
+	}
+	.content {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	#npmLink {
+		color: #007bff;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	#npmLink:hover, #npmLink:active {
+		color: #0056b3;
 	}
 }
 #tags {
@@ -267,6 +292,11 @@ token: `
 		margin: 0 2.5px;
 		display: inline-block;
 		margin-bottom: 5px;
+		transition: all 0.2s ease-in-out;
+	}
+	.tag:hover {
+		background: #007E3A;
+		color: #fff;
 	}
 }
 #socialContent, #statsContent {
