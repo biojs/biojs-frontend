@@ -175,11 +175,16 @@ token: `
 					} else {
 						this.biojsioURL = 'http://biojs.io/d/'+this.name;
 					}
+				}, error => {
+					this.biojsioURL = 'error';
+					console.error(error);
 				});
+				
 				if(this.visualizations)
 					this.selectedSnippet = result.data.snippets[0].name;
 				else
 					this.selectedSnippet = '';
+			
 			}, error => {
 				console.error(error);
 			});

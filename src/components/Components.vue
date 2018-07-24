@@ -6,7 +6,7 @@
 		<p id="">Generate</p>
 		<input type="number" v-model="randomComponentNum" />
 		<p>random components!</p>
-		<router-link :to="generateRandom()"><button type="button" class="btn btn-success btn-sm">Go</button></router-link>		
+		<router-link :to="generateRandom()"><button type="button" class="btn btn-success btn-sm">Go</button></router-link>
 	</div>
 	<search-component />
 	<div id="componentsContainer">
