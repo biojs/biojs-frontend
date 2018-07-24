@@ -18,7 +18,8 @@
 <script>
 /* eslint-disable */ 
 import axios from 'axios';
-const URL = 'http://139.59.93.32/api/';
+import {API_URL} from '../DB_CONFIG.js';
+
 export default {
 	name: 'ComponentTable',
 	introduction: 'Component table for loading the top 3 components for various categories: Most downloaded, Top starred, and Most recent.',
@@ -82,7 +83,7 @@ token: `
 		}
 	},
 	mounted () {
-		axios({ method: 'GET', 'url': URL }).then(result => {
+		axios({ method: 'GET', 'url': API_URL }).then(result => {
 			this.most_recent = result.data.most_recent_components;
 			this.top_starred = result.data.top_starred_components;
 			this.top_dwnld = result.data.top_dl_components;

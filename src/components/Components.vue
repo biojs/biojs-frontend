@@ -64,9 +64,9 @@ import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import SearchComponent from './SearchComponent.vue';
 import ComponentTable from './ComponentTable';
-
 import axios from 'axios';
-const URL = 'http://139.59.93.32/api/top/';
+import {API_URL} from '../DB_CONFIG.js';
+
 
 export default {
 	name: 'Components',
@@ -113,7 +113,7 @@ token: `
 		}
 	},
 	mounted () {
-		axios({ method: 'GET', 'url': URL }).then(result => {
+		axios({ method: 'GET', 'url': API_URL + 'top/' }).then(result => {
 			this.components = result.data.top_components;
 		}, error => {
 			console.error(error);
