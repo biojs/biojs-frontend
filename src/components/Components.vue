@@ -34,15 +34,15 @@
 						</div>
 						<div id="properties">
 							<div class="downloads property">
-								<i class="flaticon-cloud-computing"></i>
+								<i class="material-icons">cloud_download</i>
 								{{ component.downloads }}
 							</div>
 							<div class="stars property">
-								<i class="flaticon-star"></i>
+								<i class="material-icons">star</i>
 								{{ component.stars }}
 							</div>
 							<div class="modified property">
-								<i class="flaticon-passage-of-time"></i>
+								<i class="material-icons">update</i>
 								{{ component.modified_time.split('T')[0] }}
 							</div>
 						</div>
@@ -122,8 +122,6 @@ token: `
 };
 </script>
 <style lang="scss" scoped>
-@import url("../../static/property-icons/flaticon.css");
-
 #components {
 	background: #efefef57;
 }
@@ -201,6 +199,12 @@ token: `
 	color: #fff;
 	padding: 5px 10px;
 	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	i {
+		margin-right: 5px;
+	}
 }
 i::before {
 	margin: 0 !important;
