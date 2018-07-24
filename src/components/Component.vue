@@ -84,6 +84,7 @@ import ComponentStat from './ComponentStat.vue';
 import Contributor from './Contributor.vue';
 import Visualization from './Visualization.vue';
 import axios from 'axios';
+import {API_URL} from '../DB_CONFIG.js';
 
 export default {
 	name: 'Component',
@@ -147,7 +148,7 @@ token: `
 	},
 	methods: {
 		fetchData () {
-			axios({ method: 'GET', 'url': 'http://139.59.93.32/api/details/' + this.$route.params.name + '/' }).then(result => {
+			axios({ method: 'GET', 'url': API_URL + 'details/' + this.$route.params.name + '/' }).then(result => {
 				this.visualizations = result.data.snippets;
 				let details = result.data.details;
 				this.name = details.name;
