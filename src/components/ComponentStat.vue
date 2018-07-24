@@ -34,7 +34,6 @@ token: `
 			note: 'URL of the image of the property.'
 		},
 		propValue: {
-			type: String,
 			required: true,
 			default: '',
 			note: 'Statistic of the property (a numerical in most cases).'

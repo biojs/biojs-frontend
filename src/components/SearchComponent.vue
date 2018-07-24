@@ -25,6 +25,7 @@
   </div>
 </template>
 <script>
+/* eslint-disable */
 import axios from 'axios';
 import fz from 'fuzzaldrin-plus';
 import Heading from './Heading.vue';
