@@ -17,7 +17,7 @@
 			<div class="title">npm</div>
 			<div class="content">
 				<span class="code">npm install {{ name }}</span>
-				<a :href="'https://www.npmjs.com/package/tnt.genome' + name" target="_blank" id="npmLink">View package on npm</a>
+				<a :href="'https://www.npmjs.com/package/' + name" target="_blank" id="npmLink">View package on npm</a>
 			</div>
 		</div>
 		<div id="visualization" class="section" v-if="computeVisualization() && biojsioURL!=='error' && biojsioURL!=='loading'">
