@@ -36,8 +36,7 @@ import axios from 'axios';
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 import SearchComponent from './SearchComponent.vue';
-
-const URL = 'http://139.59.93.32/api/all/';
+import {API_URL} from '../DB_CONFIG.js';
 
 export default {
 	components: {
@@ -64,7 +63,7 @@ export default {
 			this.searchResults = [];
 			this.query = this.$route.params.tag;
 			this.isLoading = true;
-			axios({ method: 'GET', 'url': URL }).then(result => {
+			axios({ method: 'GET', 'url': API_URL + 'all/' }).then(result => {
 				this.components = result.data.all_components;
 				console.log(this.components);
 				this.components.map(component => {

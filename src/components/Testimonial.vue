@@ -2,8 +2,8 @@
 	<b-card-groups class="testimonialContainer">
 		<b-card v-for="testimonial in testimonials" class="testimonial" :key="testimonial.id">
 			<div id="hearts">
-				<i class="flaticon-shapes-1" v-for="n in testimonial.stars" :key="n" style="text-align: center; color: #dc3545;"></i>
-				<i class="flaticon-shapes" v-for="n in 5 - testimonial.stars" :key="n" style="text-align: center; color: #dc3545;"></i>
+				<i class="material-icons" v-for="n in testimonial.stars" :key="n" style="text-align: center; color: #dc3545;">favorite</i>
+				<i class="material-icons" v-for="n in 5 - testimonial.stars" :key="n" style="text-align: center; color: #dc3545;">favorite_border</i>
 			</div>
             <blockquote class="blockquote mb-0">
                 <p style="font-size: 16px">{{ testimonial.testimonial }}</p>
@@ -30,8 +30,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import url("../../static/heart_icon/flaticon.css");
-
 .testimonialContainer {
 	display: flex;
 	width: 100%;

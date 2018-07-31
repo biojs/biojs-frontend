@@ -29,8 +29,7 @@
 import axios from 'axios';
 import fz from 'fuzzaldrin-plus';
 import Heading from './Heading.vue';
-
-const URL = 'http://139.59.93.32/api/all/';
+import {API_URL} from '../DB_CONFIG.js';
 
 export default {
 	name: 'SearchComponent',
@@ -52,7 +51,7 @@ token: '',
 		'heading': Heading
 	},
 	mounted () {
-		axios({ method: 'GET', 'url': URL }).then(result => {
+		axios({ method: 'GET', 'url': API_URL + 'all/' }).then(result => {
 			this.components = result.data.all_components;
 		}, error => {
 			console.error(error);

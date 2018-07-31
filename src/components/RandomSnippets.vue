@@ -26,7 +26,8 @@
 </template>
 <script>
 import axios from 'axios';
-const URL = 'http://139.59.93.32/api/random_snippets/?q=';
+import {API_URL} from '../DB_CONFIG.js';
+
 export default {
 	data () {
 		return {
@@ -42,7 +43,7 @@ export default {
 	},
 	methods: {
 		fetchData () {
-			axios({ method: 'GET', url: URL + this.$route.params.num }).then(
+			axios({ method: 'GET', url: API_URL + 'random_snippets/?q=' + this.$route.params.num }).then(
 				result => {
 					this.components = result.data.components;
 				},
