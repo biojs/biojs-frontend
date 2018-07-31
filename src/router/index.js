@@ -9,6 +9,7 @@ import Visualization from '@/components/Visualization.vue';
 import RandomSnippets from '@/components/RandomSnippets.vue';
 import SearchPage from '@/components/SearchPage.vue';
 import ContactUs from '@/components/ContactUs.vue';
+import VersionList from '@/components/VersionList.vue';
 
 Vue.use(Router);
 
@@ -58,6 +59,11 @@ export default new Router({
 			path: '/contact',
 			name: 'Contact Us',
 			component: ContactUs
+		},
+		{
+			path: '/version-list',
+			name: 'Version List',
+			component: VersionList
 		}
 	]
 });

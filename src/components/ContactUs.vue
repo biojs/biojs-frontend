@@ -16,6 +16,7 @@
 </div>
 </template>
 <script>
+/* eslint-disable */
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
 
