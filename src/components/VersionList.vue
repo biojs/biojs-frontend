@@ -22,6 +22,8 @@
 <script>
 /*eslint-disable*/
 import axios from "axios";
+import {API_URL} from "../DB_CONFIG";
+
 export default {
   data() {
     return {
@@ -33,7 +35,7 @@ export default {
     };
   },
   mounted() {
-    axios({ method: "GET", url: "http://139.59.93.32/api/all/" }).then(
+    axios({ method: "GET", url: API_URL + "all/" }).then(
       result => {
         this.all_components = result.data.all_components;
         this.all_components.map((component, index) => {
@@ -41,7 +43,7 @@ export default {
           componentObj["name"] = component.name;
           axios({
             method: "GET",
-            url: "http://139.59.93.32/api/details/" + component.url_name
+            url: API_URL + "details/" + component.url_name
           }).then(
             result => {
               componentObj["newVersion"] = result.data.details.version;
