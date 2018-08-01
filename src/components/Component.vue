@@ -6,7 +6,7 @@
 		<img src="../assets/component/fork_banner.png" alt="Fork me on GitHub" id="githubFork" />
 	</a>
 	<div id="content">
-		<div id="biojsio">
+		<div id="biojsio" v-if="this.$route.query && this.$route.query.debug === 'true'">
 			<p v-if="biojsioURL!=='error' && biojsioURL!=='loading'" class="biojsio-found">URL to biojs.io website: <a  :href="biojsioURL">{{biojsioURL}}</a></p>
 			<p class="biojsio-notfound" v-if="biojsioURL==='error'">Component not found in biojs.io!</p>
 			<p v-if="biojsioURL==='loading'">Loading...</p>

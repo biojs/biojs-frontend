@@ -2,11 +2,14 @@
 <div id="components">
 	<navbar :isShadow="true" />
 	<heading title="Components" />
-	<div id="randomComponents">
+	<div id="randomComponents" v-if="this.$route.query && this.$route.query.debug === 'true'">
 		<p id="">Generate</p>
 		<input type="number" v-model="randomComponentNum" />
 		<p>random components!</p>
 		<router-link :to="generateRandom()"><button type="button" class="btn btn-success btn-sm">Go</button></router-link>
+	</div>
+	<div id="randomComponents" v-if="this.$route.query && this.$route.query.debug === 'true'">
+		<router-link to="/version-list">Compare versions with old website</router-link>
 	</div>
 	<search-component />
 	<div id="componentsContainer">
