@@ -1,8 +1,48 @@
 <template>
 <div id="guide">
 	<navbar :isShadow="true" />
-	<heading title="Documentation" />
 	<div id="documentation">
+		<heading title="Run BioJS Locally" />
+		<div id="build">
+			<div>
+				<h4>Clone GitHub repository</h4>
+				<code>git clone https://github.com/biojs/biojs-frontend</code>
+			</div>
+			<div>
+				<h4>Change directory</h4>
+				<code>cd biojs-frontend</code>
+			</div>
+			<div>
+				<h4>Install dependencies</h4>
+				<code>npm install</code>
+			</div>
+			<div>
+				<h4>Serve the website</h4>
+				<code>npm run dev</code>
+				<span><strong>Note: Due to security reasons, your browser might not allow the website to make API calls (Cross Origin Resource Sharing blocked).</strong></span>
+			</div>
+			<div>
+				<h4>Build the website for production</h4>
+				<code>npm run build</code>
+			</div>
+			<div>
+				<h4>Build the website for production and view the bundle analyzer report</h4>
+				<code>npm run build --report</code>
+			</div>
+			<div>
+				<h4>Run unit tests</h4>
+				<code>npm run unit</code>
+			</div>
+			<div>
+				<h4>Run e2e tests</h4>
+				<code>npm run e2e</code>
+			</div>
+			<div>
+				<h4>Run all tests</h4>
+				<code>npm test</code>
+			</div>
+		</div>
+		<heading title="Website documentation" />
 		<prop-doc :component="About"></prop-doc>
 		<prop-doc :component="Component"></prop-doc>
 		<prop-doc :component="Components"></prop-doc>
@@ -81,5 +121,17 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	margin-bottom: 50px;
+}
+#build {
+	width: 80%;
+	background: #eee;
+	padding: 10px;
+	border-radius: 5px;
+	div {
+		margin-bottom: 15px;
+	}
+	span {
+		display: block;
+	}
 }
 </style>
