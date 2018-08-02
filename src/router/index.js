@@ -26,6 +26,12 @@ export default new Router({
 			component: Components
 		},
 		{
+			path: '/components',
+			name: 'Components',
+			component: Components,
+			query: { debug: 'true' }
+		},
+		{
 			path: '/guide',
 			name: 'Guide',
 			component: Guide
@@ -34,6 +40,12 @@ export default new Router({
 			path: '/component/:name',
 			name: 'Component',
 			component: Component
+		},
+		{
+			path: '/component/:name',
+			name: 'Component',
+			component: Component,
+			query: {debug: 'true'}
 		},
 		{
 			path: '/about',
