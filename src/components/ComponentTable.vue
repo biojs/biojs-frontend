@@ -1,7 +1,8 @@
 <template>
 	<div id="componentTable">
 		<h2 class="title">{{ title }}</h2>
-		<div id="table">
+		<loader v-if="isLoading" />
+		<div id="table" v-if="!isLoading">
 			<b-list-group>
 				<router-link class="link" v-for="component in computedComponents" :key="component.id" :to="componentURL(component.url_name)">
 					<b-list-group-item class="d-flex justify-content-between align-items-center tableItem">
@@ -19,6 +20,7 @@
 /* eslint-disable */ 
 import axios from 'axios';
 import {API_URL} from '../DB_CONFIG.js';
+import Loader from './Loader';
 
 export default {
 	name: 'ComponentTable',
@@ -42,7 +44,8 @@ token: `
 		return {
 			most_recent: [],
 			top_starred: [],
-			top_dwnld: []
+			top_dwnld: [],
+			isLoading: true
 		};
 	},
 	props: {
@@ -87,9 +90,13 @@ token: `
 			this.most_recent = result.data.most_recent_components;
 			this.top_starred = result.data.top_starred_components;
 			this.top_dwnld = result.data.top_dl_components;
+			this.isLoading = false;
 		}, error => {
 			console.error(error);
 		});
+	},
+	components: {
+		'loader': Loader
 	}
 };
 </script>

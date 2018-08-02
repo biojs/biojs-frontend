@@ -1,75 +1,80 @@
 <template>
 <div id="container">
 	<nav-bar></nav-bar>
-	<heading :title="name"></heading>
-	<a :href="githubURL" target="_blank">
-		<img src="../assets/component/fork_banner.png" alt="Fork me on GitHub" id="githubFork" />
-	</a>
-	<div id="content">
-		<div id="biojsio" v-if="this.$route.query && this.$route.query.debug === 'true'">
-			<p v-if="biojsioURL!=='error' && biojsioURL!=='loading'" class="biojsio-found">URL to biojs.io website: <a  :href="biojsioURL">{{biojsioURL}}</a></p>
-			<p class="biojsio-notfound" v-if="biojsioURL==='error'">Component not found in biojs.io!</p>
-			<p v-if="biojsioURL==='loading'">Loading...</p>
-		</div>
-		<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
-		<p>{{ description }}</p>
-		<div id="npm" class="section">
-			<div class="title">npm</div>
-			<div class="content">
-				<span class="code">npm install {{ name }}</span>
-				<a :href="'https://www.npmjs.com/package/' + name" target="_blank" id="npmLink">View package on npm</a>
+	<div id="main" v-if="isLoading">
+		<loader />
+	</div>
+	<div id="main" v-if="!isLoading">
+		<heading :title="name"></heading>
+		<a :href="githubURL" target="_blank">
+			<img src="../assets/component/fork_banner.png" alt="Fork me on GitHub" id="githubFork" />
+		</a>
+		<div id="content">
+			<div id="biojsio" v-if="this.$route.query && this.$route.query.debug === 'true'">
+				<p v-if="biojsioURL!=='error' && biojsioURL!=='loading'" class="biojsio-found">URL to biojs.io website: <a  :href="biojsioURL">{{biojsioURL}}</a></p>
+				<p class="biojsio-notfound" v-if="biojsioURL==='error'">Component not found in biojs.io!</p>
+				<p v-if="biojsioURL==='loading'">Loading...</p>
 			</div>
-		</div>
-		<div id="visualization" class="section" v-if="computeVisualization() && biojsioURL!=='error' && biojsioURL!=='loading'">
-			<div class="title">Visualization</div>
-			<div class="content">
-				<visualization :snippet="selectedSnippet" :component="name" id="visualization" />
-				<div id="selectMenu">
-					<strong>Select visualization:</strong>
-					<select id="visualizationSelect" v-model="selectedSnippet">
-						<option
-							v-for="(snippet, index) in visualizations"
-							:key="index"
-							:value="snippet.name"
-						>
-							{{ snippet.name }}
-						</option>
-					</select>
+			<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
+			<p>{{ description }}</p>
+			<div id="npm" class="section">
+				<div class="title">npm</div>
+				<div class="content">
+					<span class="code">npm install {{ name }}</span>
+					<a :href="'https://www.npmjs.com/package/' + name" target="_blank" id="npmLink">View package on npm</a>
 				</div>
 			</div>
-		</div>
-		<div id="tags" class="section">
-			<div class="title">Tags</div>
-			<div class="content">
-				<router-link v-for="tag in tags" :key="tag.id" :to="'/search/'+tag">
-					<span class="tag">
-						{{ tag }}
-					</span>
-				</router-link>
+			<div id="visualization" class="section" v-if="computeVisualization() && biojsioURL!=='error' && biojsioURL!=='loading'">
+				<div class="title">Visualization</div>
+				<div class="content">
+					<visualization :snippet="selectedSnippet" :component="name" id="visualization" />
+					<div id="selectMenu">
+						<strong>Select visualization:</strong>
+						<select id="visualizationSelect" v-model="selectedSnippet">
+							<option
+								v-for="(snippet, index) in visualizations"
+								:key="index"
+								:value="snippet.name"
+							>
+								{{ snippet.name }}
+							</option>
+						</select>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div id="social" class="section">
-			<div class="title">Social</div>
-			<div id="socialContent" class="content">
-				<component-stat v-for="stat in social" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" />
+			<div id="tags" class="section">
+				<div class="title">Tags</div>
+				<div class="content">
+					<router-link v-for="tag in tags" :key="tag.id" :to="'/search/'+tag">
+						<span class="tag">
+							{{ tag }}
+						</span>
+					</router-link>
+				</div>
 			</div>
-		</div>
-		<div id="stats" class="section">
-			<div class="title">Stats</div>
-			<div id="statsContent" class="content">
-				<component-stat v-for="stat in stats" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" />
+			<div id="social" class="section">
+				<div class="title">Social</div>
+				<div id="socialContent" class="content">
+					<component-stat v-for="stat in social" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" />
+				</div>
 			</div>
-		</div>
-		<div id="contributors" class="section">
-			<div class="title">Contributors</div>
-			<div id="contributorsContent" class="content">
-				<contributor v-for="contributor in contributors" :key="contributor.id" :imageURL="contributor.avatar_url" :name="contributor.username" />
+			<div id="stats" class="section">
+				<div class="title">Stats</div>
+				<div id="statsContent" class="content">
+					<component-stat v-for="stat in stats" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" />
+				</div>
 			</div>
-		</div>
-		<div id="legal" class="section">
-			<div class="title">Legal</div>
-			<div class="content">
-				License: {{ computeLicense() }}
+			<div id="contributors" class="section">
+				<div class="title">Contributors</div>
+				<div id="contributorsContent" class="content">
+					<contributor v-for="contributor in contributors" :key="contributor.id" :imageURL="contributor.avatar_url" :name="contributor.username" />
+				</div>
+			</div>
+			<div id="legal" class="section">
+				<div class="title">Legal</div>
+				<div class="content">
+					License: {{ computeLicense() }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -85,6 +90,7 @@ import Contributor from './Contributor.vue';
 import Visualization from './Visualization.vue';
 import axios from 'axios';
 import {API_URL} from '../DB_CONFIG.js';
+import Loader from './Loader';
 
 export default {
 	name: 'Component',
@@ -127,7 +133,8 @@ token: `
 			js_dependencies: [],
 			css_dependencies: [],
 			biojsioURL: 'loading',
-			selectedSnippet: ''
+			selectedSnippet: '',
+			isLoading: true
 		};
 	},
 	components: {
@@ -135,7 +142,8 @@ token: `
 		'heading': Heading,
 		'component-stat': ComponentStat,
 		'contributor': Contributor,
-		'visualization': Visualization
+		'visualization': Visualization,
+		'loader': Loader
 	},
 	mounted () {
 		this.fetchData();
@@ -176,6 +184,7 @@ token: `
 				this.sniper_data = result.data.sniper_data;
 				this.js_dependencies = result.data.js_dependencies;
 				this.css_dependencies = result.data.css_dependencies;
+				this.isLoading = false;
 
 				axios({method: 'GET', 'url': 'http://workmen.biojs.net/detail/'+this.name})
 				.then(result => {
@@ -348,6 +357,14 @@ token: `
 #selectMenu {
 	text-align: center;
 	margin-bottom: 20px;
+}
+#main {
+	width: 100%;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	justify-content: center;
+	min-height: 100%;
 }
 @media (max-width: 700px) {
 	#content {
