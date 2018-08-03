@@ -13,7 +13,10 @@
 	</div>
 	<search-component />
 	<div id="componentsContainer">
-		<div id="popComponents">
+		<div id="popComponents" class="loading" v-if="isComponentsLoading">
+			<loader />
+		</div>
+		<div id="popComponents" v-if="!isComponentsLoading">
 			<router-link v-for="component in components" :key="component.id" :to="computeURL(component.url_name)" class="link">
 				<div id="component">
 					<div class="image" :style="{backgroundImage: 'url(' + component.icon_url + ')' }"></div>
@@ -63,12 +66,13 @@
 </template>
 <script>
 /* eslint-disable */ 
-import NavBar from './NavBar.vue';
-import Heading from './Heading.vue';
-import SearchComponent from './SearchComponent.vue';
+import NavBar from './NavBar';
+import Heading from './Heading';
+import SearchComponent from './SearchComponent';
 import ComponentTable from './ComponentTable';
 import axios from 'axios';
 import {API_URL} from '../DB_CONFIG.js';
+import Loader from './Loader';
 
 
 export default {
@@ -98,14 +102,16 @@ token: `
 	data () {
 		return {
 			components: [],
-			randomComponentNum: 5
+			randomComponentNum: 5,
+			isComponentsLoading: true
 		};
 	},
 	components: {
 		'navbar': NavBar,
 		'heading': Heading,
 		'search-component': SearchComponent,
-		'component-table': ComponentTable
+		'component-table': ComponentTable,
+		'loader': Loader
 	},
 	methods: {
 		computeURL (url) {
@@ -118,6 +124,7 @@ token: `
 	mounted () {
 		axios({ method: 'GET', 'url': API_URL + 'top/' }).then(result => {
 			this.components = result.data.top_components;
+			this.isComponentsLoading = false;
 		}, error => {
 			console.error(error);
 		});
