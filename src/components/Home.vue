@@ -32,7 +32,7 @@
 					<search-component />
 				</div>
 				<div id="visIframe">
-					<iframe src="../../static/visualization/index.html" frameborder="0"></iframe>
+					<iframe src="@/../static/visualization/index.html" frameborder="0"></iframe>
 				</div>
 			</div>
 		</div>
