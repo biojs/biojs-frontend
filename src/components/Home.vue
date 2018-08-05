@@ -16,8 +16,17 @@
 			<heading title="Visualize" />
 			<div id="visContent">
 				<div id="visAbout">
-					<h2>Bio-PV</h2>
-					<p>WebGL protein viewer</p>
+					<h2>{{visualization.name}}</h2>
+					<p>{{visualization.description}}<br>
+					Author: {{visualization.author}}</p>
+					<div class="tags">
+						<span>Tags: </span>
+						<router-link v-for="(tag, index) in visualization.tags" :key="index" :to="'/search/'+tag">
+							<span class="tagName">
+								{{ tag }}
+							</span>
+						</router-link>
+					</div>
 					<br>
 					<h2>Browse all components</h2>
 					<search-component />
@@ -73,7 +82,13 @@ export default {
 	data () {
 		return {
 			intro: 'BioJS is a library of over hundred JavaScript components enabling you to visualize and process data using current web technologies.',
-			aboutBioJS: 'BioJS unites users and developers from all around the globe to create outstanding biological data representations. The open-source character of the BioJS project makes it easy for anyone to follow and discuss current developments in the project, as well as to contribute and share their code with others.'
+			aboutBioJS: 'BioJS unites users and developers from all around the globe to create outstanding biological data representations. The open-source character of the BioJS project makes it easy for anyone to follow and discuss current developments in the project, as well as to contribute and share their code with others.',
+			visualization: {
+				name: 'bio-pv',
+				description: 'WebGL protein viewer',
+				author: 'Marco Biasini',
+				tags: ['biojs', 'protein', '3d', 'webgl']
+			}
 		};
 	}
 };
@@ -153,6 +168,21 @@ export default {
 		width: 35%;
 	}
 }
+.tagName {
+	background: #efefef;
+    color: #007E3A;
+    padding: 5px;
+    border-radius: 1px;
+    margin: 0 2.5px;
+	display: inline-block;
+	margin-bottom: 5px;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+.tagName:hover {
+	background: #007E3A;
+	color: #fff;
+}
 @media (max-width: 700px) {
 	#coverContainer {
 		flex-direction: column;
@@ -187,7 +217,7 @@ export default {
 	}
 	#components {
 		#search {
-			width: 100%;
+			width: 90%;
 		}
 	}
 }
@@ -205,6 +235,7 @@ export default {
 			height: 100%;
 			width: 100%;
 			border-radius: 5px;
+			min-height: 400px;
 		}
 	}
 }
@@ -226,6 +257,22 @@ export default {
 	}
 	#coverContent {
 		width: 80%;
+	}
+}
+@media (max-width: 1100px) {
+	#visContent {
+		flex-direction: column;
+	}
+	#visAbout {
+		order: 2;
+	}
+	#visIframe {
+		order: 1;
+		margin-bottom: 20px;
+		iframe {
+			width: 100%;
+			height: 100%;
+		}
 	}
 }
 </style>

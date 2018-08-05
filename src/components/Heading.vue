@@ -44,7 +44,6 @@ export default {
 	}
 	@media (max-width: 600px) {
 		h1 {
-			width: 80%;
 			text-align: center;
 		}
 	}

@@ -185,7 +185,6 @@ token: '',
 	#searchForm {
 		align-items: center;
 		input {
-		width: 70%;
 		margin-bottom: 0 !important;
 		}
 	}
