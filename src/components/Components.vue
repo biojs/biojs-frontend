@@ -11,7 +11,9 @@
 	<div id="randomComponents" v-if="this.$route.query && this.$route.query.debug === 'true'">
 		<router-link to="/version-list">Compare versions with old website</router-link>
 	</div>
-	<search-component />
+	<div id="search">
+		<search-component />
+	</div>
 	<div id="componentsContainer">
 		<div id="popComponents" class="loading" v-if="isComponentsLoading">
 			<loader />
@@ -134,6 +136,9 @@ token: `
 <style lang="scss" scoped>
 #components {
 	background: #efefef57;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 #componentsContainer {
 	width: 100%;
@@ -261,10 +266,16 @@ i::before {
 		display: none;
 	}
 }
+#search {
+	width: 40%;
+}
 @media (max-width: 800px) {
 	.image {
 		height: 200px;
 		width: 200px;
+	}
+	#search {
+		width: 90%;
 	}
 }
 @media (max-width: 700px) {

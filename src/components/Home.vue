@@ -14,6 +14,27 @@
 		</div>
 		<div id="visualize">
 			<heading title="Visualize" />
+			<div id="visContent">
+				<div id="visAbout">
+					<h2>{{visualization.name}}</h2>
+					<p>{{visualization.description}}<br>
+					Author: {{visualization.author}}</p>
+					<div class="tags">
+						<span>Tags: </span>
+						<router-link v-for="(tag, index) in visualization.tags" :key="index" :to="'/search/'+tag">
+							<span class="tagName">
+								{{ tag }}
+							</span>
+						</router-link>
+					</div>
+					<br>
+					<h2>Browse all components</h2>
+					<search-component />
+				</div>
+				<div id="visIframe">
+					<iframe src="../../static/visualization/index.html" frameborder="0"></iframe>
+				</div>
+			</div>
 		</div>
 		<div id="components">
 			<heading title="Popular Components" />
@@ -22,7 +43,9 @@
 				<component-table title="Top Starred" components="top_starred" />
 				<component-table title="Most Recent" components="most_recent" />
 			</div>
-			<search-component />
+			<div id="search">
+				<search-component />
+			</div>
 		</div>
 		<div id="testimonials">
 			<heading title="Why biologists love BioJS!" color="#FFFFFF" />
@@ -59,7 +82,13 @@ export default {
 	data () {
 		return {
 			intro: 'BioJS is a library of over hundred JavaScript components enabling you to visualize and process data using current web technologies.',
-			aboutBioJS: 'BioJS unites users and developers from all around the globe to create outstanding biological data representations. The open-source character of the BioJS project makes it easy for anyone to follow and discuss current developments in the project, as well as to contribute and share their code with others.'
+			aboutBioJS: 'BioJS unites users and developers from all around the globe to create outstanding biological data representations. The open-source character of the BioJS project makes it easy for anyone to follow and discuss current developments in the project, as well as to contribute and share their code with others.',
+			visualization: {
+				name: 'bio-pv',
+				description: 'WebGL protein viewer',
+				author: 'Marco Biasini',
+				tags: ['biojs', 'protein', '3d', 'webgl']
+			}
 		};
 	}
 };
@@ -131,6 +160,29 @@ export default {
 	bottom: 0;
 	right: 10%;
 }
+#components {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	#search {
+		width: 35%;
+	}
+}
+.tagName {
+	background: #efefef;
+    color: #007E3A;
+    padding: 5px;
+    border-radius: 1px;
+    margin: 0 2.5px;
+	display: inline-block;
+	margin-bottom: 5px;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+.tagName:hover {
+	background: #007E3A;
+	color: #fff;
+}
 @media (max-width: 700px) {
 	#coverContainer {
 		flex-direction: column;
@@ -163,6 +215,29 @@ export default {
 			font-size: 15px;
 		}
 	}
+	#components {
+		#search {
+			width: 90%;
+		}
+	}
+}
+#visContent {
+	display: flex;
+	padding: 10px 7vw 30px 7vw;
+	justify-content: space-between;
+	#visAbout {
+		margin-right: 5vw;
+	}
+	#visIframe {
+		flex: 1;
+		min-height: 400px;
+		iframe {
+			height: 100%;
+			width: 100%;
+			border-radius: 5px;
+			min-height: 400px;
+		}
+	}
 }
 @media (max-height: 520px) and (max-width: 700px) {
 	#phone {
@@ -182,6 +257,22 @@ export default {
 	}
 	#coverContent {
 		width: 80%;
+	}
+}
+@media (max-width: 1100px) {
+	#visContent {
+		flex-direction: column;
+	}
+	#visAbout {
+		order: 2;
+	}
+	#visIframe {
+		order: 1;
+		margin-bottom: 20px;
+		iframe {
+			width: 100%;
+			height: 100%;
+		}
 	}
 }
 </style>
