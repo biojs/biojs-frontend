@@ -34,7 +34,9 @@
 				<component-table title="Top Starred" components="top_starred" />
 				<component-table title="Most Recent" components="most_recent" />
 			</div>
-			<search-component />
+			<div id="search">
+				<search-component />
+			</div>
 		</div>
 		<div id="testimonials">
 			<heading title="Why biologists love BioJS!" color="#FFFFFF" />
@@ -143,6 +145,14 @@ export default {
 	bottom: 0;
 	right: 10%;
 }
+#components {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	#search {
+		width: 35%;
+	}
+}
 @media (max-width: 700px) {
 	#coverContainer {
 		flex-direction: column;
@@ -173,6 +183,11 @@ export default {
 		}
 		p {
 			font-size: 15px;
+		}
+	}
+	#components {
+		#search {
+			width: 100%;
 		}
 	}
 }

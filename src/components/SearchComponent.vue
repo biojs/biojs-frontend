@@ -115,7 +115,7 @@ token: '',
   align-items: center;
   margin-bottom: 40px;
   input {
-	width: 35%;
+	width: 100%;
   }
 }
 #results {
@@ -186,7 +186,6 @@ token: '',
 		align-items: center;
 		input {
 		width: 70%;
-		margin-right: 5%;
 		margin-bottom: 0 !important;
 		}
 	}
