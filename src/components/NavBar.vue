@@ -165,10 +165,10 @@ export default {
 		background: #fff;
 		margin: 0;
 		padding-top: 80px;
-		-webkit-transition: 0.3s all cubic-bezier(0,.47,.37,.37);
-		-moz-transition: 0.3s all cubic-bezier(0,.47,.37,.37);
-		-o-transition: 0.3s all cubic-bezier(0,.47,.37,.37);
-		transition: 0.3s all cubic-bezier(0,.47,.37,.37);
+		-webkit-transition: 0.3s all ease-in;
+		-moz-transition: 0.3s all ease-in;
+		-o-transition: 0.3s all ease-in;
+		transition: 0.3s all ease-in;
 		span {
 			padding-left: 30px;
 			line-height: 60px;
