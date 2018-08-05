@@ -14,6 +14,18 @@
 		</div>
 		<div id="visualize">
 			<heading title="Visualize" />
+			<div id="visContent">
+				<div id="visAbout">
+					<h2>Bio-PV</h2>
+					<p>WebGL protein viewer</p>
+					<br>
+					<h2>Browse all components</h2>
+					<search-component />
+				</div>
+				<div id="visIframe">
+					<iframe src="../../static/visualization/index.html" frameborder="0"></iframe>
+				</div>
+			</div>
 		</div>
 		<div id="components">
 			<heading title="Popular Components" />
@@ -161,6 +173,23 @@ export default {
 		}
 		p {
 			font-size: 15px;
+		}
+	}
+}
+#visContent {
+	display: flex;
+	padding: 10px 7vw 30px 7vw;
+	justify-content: space-between;
+	#visAbout {
+		margin-right: 5vw;
+	}
+	#visIframe {
+		flex: 1;
+		min-height: 400px;
+		iframe {
+			height: 100%;
+			width: 100%;
+			border-radius: 5px;
 		}
 	}
 }
