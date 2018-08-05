@@ -328,7 +328,7 @@ token: `
 	height: 150px;
 	width: 150px;
 	cursor: pointer;
-	z-index: 9999;
+	z-index: 999;
 }
 #author {
 	// margin-top: -20px;
@@ -366,11 +366,14 @@ token: `
 	justify-content: center;
 	min-height: 100%;
 }
-@media (max-width: 700px) {
+@media (max-width: 768px) {
 	#content {
 		p {
 			width: 100%;
 		}
+	}
+	#githubFork {
+		display: none
 	}
 }
 </style>
