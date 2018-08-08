@@ -1,25 +1,30 @@
 <template>
-<div class="navBar" :class="{ noShadow: !isShadow }">
-	<div id="nav" ref="nav">
-		<router-link class="navLink" to="/components"><span>Components</span></router-link>
-		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
-		<router-link class="navLink" to="/" v-if="isHome">
-			<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
-		</router-link>
-		<router-link class="navLink" to="/" v-if="!isHome" id="homeLink">
-			<span>Home</span>
-		</router-link>
-		<router-link class="navLink" to="/about"><span>About</span></router-link>
-		<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
-		<div class="close">
-			<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
-		</div>
+<div id="nav-container">
+	<div id="banner">
+		Facing problems? <a href="https://gitter.im/biojs/biojs" target="_blank">Report an issue</a> or <a href="http://biojs.io/" target="_blank">View old website</a>
 	</div>
-	<div id="mobileNav">
-		<div class="hamburger" onclick="">
-			<img src="../../static/hamburger.png" alt="Open Menu" @click="openMenu()">
+	<div class="navBar" :class="{ noShadow: !isShadow }">
+		<div id="nav" ref="nav">
+			<router-link class="navLink" to="/components"><span>Components</span></router-link>
+			<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
+			<router-link class="navLink" to="/" v-if="isHome">
+				<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
+			</router-link>
+			<router-link class="navLink" to="/" v-if="!isHome" id="homeLink">
+				<span>Home</span>
+			</router-link>
+			<router-link class="navLink" to="/about"><span>About</span></router-link>
+			<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
+			<div class="close">
+				<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
+			</div>
 		</div>
-		<h2>Bio<span>JS</span></h2>
+		<div id="mobileNav">
+			<div class="hamburger" onclick="">
+				<img src="../../static/hamburger.png" alt="Open Menu" @click="openMenu()">
+			</div>
+			<h2>Bio<span>JS</span></h2>
+		</div>
 	</div>
 </div>
 </template>
@@ -62,6 +67,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#nav-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+#banner {
+	width: 100%;
+	text-align: center;
+	padding: 5px;
+	color: #fff;
+	background-color: rgb(19, 19, 19);
+	font-size: 17px;
+	a {
+		color: #3e9bff;
+	}
+}
 .navBar {
 	width: 100%;
 	height: 70px;
