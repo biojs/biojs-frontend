@@ -3,7 +3,12 @@
 	<div id="nav" ref="nav">
 		<router-link class="navLink" to="/components"><span>Components</span></router-link>
 		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
-		<router-link class="navLink" to="/"><span class="navLogo"><img src="../../static/logo.png" height="50px"></span></router-link>
+		<router-link class="navLink" to="/" v-if="isHome">
+			<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
+		</router-link>
+		<router-link class="navLink" to="/" v-if="!isHome" id="homeLink">
+			<span>Home</span>
+		</router-link>
 		<router-link class="navLink" to="/about"><span>About</span></router-link>
 		<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
 		<div class="close">
@@ -31,6 +36,12 @@ export default {
 			required: false,
 			default: true,
 			note: 'The navigation can either have a shadow at the bottom as observed in this page or it can be without a shadow as observed in the landing page.'
+		},
+		isHome: {
+			type: Boolean,
+			required: false,
+			default: false,
+			note: 'Show the text "Home" instead of the icon if not on home page'
 		}
 	},
 	data () {
@@ -126,7 +137,7 @@ export default {
 }
 .close {
 	position: absolute;
-	right: 10px;
+	right: 20px;
 	top: 10px;
 	height: 40px;
 	width: 40px;
@@ -179,7 +190,7 @@ export default {
 		span:hover::after {
 			width: 0%;
 		}
-		span:hover {
+		.navlink:hover {
 			background-color: #efefef;
 		}
 	}
@@ -191,6 +202,9 @@ export default {
 	}
 	.close {
 		display: flex;
+	}
+	#homeLink {
+		order: -1;
 	}
 }
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
