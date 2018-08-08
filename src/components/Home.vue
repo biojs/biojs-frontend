@@ -16,7 +16,7 @@
 			<heading title="Visualize" />
 			<div id="visContent">
 				<div id="visAbout">
-					<h2>{{visualization.name}}</h2>
+					<router-link :to="'/component/' + visualization.url" id="visName"><h2>{{visualization.name}}</h2></router-link>
 					<p>{{visualization.description}}<br>
 					Author: {{visualization.author}}</p>
 					<div class="tags">
@@ -27,7 +27,8 @@
 							</span>
 						</router-link>
 					</div>
-					<br>
+					<router-link :to="'/component/' + visualization.url"><button type="button" class="btn btn-success btn-sm">Visit {{visualization.name}}</button></router-link>
+					<br><br>
 					<h2>Browse all components</h2>
 					<search-component />
 				</div>
@@ -85,6 +86,7 @@ export default {
 			aboutBioJS: 'BioJS unites users and developers from all around the globe to create outstanding biological data representations. The open-source character of the BioJS project makes it easy for anyone to follow and discuss current developments in the project, as well as to contribute and share their code with others.',
 			visualization: {
 				name: 'bio-pv',
+				url: 'bio-pv',
 				description: 'WebGL protein viewer',
 				author: 'Marco Biasini',
 				tags: ['biojs', 'protein', '3d', 'webgl']
@@ -124,6 +126,9 @@ export default {
 }
 #visualize {
 	background: #efefef;
+}
+#visName {
+	color: #007E3A;
 }
 #componentsTable {
 	display: flex;
