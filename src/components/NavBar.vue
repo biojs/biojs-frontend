@@ -1,14 +1,14 @@
 <template>
 <div class="navBar" :class="{ noShadow: !isShadow }">
 	<div id="nav" ref="nav">
-		<router-link class="navLink" to="/components"><span>Components</span></router-link>
-		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
 		<router-link class="navLink" to="/" v-if="isHome">
 			<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
 		</router-link>
 		<router-link class="navLink" to="/" v-if="!isHome" id="homeLink">
 			<span>Home</span>
 		</router-link>
+		<router-link class="navLink" to="/components"><span>Components</span></router-link>
+		<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
 		<router-link class="navLink" to="/about"><span>About</span></router-link>
 		<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
 		<div class="close">
