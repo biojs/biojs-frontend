@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div id="cover">
-			<nav-bar :isShadow="false" :isHome="true" />
+			<nav-bar :isShadow="false" />
 			<div id="coverContainer">
 				<div id="coverContent">
 					<h1>Welcome to <span>BioJS</span></h1>
