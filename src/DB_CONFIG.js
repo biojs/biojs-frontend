@@ -1,1 +1,1 @@
-export const API_URL = 'http://biojs.net/api/;
+export const API_URL = 'http://biojs.net/api/';
