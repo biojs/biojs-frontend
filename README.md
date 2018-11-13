@@ -4,7 +4,7 @@
 
 ## Status
 
-![Build Status](https://travis-ci.org/biojs/biojs-frontend.svg?branch=develop)](https://travis-ci.org/biojs/biojs-frontend)  <img src="http://www.bichromate.org/images/browserstack.png" height=25 />
+[![Build Status](https://travis-ci.org/biojs/biojs-frontend.svg?branch=develop)](https://travis-ci.org/biojs/biojs-frontend)  <img src="http://www.bichromate.org/images/browserstack.png" height=25 />
 ## Build Setup
 
 ``` bash
