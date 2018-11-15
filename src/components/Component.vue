@@ -171,12 +171,13 @@ token: `
 					{prop: 'contributors', image: require('../assets/component/contributors.png'), value: details.no_of_contributors},
 					{prop: 'forks', image: require('../assets/component/fork.png'), value: details.forks}
 				];
+				const splitTime = (time) => time && typeof time === 'string' ? time.split('T')[0] : undefined;
 				this.stats = [
 					{prop: 'downloads', image: require('../assets/component/download.png'), value: details.downloads},
-					{prop: 'last modified', image: require('../assets/component/modified.png'), value: details.modified_time.split('T')[0]},
+					{prop: 'last modified', image: require('../assets/component/modified.png'), value: splitTime(details.modified_time)},
 					{prop: 'commits', image: require('../assets/component/commit.png'), value: details.commits},
 					{prop: 'version', image: require('../assets/component/version.png'), value: details.version},
-					{prop: 'created at', image: require('../assets/component/created.png'), value: details.created_time.split('T')[0]},
+					{prop: 'created at', image: require('../assets/component/created.png'), value: splitTime(details.created_time)},
 					{prop: 'open issues', image: require('../assets/component/issues.png'), value: details.open_issues}
 				];
 				this.contributors = result.data.contributors.map((obj) => obj.contributor);
@@ -185,8 +186,10 @@ token: `
 				this.js_dependencies = result.data.js_dependencies;
 				this.css_dependencies = result.data.css_dependencies;
 				this.isLoading = false;
+				const url = `${API_URL}details/${this.name}`;
+				console.log(url);
 
-				axios({method: 'GET', 'url': 'http://workmen.biojs.net/detail/'+this.name})
+				axios({method: 'GET', url})
 				.then(result => {
 					if(result.data.error) {
 						this.biojsioURL = 'error';
@@ -197,12 +200,12 @@ token: `
 					this.biojsioURL = 'error';
 					console.error(error);
 				});
-				
+
 				if(this.visualizations)
 					this.selectedSnippet = result.data.snippets[0].name;
 				else
 					this.selectedSnippet = '';
-			
+
 			}, error => {
 				console.error(error);
 			});

@@ -4,6 +4,7 @@
 	</div>
 </template>
 <script>
+import {API_URL} from '../DB_CONFIG.js';
 export default {
 	data () {
 		return {
@@ -22,7 +23,7 @@ export default {
 			if (this.component === '') {
 				return '';
 			} else {
-				return 'http://workmen.biojs.net/demo/' + this.component + '/' + this.snippet + '/';
+				return `${API_URL}visualization/${this.component}/${this.snippet}/`;
 			}
 		}
 	}
