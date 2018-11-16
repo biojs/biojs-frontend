@@ -24,21 +24,29 @@
 					<a :href="'https://www.npmjs.com/package/' + name" target="_blank" id="npmLink">View package on npm</a>
 				</div>
 			</div>
-			<div id="visualization" class="section" v-if="computeVisualization() && biojsioURL!=='error' && biojsioURL!=='loading'">
+			<div id="visualization" class="section">
 				<div class="title">Visualization</div>
 				<div class="content">
-					<visualization :snippet="selectedSnippet" :component="name" id="visualization" />
-					<div id="selectMenu">
-						<strong>Select visualization:</strong>
-						<select id="visualizationSelect" v-model="selectedSnippet">
-							<option
-								v-for="(snippet, index) in visualizations"
-								:key="index"
-								:value="snippet.name"
-							>
-								{{ snippet.name }}
-							</option>
-						</select>
+					<div class="vis-container" v-if="computeVisualization() === 'supported' && biojsioURL!=='error' && biojsioURL!=='loading'">
+						<visualization :snippet="selectedSnippet" :component="name" id="visualization" />
+						<div id="selectMenu">
+							<strong>Select visualization:</strong>
+							<select id="visualizationSelect" v-model="selectedSnippet">
+								<option
+									v-for="(snippet, index) in visualizations"
+									:key="index"
+									:value="snippet.name"
+								>
+									{{ snippet.name }}
+								</option>
+							</select>
+						</div>
+					</div>
+					<div class="legacy-vis-message" v-else-if="computeVisualization() === 'legacy'">
+						<span class="code">The previews for this component are currently not available because they are in a legacy format.</span>
+					</div>
+					<div class="no-vis-message" v-else >
+						<span class="code">There is no currently no preview visualisation available for this component.</span>
 					</div>
 				</div>
 			</div>
@@ -82,20 +90,21 @@
 </template>
 
 <script>
-/* eslint-disable */ 
-import NavBar from './NavBar.vue';
-import Heading from './Heading.vue';
-import ComponentStat from './ComponentStat.vue';
-import Contributor from './Contributor.vue';
-import Visualization from './Visualization.vue';
-import axios from 'axios';
-import {API_URL} from '../DB_CONFIG.js';
-import Loader from './Loader';
+/* eslint-disable */
+
+import NavBar from "./NavBar.vue";
+import Heading from "./Heading.vue";
+import ComponentStat from "./ComponentStat.vue";
+import Contributor from "./Contributor.vue";
+import Visualization from "./Visualization.vue";
+import axios from "axios";
+import { API_URL } from "../DB_CONFIG.js";
+import Loader from "./Loader";
 
 export default {
-	name: 'Component',
-	introduction: 'A dynamic page for each component.',
-description: `
+  name: "Component",
+  introduction: "A dynamic page for each component.",
+  description: `
 The component page gets the data from backend through an API call and renders it to display all the information for a specific component.
 A watcher has been added to the component to render the details dynamically when the component changes.
 #### API structure
@@ -105,7 +114,7 @@ A watcher has been added to the component to render the details dynamically when
 2. computeLicense() returns "Not available" is a license is not present in the data and returns the license otherwise.
 3. isAuthor() shows the author under the component's name is an author is present in the data received otherwise it does not show the author.
 `,
-token: `
+  token: `
 <p id="author" v-if="isAuthor()">..rendered if author is present..</p>
 <p>{{description}}</p>
 <div id="install">..renders the npm install command..</div>
@@ -116,267 +125,320 @@ token: `
 <div id="legal>..displays the license information if it exists..</div>
 `,
 
-	data () {
-		return {
-			name: '',
-			description: '',
-			urlName: '',
-			visualizations: [],
-			tags: [],
-			social: [],
-			stats: [],
-			contributors: [],
-			license: '',
-			author: '',
-			githubURL: 'https://www.github.com/',
-			sniper_data: {},
-			js_dependencies: [],
-			css_dependencies: [],
-			biojsioURL: 'loading',
-			selectedSnippet: '',
-			isLoading: true
-		};
-	},
-	components: {
-		'nav-bar': NavBar,
-		'heading': Heading,
-		'component-stat': ComponentStat,
-		'contributor': Contributor,
-		'visualization': Visualization,
-		'loader': Loader
-	},
-	mounted () {
-		this.fetchData();
-	},
-	watch: {
-		'$route': 'fetchData',
-		selectedSnippet: function (value) {
-			this.selectedSnippet = value;
-		}
-	},
-	methods: {
-		fetchData () {
-			axios({ method: 'GET', 'url': API_URL + 'details/' + this.$route.params.name + '/' }).then(result => {
-				this.visualizations = result.data.snippets;
-				let details = result.data.details;
-				this.name = details.name;
-				this.description = details.short_description;
-				this.urlName = details.url_name;
-				this.tags = details.tags;
-				this.author = details.author;
-				this.githubURL = details.github_url;
-				this.social = [
-					{prop: 'stars', image: require('../assets/component/stars.png'), value: details.stars},
-					{prop: 'watchers', image: require('../assets/component/watchers.png'), value: details.watchers},
-					{prop: 'contributors', image: require('../assets/component/contributors.png'), value: details.no_of_contributors},
-					{prop: 'forks', image: require('../assets/component/fork.png'), value: details.forks}
-				];
-				const splitTime = (time) => time && typeof time === 'string' ? time.split('T')[0] : undefined;
-				this.stats = [
-					{prop: 'downloads', image: require('../assets/component/download.png'), value: details.downloads},
-					{prop: 'last modified', image: require('../assets/component/modified.png'), value: splitTime(details.modified_time)},
-					{prop: 'commits', image: require('../assets/component/commit.png'), value: details.commits},
-					{prop: 'version', image: require('../assets/component/version.png'), value: details.version},
-					{prop: 'created at', image: require('../assets/component/created.png'), value: splitTime(details.created_time)},
-					{prop: 'open issues', image: require('../assets/component/issues.png'), value: details.open_issues}
-				];
-				this.contributors = result.data.contributors.map((obj) => obj.contributor);
-				this.license = details.license;
-				this.sniper_data = result.data.sniper_data;
-				this.js_dependencies = result.data.js_dependencies;
-				this.css_dependencies = result.data.css_dependencies;
-				this.isLoading = false;
-				const url = `${API_URL}details/${this.name}`;
-				console.log(url);
+  data() {
+    return {
+      name: "",
+      description: "",
+      urlName: "",
+      visualizations: [],
+      tags: [],
+      social: [],
+      stats: [],
+      contributors: [],
+      license: "",
+      author: "",
+      githubURL: "https://www.github.com/",
+      sniper_data: {},
+      js_dependencies: [],
+      css_dependencies: [],
+      biojsioURL: "loading",
+      selectedSnippet: "",
+      isLoading: true
+    };
+  },
+  components: {
+    "nav-bar": NavBar,
+    heading: Heading,
+    "component-stat": ComponentStat,
+    contributor: Contributor,
+    visualization: Visualization,
+    loader: Loader
+  },
+  mounted() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData",
+    selectedSnippet: function(value) {
+      this.selectedSnippet = value;
+    }
+  },
+  methods: {
+    fetchData() {
+      axios({
+        method: "GET",
+        url: API_URL + "details/" + this.$route.params.name + "/"
+      }).then(
+        result => {
+          this.visualizations = result.data.snippets;
+          let details = result.data.details;
+          this.name = details.name;
+          this.description = details.short_description;
+          this.urlName = details.url_name;
+          this.tags = details.tags;
+          this.author = details.author;
+          this.githubURL = details.github_url;
+          this.social = [
+            {
+              prop: "stars",
+              image: require("../assets/component/stars.png"),
+              value: details.stars
+            },
+            {
+              prop: "watchers",
+              image: require("../assets/component/watchers.png"),
+              value: details.watchers
+            },
+            {
+              prop: "contributors",
+              image: require("../assets/component/contributors.png"),
+              value: details.no_of_contributors
+            },
+            {
+              prop: "forks",
+              image: require("../assets/component/fork.png"),
+              value: details.forks
+            }
+          ];
+          const splitTime = time =>
+            time && typeof time === "string" ? time.split("T")[0] : undefined;
+          this.stats = [
+            {
+              prop: "downloads",
+              image: require("../assets/component/download.png"),
+              value: details.downloads
+            },
+            {
+              prop: "last modified",
+              image: require("../assets/component/modified.png"),
+              value: splitTime(details.modified_time)
+            },
+            {
+              prop: "commits",
+              image: require("../assets/component/commit.png"),
+              value: details.commits
+            },
+            {
+              prop: "version",
+              image: require("../assets/component/version.png"),
+              value: details.version
+            },
+            {
+              prop: "created at",
+              image: require("../assets/component/created.png"),
+              value: splitTime(details.created_time)
+            },
+            {
+              prop: "open issues",
+              image: require("../assets/component/issues.png"),
+              value: details.open_issues
+            }
+          ];
+          this.contributors = result.data.contributors.map(
+            obj => obj.contributor
+          );
+          this.license = details.license;
+          this.sniper_data = result.data.sniper_data;
+          this.js_dependencies = result.data.js_dependencies;
+          this.css_dependencies = result.data.css_dependencies;
+          this.isLoading = false;
+          const url = `${API_URL}details/${this.name}`;
+          console.log(this.sniper_data);
 
-				axios({method: 'GET', url})
-				.then(result => {
-					if(result.data.error) {
-						this.biojsioURL = 'error';
-					} else {
-						this.biojsioURL = 'http://biojs.io/d/'+this.name;
-					}
-				}, error => {
-					this.biojsioURL = 'error';
-					console.error(error);
-				});
+          axios({ method: "GET", url }).then(
+            result => {
+              if (result.data.error) {
+                this.biojsioURL = "error";
+              } else {
+                this.biojsioURL = "http://biojs.io/d/" + this.name;
+              }
+            },
+            error => {
+              this.biojsioURL = "error";
+              console.error(error);
+            }
+          );
 
-				if(this.visualizations)
-					this.selectedSnippet = result.data.snippets[0].name;
-				else
-					this.selectedSnippet = '';
-
-			}, error => {
-				console.error(error);
-			});
-		},
-		computeVisualization () {
-			if (!this.visualizations) {
-				return false;
-			} else {
-				return true;
+          if (this.visualizations)
+            this.selectedSnippet = result.data.snippets[0].name;
+          else this.selectedSnippet = "";
+        },
+        error => {
+          console.error(error);
+        }
+      );
+    },
+    computeVisualization() {
+      if (this.visualizations && this.sniper_data && this.sniper_data.no_browserify) {
+        return "supported";
+      } else if (this.visualizations && this.sniper_data && !this.sniper_data.no_browserify) {
+        return "legacy";
+      } else {
+				return "none"
 			}
-		},
-		computeLicense () {
-			if (this.license === '') {
-				return 'Not available';
-			} else {
-				return this.license;
-			}
-		},
-		isAuthor () {
-			if (this.author === '') {
-				return false;
-			} else {
-				return true;
-			}
-		}
-	}
+    },
+    computeLicense() {
+      if (this.license === "") {
+        return "Not available";
+      } else {
+        return this.license;
+      }
+    },
+    isAuthor() {
+      if (this.author === "") {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 #container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background: #efefef;
-	min-height: 100vh;
-	font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #efefef;
+  min-height: 100vh;
+  font-family: "Open Sans", sans-serif;
 }
 #content {
-	width: 90%;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	p {
-		width: 60%;
-	}
-	.section {
-		background: #fff;
-		border-radius: 3px;
-		box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-		margin-bottom: 3vh;
-		width: 100%;
-		text-align: left;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    width: 60%;
+  }
+  .section {
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 3vh;
+    width: 100%;
+    text-align: left;
 
-		.title {
-			background: rgb(0, 126, 58);
-			font-family: 'Roboto', sans-serif;
-			color: #fff;
-			padding: 5px 17px;
-			font-size: 20px;
-			border-radius: 3px 3px 0 0;
-		}
+    .title {
+      background: rgb(0, 126, 58);
+      font-family: "Roboto", sans-serif;
+      color: #fff;
+      padding: 5px 17px;
+      font-size: 20px;
+      border-radius: 3px 3px 0 0;
+    }
 
-		.content {
-			padding: 10px 20px;
-		}
-	}
+    .content {
+      padding: 10px 20px;
+    }
+  }
 }
 #npm {
-	.code {
-		background: #efefef;
-		color: red;
-		padding: 0 5px;
-		border-radius: 2px;
-	}
-	.content {
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
-	}
-	#npmLink {
-		color: #007bff;
-		font-weight: bold;
-		text-decoration: underline;
-	}
-	#npmLink:hover, #npmLink:active {
-		color: #0056b3;
-	}
+  .code {
+    background: #efefef;
+    color: red;
+    padding: 0 5px;
+    border-radius: 2px;
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  #npmLink {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  #npmLink:hover,
+  #npmLink:active {
+    color: #0056b3;
+  }
 }
 #tags {
-	.tag {
-		background: #efefef;
-		color: #007E3A;
-		padding: 5px;
-		border-radius: 1px;
-		margin: 0 2.5px;
-		display: inline-block;
-		margin-bottom: 5px;
-		transition: all 0.2s ease-in-out;
-	}
-	.tag:hover {
-		background: #007E3A;
-		color: #fff;
-	}
+  .tag {
+    background: #efefef;
+    color: #007e3a;
+    padding: 5px;
+    border-radius: 1px;
+    margin: 0 2.5px;
+    display: inline-block;
+    margin-bottom: 5px;
+    transition: all 0.2s ease-in-out;
+  }
+  .tag:hover {
+    background: #007e3a;
+    color: #fff;
+  }
 }
-#socialContent, #statsContent {
-	display: flex;
-	width: 100%;
-	justify-content: center;
-	flex-wrap: wrap;
+#socialContent,
+#statsContent {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 #contributorsContent {
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-	justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
 }
 #githubFork {
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 150px;
-	width: 150px;
-	cursor: pointer;
-	z-index: 999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 150px;
+  width: 150px;
+  cursor: pointer;
+  z-index: 999;
 }
 #author {
-	// margin-top: -20px;
-	color: rgba(0,0,0,0.7);
+  // margin-top: -20px;
+  color: rgba(0, 0, 0, 0.7);
 }
 #biojsio {
-	width: 80%;
-	border-radius: 3px;
-	background-color: #fff;
-	display: flex;
-	text-align: center;
-	justify-content: center;
-	align-items: center;
-	font-weight: bold;
-	p {
-		margin: 0;
-		padding: 5px;
-	}
+  width: 80%;
+  border-radius: 3px;
+  background-color: #fff;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  p {
+    margin: 0;
+    padding: 5px;
+  }
 }
 .biojsio-found {
-	color: green;
+  color: green;
 }
 .biojsio-notfound {
-	color: red;
+  color: red;
 }
 #selectMenu {
-	text-align: center;
-	margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 #main {
-	width: 100%;
-	display: flex;
-    flex-direction: column;
-    align-items: center;
-	justify-content: center;
-	min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
 }
 @media (max-width: 768px) {
-	#content {
-		p {
-			width: 100%;
-		}
-	}
-	#githubFork {
-		display: none
-	}
+  #content {
+    p {
+      width: 100%;
+    }
+  }
+  #githubFork {
+    display: none;
+  }
 }
 </style>

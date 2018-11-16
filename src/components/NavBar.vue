@@ -1,7 +1,7 @@
 <template>
 <div id="nav-container">
 	<div id="banner">
-		Facing problems? <a href="https://gitter.im/biojs/biojs" target="_blank">Report an issue</a> or <a href="http://biojs.io/" target="_blank">View old website</a>
+		Facing problems? <a href="https://gitter.im/biojs/biojs" target="_blank">Contact us</a> or <a href="https://github.com/biojs/organisation/issues" target="_blank">Report an issue</a>
 	</div>
 	<div class="navBar" :class="{ noShadow: !isShadow }">
 		<div id="nav" ref="nav">
