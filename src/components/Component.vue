@@ -43,10 +43,17 @@
 						</div>
 					</div>
 					<div class="legacy-vis-message" v-else-if="computeVisualization() === 'legacy'">
-						<span class="code">The previews for this component are currently not available because they are in a legacy format.</span>
+						<p class="code">
+							The previews for this component are currently not available because they are in a legacy format.<br />
+							Please help update them or <a :href="githubURL" target="_blank">contact the author on Github</a>. <br />
+							<a href="https://github.com/biojs/organisation/issues" target="_blank">Contact BioJS directly</a> if you have further questions.
+						</p>
 					</div>
 					<div class="no-vis-message" v-else >
-						<span class="code">There is no currently no preview visualisation available for this component.</span>
+						<span class="code">
+							There is no currently no preview visualisation available for this component.<br />
+							If you think this component could use an example, you can add one or <a :href="githubURL" target="_blank">contact the author on Github</a>.
+						</span>
 					</div>
 				</div>
 			</div>
