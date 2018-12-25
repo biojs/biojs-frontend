@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 # biojs-frontend
+=======
+# biojs
+
+
+	Demo : http://biojs-kakkar.surge.sh/
+>>>>>>> 77bcf42fd7a8045eac02c9f702a40815c04eb8d0
 
 ## Project setup
 ```

@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "biojs-frontend",
+=======
+  "name": "biojs",
+>>>>>>> 77bcf42fd7a8045eac02c9f702a40815c04eb8d0
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,13 +23,19 @@
     "@vue/cli-plugin-eslint": "^3.2.0",
     "@vue/cli-plugin-pwa": "^3.2.0",
     "@vue/cli-service": "^3.2.0",
+<<<<<<< HEAD
     "axios": "^0.18.0",
+=======
+>>>>>>> 77bcf42fd7a8045eac02c9f702a40815c04eb8d0
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
+<<<<<<< HEAD
     "vue-cli-plugin-axios": "^0.0.4",
+=======
+>>>>>>> 77bcf42fd7a8045eac02c9f702a40815c04eb8d0
     "vue-cli-plugin-vuetify": "^0.4.6",
     "vue-template-compiler": "^2.5.17",
     "vuetify-loader": "^1.0.5"

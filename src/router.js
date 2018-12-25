@@ -5,7 +5,10 @@ import Router from "vue-router";
 import Home from "./containers/Home/Home.vue";
 import About from "./containers/About/About.vue";
 import Contact from "./containers/Contact/Contact.vue";
+<<<<<<< HEAD
 import Guide from "./containers/Guide/Guide.vue";
+=======
+>>>>>>> 77bcf42fd7a8045eac02c9f702a40815c04eb8d0
 
 Vue.use(Router);
 
@@ -27,6 +30,7 @@ export default new Router({
       path: "/contact",
       name: "contact",
       component: Contact
+<<<<<<< HEAD
     },
     {
       path: "/guide",
@@ -41,4 +45,8 @@ export default new Router({
       }, 500);
     });
   }
+=======
+    }
+  ]
+>>>>>>> 77bcf42fd7a8045eac02c9f702a40815c04eb8d0
 });
