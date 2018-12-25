@@ -1,25 +1,44 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+//Routes
+import Home from "./containers/Home/Home.vue";
+import About from "./containers/About/About.vue";
+import Contact from "./containers/Contact/Contact.vue";
+import Guide from "./containers/Guide/Guide.vue";
+
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: "/about",
+      name: "about",
+      component: About
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      component: Contact
+    },
+    {
+      path: "/guide",
+      name: "guide",
+      component: Guide
     }
-  ]
-})
+  ],
+  scrollBehavior() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve({ x: 0, y: 0 });
+      }, 500);
+    });
+  }
+});
