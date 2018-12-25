@@ -1,5 +1,13 @@
 # biojs
 
+
+## demo
+``
+biojs-kakkar-frontend.surge.sh
+``
+
+PS: Only Home And About Directory are available for demo
+
 ## Project setup
 ```
 yarn install
