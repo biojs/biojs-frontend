@@ -5,7 +5,7 @@ import Components from '@/components/Components.vue';
 import Guide from '@/components/Guide.vue';
 import Component from '@/components/Component.vue';
 import About from '@/components/About.vue';
-import Visualization from '@/components/Visualization.vue';
+import Visualization from '@/components/OLD_Visualization.vue';
 import RandomSnippets from '@/components/RandomSnippets.vue';
 import SearchPage from '@/components/SearchPage.vue';
 import ContactUs from '@/components/ContactUs.vue';
