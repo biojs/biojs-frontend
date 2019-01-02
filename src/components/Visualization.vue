@@ -1,5 +1,6 @@
 <template>
   <div id="visualization">
+		{{ name }}@{{ version }}
     <div id="loading-bar-spinner" v-if="this.loading" class="spinner">
       <div class="spinner-icon"></div>
     </div>
@@ -17,7 +18,10 @@ export default {
 		};
 	},
 	props: {
-		snippet: {
+		snippetName: {
+			type: String
+		},
+		snippetURL: {
 			type: String
 		},
 		name: {
@@ -61,55 +65,58 @@ export default {
 				`/component?module_name=${this.name}&module_version=${this.version}`
 			);
 		},
-		addSnippetCSS (url) {
-			return new Promise((resolve, reject) => {
+		getSnippetCode (url) {
+			return axios.get(url)
+				.then((res) => res.data);
+		},
+		addSnippetCSS () {
+			return Promise.all(this.css.map((css) => new Promise((resolve, reject) => {
 				const style = document.createElement('link');
 				style.rel = 'stylesheet';
 				style.type = 'text/css';
-				style.href = url;
+				style.href = css.css_url;
 				style.onload = resolve;
 				document.head.appendChild(style);
-			});
+			})));
+		},
+		addSnippetJS () {
+			return Promise.all(this.js.map(js => new Promise((resolve, reject) => {
+				const script = document.createElement('script');
+				script.setAttribute('src', js.js_url);
+				script.onload = resolve;
+				document.head.appendChild(script);
+			})));
+		},
+		fixSnippetCode (code) {
+			// detect rootDiv
+			code = code.replace(/yourDiv|mainDiv|masterDiv|biojsDiv/g, 'rootDiv');
+			// detect component var name
+			const varNamePattern = new RegExp('(var|let|const)\\s*(\\S+)\\s*=\\s*require\\(["\']' + this.name + '["\']\\);?');
+			const varNameMatch = code.match(varNamePattern);
+			if (!varNameMatch) throw new Error('No import found!');
+			const varName = varNameMatch[2];
+			// delete require line
+			code = code.replace(varNameMatch[0], '');
+			// replace instantiation with window[] call
+			const instanceCallPattern = new RegExp('(new\\s+)?' + varName + '\\(');
+			code = code.replace(instanceCallPattern, 'new window[\'' + this.name + '\'](');
+			return code;
 		},
 		renderVisualisation () {
-			return Promise.all(this.css.map(this.addSnippetCSS))
-				.then(() => {
-					alert('done!', this.css.length);
+			return this.addSnippetCSS()
+				.then(this.addSnippetJS)
+				.then(() => this.getSnippetCode(this.snippetURL))
+				.then((code) => {
+					this.loading = false;
+					// eslint-disable-next-line
+					var rootDiv = document.getElementById('snippetDiv');
+					// TODO: Serve bundle js statically after compilation?
+					// eslint-disable-next-line
+					eval(this.bundle); // Add bundle code
+					const newSnippet = this.fixSnippetCode(code);
+					eval(newSnippet); // run snippet code
+					console.log(newSnippet);
 				});
-		},
-		oldStuff () {
-			// Promise.all(
-			//   cssDeps.map(css => {
-			//     return new Promise((res, rej) => {
-			//       const style = document.createElement("link");
-			//       style.rel = "stylesheet";
-			//       style.type = "text/css";
-			//       style.href = css.fields.css_url;
-			//       style.onload = res;
-			//       document.head.appendChild(style);
-			//     });
-			//   })
-			// )
-			//   .then(() => {
-			//     console.log("done loading css!");
-			//     return Promise.all(
-			//       jsDeps.map(js => {
-			//         return new Promise((res, rej) => {
-			//           const script = document.createElement("script");
-			//           script.setAttribute("src", js.fields.js_url);
-			//           script.onload = res;
-			//           document.head.appendChild(script);
-			//         });
-			//       })
-			//     ).then(() => {
-			//       console.log("done loading js!");
-			//     });
-			//   })
-			//   .then(() => {
-			//     stopLoading();
-			//     var rootDiv = document.getElementById("snippetDiv");
-			//     eval(script);
-			//   });
 		}
 	}
 };

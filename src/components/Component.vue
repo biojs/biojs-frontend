@@ -44,7 +44,8 @@
 					</div>
 					<div class="legacy-vis-message" v-else-if="computeVisualization() === 'legacy'">
             <visualization
-              :snippet="selectedSnippet"
+              :snippetName="selectedSnippet"
+              :snippetURL="selectedSnippetURL"
               :name="name"
               :version="version"
               :sniperData="sniper_data"
@@ -158,6 +159,7 @@ A watcher has been added to the component to render the details dynamically when
 			css_dependencies: [],
 			biojsioURL: 'loading',
 			selectedSnippet: '',
+			selectedSnippetURL: '',
 			isLoading: true
 		};
 	},
@@ -276,7 +278,13 @@ A watcher has been added to the component to render the details dynamically when
 						}
 					);
 
-					if (this.visualizations) { this.selectedSnippet = result.data.snippets[0].name; } else this.selectedSnippet = '';
+					if (this.visualizations) {
+						this.selectedSnippet = result.data.snippets[0].name;
+						this.selectedSnippetURL = result.data.snippets[0].url;
+					} else {
+						this.selectedSnippet = '';
+						this.selectedSnippetURL = '';
+					}
 				},
 				error => {
 					console.error(error);
