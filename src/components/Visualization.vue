@@ -1,6 +1,5 @@
 <template>
   <div id="visualization">
-  	{{ name }}@{{ version }}
     <div id="mount"></div>
   </div>
 </template>
@@ -50,13 +49,21 @@ export default {
 			console.log(data.slice(0, 100));
 			this.buildVisualisationScript().then(script => {
 				const FrameConstructor = Vue.extend(VisFrame);
-				new FrameConstructor({
+				this.frame = new FrameConstructor({
 					propsData: {
 						snippet: script
 					}
 				}).$mount('#mount');
 			});
 		});
+	},
+	watch: {
+		snippetName: function (value) {
+			this.buildVisualisationScript()
+				.then((script) => {
+					this.frame.snippet = script;
+				})
+		}
 	},
 	methods: {
 		getBundle () {
@@ -86,7 +93,7 @@ export default {
 			// detect rootDiv
 			code = code.replace(/yourDiv|mainDiv|masterDiv|biojsDiv/g, 'rootDiv');
 			// detect component var name
-			const importPattern = new RegExp('require\\(["\']' + this.name + '["\']\\);');
+			const importPattern = new RegExp('require\\(["\']' + this.name + '["\']\\);?');
 			code = code.replace(
 				importPattern,
 				"window['" + this.name + "'];"
@@ -118,10 +125,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#visualization {
+	padding-bottom: 20px;
+}
 #mount {
   margin: 30px 0;
   width: 100%;
-  height: 500px;
 }
 .message {
   height: 60px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="frame-container">
     <iframe id="frame" v-on:load="loaded" :srcdoc="snippet"></iframe>
     <div id="loading-bar-spinner" v-if="this.loading" class="spinner">
       <div class="spinner-icon"></div>
@@ -27,13 +27,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.frame-container {
+  width: 100%;
+  height: 500px;
+}
 #frame {
   width: 100%;
   height: 100%;
   box-shadow: 0 0 2px 0 #cecece;
   outline: none;
-  border: 1px solid #ff0000;
+  border: 1px solid #eee;
   border-radius: 5px;
+	// margin: 20px;
 }
 #loading-bar-spinner.spinner {
   left: 50%;

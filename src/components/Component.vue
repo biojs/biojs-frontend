@@ -15,7 +15,8 @@
 				<p class="biojsio-notfound" v-if="biojsioURL==='error'">Component not found in biojs.io!</p>
 				<p v-if="biojsioURL==='loading'">Loading...</p>
 			</div>
-			<p id="author" v-if="isAuthor()">Author: {{ author }}</p>
+			<p class="subheader">Version: {{ version }}</p>
+			<p class="subheader" id="author" v-if="isAuthor()">Author: {{ author }}</p>
 			<p>{{ description }}</p>
 			<div id="npm" class="section">
 				<div class="title">npm</div>
@@ -27,8 +28,17 @@
 			<div id="visualization" class="section">
 				<div class="title">Visualization</div>
 				<div class="content">
-					<div class="vis-container" v-if="computeVisualization() === 'supported' && biojsioURL!=='error' && biojsioURL!=='loading'">
-						<old-visualization :snippet="selectedSnippet" :component="name" id="visualization" />
+					<div class="vis-container" v-if="computeVisualization() === 'supported'">
+						<!-- <old-visualization :snippet="selectedSnippet" :component="name" id="visualization" /> -->
+						<visualization
+              :snippetName="selectedSnippet"
+              :snippetURL="selectedSnippetURL"
+              :name="name"
+              :version="version"
+              :sniperData="sniper_data"
+              :js="js_dependencies"
+              :css="css_dependencies"
+              id="visualization" />
 						<div id="selectMenu">
 							<strong>Select visualization:</strong>
 							<select id="visualizationSelect" v-model="selectedSnippet">
@@ -42,22 +52,14 @@
 							</select>
 						</div>
 					</div>
-					<div class="legacy-vis-message" v-else-if="computeVisualization() === 'legacy'">
-            <visualization
-              :snippetName="selectedSnippet"
-              :snippetURL="selectedSnippetURL"
-              :name="name"
-              :version="version"
-              :sniperData="sniper_data"
-              :js="js_dependencies"
-              :css="css_dependencies"
-              id="visualization" />
-						<!-- <p class="code">
+					<!-- <div class="legacy-vis-message" v-else-if="computeVisualization() === 'legacy'">
+
+						<p class="code">
 							The previews for this component are currently not available because they are in a legacy format.<br />
 							Please help update them or <a :href="githubURL" target="_blank">contact the author on Github</a>. <br />
 							<a href="https://github.com/biojs/organisation/issues" target="_blank">Contact BioJS directly</a> if you have further questions.
-						</p> -->
-					</div>
+						</p>
+					</div> -->
 					<div class="no-vis-message" v-else >
 						<span class="code">
 							There is no currently no preview visualisation available for this component.<br />
@@ -178,7 +180,9 @@ A watcher has been added to the component to render the details dynamically when
 	watch: {
 		$route: 'fetchData',
 		selectedSnippet: function (value) {
-			this.selectedSnippet = value;
+			const snippet = this.visualizations.find(vis => vis.name === value);
+			this.selectedSnippet = snippet.name;
+			this.selectedSnippetURL = snippet.url;
 		}
 	},
 	methods: {
@@ -292,11 +296,8 @@ A watcher has been added to the component to render the details dynamically when
 			);
 		},
 		computeVisualization () {
-			if (this.visualizations && this.sniper_data && this.sniper_data.no_browserify) {
-				// return 'supported';
-				return 'legacy';
-			} else if (this.visualizations && this.sniper_data && !this.sniper_data.no_browserify) {
-				return 'legacy';
+			if (this.visualizations) {
+				return 'supported';
 			} else {
 				return 'none';
 			}
@@ -419,9 +420,8 @@ A watcher has been added to the component to render the details dynamically when
   cursor: pointer;
   z-index: 999;
 }
-#author {
-  // margin-top: -20px;
-  color: rgba(0, 0, 0, 0.7);
+.subheader {
+	color: rgba(0, 0, 0, 0.7);
 }
 #biojsio {
   width: 80%;
