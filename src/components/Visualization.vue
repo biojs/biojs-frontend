@@ -1,10 +1,10 @@
 <template>
   <div id="visualization">
-		{{ name }}@{{ version }}
+    {{ name }}@{{ version }}
     <div id="loading-bar-spinner" v-if="this.loading" class="spinner">
       <div class="spinner-icon"></div>
     </div>
-    <div id="snippetDiv"></div>
+	<!-- <iframe srcdoc="{{ this.buildVisualisationScript() }}"></iframe> -->
   </div>
 </template>
 <script>
@@ -41,17 +41,18 @@ export default {
 		}
 	},
 	mounted () {
-		this.getBundle()
-			.then(res => {
-				const { data } = res;
-				if (!data.startsWith('(function webpackUniversalModuleDefinition')) {
-					throw new Error('Unexpected script format!'); // Just to be sure
-				}
-				this.bundle = data;
-				console.log(`Got bundled script for ${this.name}!`);
-				console.log(data.slice(0, 100));
-				this.renderVisualisation();
-			});
+		this.getBundle().then(res => {
+			const { data } = res;
+			if (!data.startsWith('(function webpackUniversalModuleDefinition')) {
+				throw new Error('Unexpected script format!'); // Just to be sure
+			}
+			this.bundle = data;
+			console.log(`Got bundled script for ${this.name}!`);
+			console.log(data.slice(0, 100));
+			this.buildVisualisationScript()
+				.then(this.addVisualisation);
+			// this.renderVisualisation();
+		});
 	},
 	methods: {
 		getBundle () {
@@ -66,32 +67,54 @@ export default {
 			);
 		},
 		getSnippetCode (url) {
-			return axios.get(url)
-				.then((res) => res.data);
+			return axios.get(url).then(res => res.data);
 		},
 		addSnippetCSS () {
-			return Promise.all(this.css.map((css) => new Promise((resolve, reject) => {
-				const style = document.createElement('link');
-				style.rel = 'stylesheet';
-				style.type = 'text/css';
-				style.href = css.css_url;
-				style.onload = resolve;
-				document.head.appendChild(style);
-			})));
+			return Promise.all(
+				this.css.map(
+					css =>
+						new Promise((resolve, reject) => {
+							const style = document.createElement('link');
+							style.rel = 'stylesheet';
+							style.type = 'text/css';
+							style.href = css.css_url;
+							style.onload = resolve;
+							document.head.appendChild(style);
+						})
+				)
+			);
+		},
+		createCSSImport (script, css) {
+			return (
+				script +
+        `<link rel="stylesheet" type="text/css" href="${css.css_url}">\n`
+			);
+		},
+		createJSImport (script, js) {
+			return script + `<script src="${js.js_url}"><\/script>\n`;
 		},
 		addSnippetJS () {
-			return Promise.all(this.js.map(js => new Promise((resolve, reject) => {
-				const script = document.createElement('script');
-				script.setAttribute('src', js.js_url);
-				script.onload = resolve;
-				document.head.appendChild(script);
-			})));
+			return Promise.all(
+				this.js.map(
+					js =>
+						new Promise((resolve, reject) => {
+							const script = document.createElement('script');
+							script.setAttribute('src', js.js_url);
+							script.onload = resolve;
+							document.head.appendChild(script);
+						})
+				)
+			);
 		},
 		fixSnippetCode (code) {
 			// detect rootDiv
 			code = code.replace(/yourDiv|mainDiv|masterDiv|biojsDiv/g, 'rootDiv');
 			// detect component var name
-			const varNamePattern = new RegExp('(var|let|const)\\s*(\\S+)\\s*=\\s*require\\(["\']' + this.name + '["\']\\);?');
+			const varNamePattern = new RegExp(
+				"(var|let|const)\\s*(\\S+)\\s*=\\s*require\\([\"']" +
+          this.name +
+          "[\"']\\);?"
+			);
 			const varNameMatch = code.match(varNamePattern);
 			if (!varNameMatch) throw new Error('No import found!');
 			const varName = varNameMatch[2];
@@ -99,23 +122,56 @@ export default {
 			code = code.replace(varNameMatch[0], '');
 			// replace instantiation with window[] call
 			const instanceCallPattern = new RegExp('(new\\s+)?' + varName + '\\(');
-			code = code.replace(instanceCallPattern, 'new window[\'' + this.name + '\'](');
+			code = code.replace(
+				instanceCallPattern,
+				"new window['" + this.name + "']("
+			);
 			return code;
 		},
 		renderVisualisation () {
 			return this.addSnippetCSS()
 				.then(this.addSnippetJS)
 				.then(() => this.getSnippetCode(this.snippetURL))
-				.then((code) => {
+				.then(code => {
 					this.loading = false;
 					// eslint-disable-next-line
-					var rootDiv = document.getElementById('snippetDiv');
+          var rootDiv = document.getElementById("snippetDiv");
 					// TODO: Serve bundle js statically after compilation?
 					// eslint-disable-next-line
-					eval(this.bundle); // Add bundle code
+          eval(this.bundle); // Add bundle code
 					const newSnippet = this.fixSnippetCode(code);
 					eval(newSnippet); // run snippet code
 					console.log(newSnippet);
+				});
+		},
+		addVisualisation (script) {
+			const iframe = document.createElement('iframe');
+			iframe.setAttribute('srcdoc', script);
+			const visDiv = document.getElementById('visualization');
+			visDiv.appendChild(iframe);
+		},
+		buildVisualisationScript () {
+			return this.getSnippetCode(this.snippetURL)
+				.then(code => {
+					const newSnippetCode = this.fixSnippetCode(code);
+					// Create HTML boilerplate
+					let script = '<!DOCTYPE html>\n<html>\n<head>\n';
+					// Add CSS
+					script = this.css.reduce(this.createCSSImport, script);
+					// Add JS deps
+					script = this.js.reduce(this.createJSImport, script);
+					// Add bundle
+					script += `<script>\n${this.bundle}\n<\/script>\n`;
+					// Add snippet script
+					script += `</head>\n<body>\n`;
+					script += '<div id="snippetDiv"></div>\n'
+					script += `<script>\nvar rootDiv = document.getElementById('snippetDiv');\n`
+					script += `${newSnippetCode}\n<\/script>\n`;
+					script += '</body>\n</html>\n';
+					console.log(script.substr(-1000));
+					// return result
+					return script
+					// this.addVisualisation(script);
 				});
 		}
 	}
