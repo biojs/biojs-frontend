@@ -144,7 +144,7 @@ A fuzzy search has been implemented. You can find the details of the search comp
 		this.loadNextComponentsPage()
 			.then(() => {
 				this.isComponentsLoading = false;
-			})
+			});
 	}
 };
 </script>
