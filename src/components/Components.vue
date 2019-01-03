@@ -68,7 +68,6 @@
 </div>
 </template>
 <script>
-import InfiniteLoading from 'vue-infinite-loading';
 import NavBar from './NavBar';
 import Heading from './Heading';
 import SearchComponent from './SearchComponent';
@@ -114,8 +113,7 @@ A fuzzy search has been implemented. You can find the details of the search comp
 		'heading': Heading,
 		'search-component': SearchComponent,
 		'component-table': ComponentTable,
-		'loader': Loader,
-		InfiniteLoading
+		'loader': Loader
 	},
 	methods: {
 		computeURL (url) {
