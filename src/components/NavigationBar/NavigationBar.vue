@@ -43,10 +43,10 @@ export default {
         route: "/components"
       });
     }
-    if (path !== "/guides") {
+    if (path !== "/guide") {
       pushInNavbarItems({
         name: "Guides",
-        route: "/guides"
+        route: "/guide"
       });
     }
 

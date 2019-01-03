@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-container>
     <v-layout row wrap>
       <v-container>
         <v-layout class="my-5">
@@ -32,7 +32,7 @@
         </v-flex>
       </v-container>
     </v-layout>
-  </v-app>
+  </v-container>
 </template>
 
 <script>

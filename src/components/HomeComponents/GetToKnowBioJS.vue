@@ -28,16 +28,20 @@
 </template>
 
 <script>
+import { pushRoute } from "@/components/global.js";
 export default {
   name: "GetToKnowBioJS",
+  mixins: [pushRoute],
   data() {
     return {
       buttons: [
         {
-          name: "About"
+          name: "About",
+          route: "about"
         },
         {
-          name: "Guide"
+          name: "Guide",
+          route: "guide"
         }
       ],
       aboutBioJS:
