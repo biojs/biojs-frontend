@@ -6,7 +6,7 @@
 https://biojs-kakkar-frontend.surge.sh
 ``
 
-PS: Only Components and Contact Directory aren't available for demo, others are more or less 
+PS: Only Components Directory isn't available for demo, others are ready (all components section throughout the site and DOCS isnt there to be showcased)
 
 ## Project setup
 ```
