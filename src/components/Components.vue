@@ -67,7 +67,7 @@
 </div>
 </template>
 <script>
-/* eslint-disable */ 
+/* eslint-disable */
 import NavBar from './NavBar';
 import Heading from './Heading';
 import SearchComponent from './SearchComponent';
