@@ -51,12 +51,13 @@
 							</div>
 							<div class="modified property">
 								<i class="material-icons">update</i>
-								{{ component.modified_time.split('T')[0] }}
+								{{ component.modified_time && component.modified_time.split('T')[0] }}
 							</div>
 						</div>
 					</div>
 				</div>
 			</router-link>
+			<infinite-loading @infinite="loadNextComponentsPage"></infinite-loading>
 		</div>
 		<div id="topComponents">
 			<component-table title="Top Downloads" components="top_dwnld" />
@@ -67,6 +68,7 @@
 </div>
 </template>
 <script>
+import InfiniteLoading from 'vue-infinite-loading';
 import NavBar from './NavBar';
 import Heading from './Heading';
 import SearchComponent from './SearchComponent';
@@ -103,7 +105,8 @@ A fuzzy search has been implemented. You can find the details of the search comp
 		return {
 			components: [],
 			randomComponentNum: 5,
-			isComponentsLoading: true
+			isComponentsLoading: true,
+			page: 1
 		};
 	},
 	components: {
@@ -111,7 +114,8 @@ A fuzzy search has been implemented. You can find the details of the search comp
 		'heading': Heading,
 		'search-component': SearchComponent,
 		'component-table': ComponentTable,
-		'loader': Loader
+		'loader': Loader,
+		InfiniteLoading
 	},
 	methods: {
 		computeURL (url) {
@@ -119,15 +123,31 @@ A fuzzy search has been implemented. You can find the details of the search comp
 		},
 		generateRandom () {
 			return '/random/' + this.randomComponentNum;
+		},
+		loadNextComponentsPage (scrollState) {
+			return axios.get(`${API_URL}components?page=${this.page}`)
+				.then((response) => {
+					const components = response.data.components;
+					if (components.length) {
+						this.page += 1;
+						this.components = this.components.concat(components);
+						console.log(this.components);
+						if (scrollState) {
+							scrollState.loaded();
+						}
+					} else {
+						if (scrollState) {
+							scrollState.complete();
+						}
+					}
+				});
 		}
 	},
 	mounted () {
-		axios({ method: 'GET', 'url': API_URL + 'top/' }).then(result => {
-			this.components = result.data.top_components;
-			this.isComponentsLoading = false;
-		}, error => {
-			console.error(error);
-		});
+		this.loadNextComponentsPage()
+			.then(() => {
+				this.isComponentsLoading = false;
+			})
 	}
 };
 </script>
