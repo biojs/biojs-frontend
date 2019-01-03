@@ -127,9 +127,8 @@ A fuzzy search has been implemented. You can find the details of the search comp
 				.then((response) => {
 					const components = response.data.components;
 					if (components.length) {
-						this.page += 1;
 						this.components = this.components.concat(components);
-						console.log(this.components);
+						this.page += 1;
 						if (scrollState) {
 							scrollState.loaded();
 						}
