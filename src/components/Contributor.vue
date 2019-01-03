@@ -7,14 +7,13 @@
 	</a>
 </template>
 <script>
-/* eslint-disable */ 
 export default {
 	name: 'Contributor',
 	introduction: 'Render each contributor in the list of contributors in the component page.',
-description: `
+	description: `
 The Contributor component renders an image and the name of the contributor.
 `,
-token: `
+	token: `
 <div id="contributor">
 	<img :src="imageURL" :alt="name" />
 	<span>{{ name }}</span>

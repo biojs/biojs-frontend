@@ -62,7 +62,7 @@ export default {
 			this.buildVisualisationScript()
 				.then((script) => {
 					this.frame.snippet = script;
-				})
+				});
 		}
 	},
 	methods: {
@@ -87,12 +87,14 @@ export default {
 			);
 		},
 		createJSImport (script, js) {
+			// eslint-disable-next-line
 			return script + `<script src="${js.js_url}"><\/script>\n`;
 		},
 		fixSnippetCode (code) {
 			// detect rootDiv
 			code = code.replace(/yourDiv|mainDiv|masterDiv|biojsDiv/g, 'rootDiv');
 			// detect component var name
+			// eslint-disable-next-line
 			const importPattern = new RegExp('require\\(["\']' + this.name + '["\']\\);?');
 			code = code.replace(
 				importPattern,
@@ -110,11 +112,13 @@ export default {
 				// Add JS deps
 				script = this.js.reduce(this.createJSImport, script);
 				// Add bundle
+				// eslint-disable-next-line
 				script += `<script>\n${this.bundle}\n<\/script>\n`;
 				// Add snippet script
 				script += `</head>\n<body>\n`;
 				script += '<div id="snippetDiv"></div>\n';
 				script += `<script>\nvar rootDiv = document.getElementById('snippetDiv');\n`;
+				// eslint-disable-next-line
 				script += `${newSnippetCode}\n<\/script>\n`;
 				script += '</body>\n</html>\n';
 				// return result
