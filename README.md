@@ -6,7 +6,7 @@
 https://biojs-kakkar-frontend.surge.sh
 ``
 
-PS: Only Home And About Directory are available for demo
+PS: Only Components and Contact Directory aren't available for demo, others are more or less 
 
 ## Project setup
 ```
