@@ -67,7 +67,6 @@
 </div>
 </template>
 <script>
-/* eslint-disable */ 
 import NavBar from './NavBar';
 import Heading from './Heading';
 import SearchComponent from './SearchComponent';
@@ -76,12 +75,11 @@ import axios from 'axios';
 import {API_URL} from '../DB_CONFIG.js';
 import Loader from './Loader';
 
-
 export default {
 	name: 'Components',
-	introduction: 'The components\' page',
-description: `
-The components\' page renders the top ten components (icon, name, author, description, tags, downloads, stars and last modified) from the data received by the API call.\nIt also has a search bar to search amongst all the components and displays top 3 component for each category.
+	introduction: 'The components page',
+	description: `
+The components page renders the top ten components (icon, name, author, description, tags, downloads, stars and last modified) from the data received by the API call.\nIt also has a search bar to search amongst all the components and displays top 3 component for each category.
 #### API Response
 <img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/Top10_API_Response.png" width="500px" alt="API Response">
 
@@ -89,7 +87,7 @@ The components\' page renders the top ten components (icon, name, author, descri
 A fuzzy search has been implemented. You can find the details of the search component in its documentation.
 
 `,
-token: `
+	token: `
 <div id="component" v-for="component in components">
 \t ..loop through the ten components..
 \t<div class="image"
@@ -120,7 +118,7 @@ token: `
 			return '/component/' + url;
 		},
 		generateRandom () {
-			return '/random/'+this.randomComponentNum;
+			return '/random/' + this.randomComponentNum;
 		}
 	},
 	mounted () {

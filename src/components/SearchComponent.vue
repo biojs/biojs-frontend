@@ -25,7 +25,6 @@
   </div>
 </template>
 <script>
-/* eslint-disable */
 import axios from 'axios';
 import fz from 'fuzzaldrin-plus';
 import Heading from './Heading.vue';
@@ -34,13 +33,13 @@ import {API_URL} from '../DB_CONFIG.js';
 export default {
 	name: 'SearchComponent',
 	introduction: 'Search bar to query across all the components.',
-description: `
-The SearchComponent component queries across all the components\' names and tags.
+	description: `
+The SearchComponent component queries across all the components' names and tags.
 A fuzzy search is implemented, more about which can be found here: https://github.com/jeancroy/fuzz-aldrin-plus
 ### API response for all components:
 <img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/SearchComponentAPI.png" width="300px" alt="API Response">
 `,
-token: '',
+	token: '',
 	data () {
 		return {
 			query: '',
