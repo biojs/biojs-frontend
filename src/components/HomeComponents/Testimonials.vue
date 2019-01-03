@@ -1,24 +1,28 @@
 <template>
   <v-container>
-    <v-layout id="parent" row wrap fill-height justify-center align-center>
+    <v-layout id="parent" row wrap class="pt-5">
       <v-flex xs12>
         <v-card>
-          <v-card-title class="primary-title text-xs-center" width="100%">Testimonials</v-card-title>
+          <v-card-title>
+            <v-flex class="text-xs-center headline" style="color: #673ab7">Testimonials</v-flex>
+          </v-card-title>
           <v-layout row wrap>
             <v-flex v-for="res in testimonials" :key="res.id" md4 text-md-center>
-              <v-container>
-                <v-card-text>
-                  <v-layout row wrap justify-center align-center>
-                    <v-flex xs12>
-                      <v-icon v-for="n in res.stars" :key="n">favorite</v-icon>
-                      <v-icon v-for="n in 5 - res.stars" :key="n + 5">favorite_border</v-icon>
-                    </v-flex>
-                    <v-flex xs12 class="ma-4">{{ res.testimonial }}</v-flex>
-                    <v-flex xs12 class="mt-2 grey--text">{{ res.author }}</v-flex>
-                    <v-flex xs12 class="mt-2 grey--text">{{ res.specialization }}</v-flex>
-                  </v-layout>
-                </v-card-text>
-              </v-container>
+              <v-card-text>
+                <v-layout row wrap justify-center align-center>
+                  <v-flex xs12>
+                    <v-icon style="color: #e91e63" v-for="n in res.stars" :key="n">favorite</v-icon>
+                    <v-icon
+                      style="color: #e91e63"
+                      v-for="n in 5 - res.stars"
+                      :key="n + 5"
+                    >favorite_border</v-icon>
+                  </v-flex>
+                  <v-flex xs12 class="ma-4">{{ res.testimonial }}</v-flex>
+                  <v-flex xs12 class="mt-2 grey--text">{{ res.author }}</v-flex>
+                  <v-flex xs12 class="mt-2 grey--text">{{ res.specialization }}</v-flex>
+                </v-layout>
+              </v-card-text>
             </v-flex>
           </v-layout>
         </v-card>
@@ -72,7 +76,7 @@ export default {
     },
     activeBoolStars(activeBool) {
       if (activeBool) {
-        console.log("herer");
+        // console.log("herer");
         return "#e5dfd4";
       }
       return "#3c1d88";

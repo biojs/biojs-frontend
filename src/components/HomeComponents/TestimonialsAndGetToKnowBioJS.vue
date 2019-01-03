@@ -1,7 +1,9 @@
 <template>
   <v-app>
-    <Testimonials/>
-    <GetToKnowBioJS/>
+    <v-container>
+      <Testimonials/>
+      <GetToKnowBioJS/>
+    </v-container>
   </v-app>
 </template>
 

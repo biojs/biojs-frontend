@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout id="parent" row wrap fill-height justify-center align-center>
+    <v-layout id="parent" row wrap>
       <v-flex xs12>
         <v-card style="background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);">
           <v-container>

@@ -1,22 +1,28 @@
 <template>
   <v-app>
-    <PushButtonUp navigate="#visualization"/>
     <v-container>
-      <v-layout id="parent-popular-component" row wrap>
-        <v-container fluid>
-          <v-flex xs12 headline style="color: #009688; text-align: center">Popular Components</v-flex>
-          <SubComponents/>
+      <PushButtonUp navigate="#visualization"/>
+      <v-layout row wrap justify-center fill-height>
+        <v-container>
+          <v-container>
+            <v-layout id="parent-popular-component" row wrap>
+              <v-container fluid>
+                <v-flex xs12 headline style="color: #009688; text-align: center">Popular Components</v-flex>
+                <SubComponents/>
+              </v-container>
+            </v-layout>
+            <v-layout row wrap class="text-center">
+              <v-flex xs12>
+                <!-- <SearchComponent/> -->
+                <!-- redisgn its input outlook -->
+                <!-- it will be a plance input tag with placeholde and search icon in right most -->
+              </v-flex>
+            </v-layout>
+          </v-container>
         </v-container>
       </v-layout>
-      <v-layout row wrap class="text-center">
-        <v-flex xs12>
-          <!-- <SearchComponent/> -->
-          <!-- redisgn its input outlook -->
-          <!-- it will be a plance input tag with placeholde and search icon in right most -->
-        </v-flex>
-      </v-layout>
+      <PushButtonDown navigate="#TestimonialsAndGetToKnowBioJS"/>
     </v-container>
-    <PushButtonDown navigate="#TestimonialsAndGetToKnowBioJS"/>
   </v-app>
 </template>
 
@@ -40,5 +46,6 @@ export default {
   background-color: white;
   box-shadow: 2px 2px 10px #ccc;
   padding: 6.25mm;
+  border-radius: 20px;
 }
 </style>

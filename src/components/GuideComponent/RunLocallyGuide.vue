@@ -94,7 +94,6 @@ export default {
       } else {
         this.e9 = 1;
       }
-      console.log(currentStep);
     }
   }
 };

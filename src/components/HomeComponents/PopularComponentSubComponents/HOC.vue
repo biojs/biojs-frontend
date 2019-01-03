@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title style="background-color: #561FC5 ; color: #D2EEC8  ">
+      <v-card-title style="background-color: #561FC5 ; color: white  ">
         <div class="center-title">{{ title }}</div>
         <v-layout style=" margin: 10px; padding: 10px; border-radius: 10px">
-          <v-flex xs12>need support on this</v-flex>
+          <v-flex xs12 justify-center>need support on this</v-flex>
         </v-layout>
       </v-card-title>
     </v-card>
@@ -27,7 +27,7 @@ export default {
         // vm.isLoading = false;
       },
       error => {
-        console.error(error);
+        // console.error(error);
       }
     );
   },
