@@ -30,7 +30,7 @@ jobs:
       before_script:
         - docker pull philm/ansible_playbook
         - git clone https://github.com/biojs/biojs-backend-ansible.git
-        - openssl aes-256-cbc -K $encrypted_276c776368d5_key -iv $encrypted_276c776368d5_iv -in biojs-backend-ansible/id_rsa.enc -out ~/.ssh/id_rsa -d
+        - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv -in biojs-backend-ansible/id_rsa.enc -out ~/.ssh/id_rsa -d
       script:
         - pwd
         - ls
