@@ -31,6 +31,7 @@ jobs:
         - docker pull philm/ansible_playbook
         - git clone https://github.com/biojs/biojs-backend-ansible.git
       script:
+        - pwd
         - cd biojs-backend-ansible && docker run -it -v ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)":/ansible/playbooks -e DB_USER=ubuntu -e DB_PASSWORD=test philm/ansible_playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
         # - cd biojs-backend-ansible && ansible-playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
 
