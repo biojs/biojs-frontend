@@ -22,18 +22,15 @@ jobs:
       script:
         - npm run unit
 
-    - stage: prepare deploy
-      if: branch =~ /^(master|develop|production)$/
+    - stage: deploy-dev
+          if: branch = develop
       # configure ansible
       before_install:
         - sudo apt-get -y install python3-pip python-dev
       install:
         - pip install ansible
-      script:
+      before_script:
         - git clone git@github.com:biojs/biojs-backend-ansible.git
-
-    - stage: deploy-dev
-      # if: branch = develop
       script:
         - cd biojs-backend-ansible && ansible-playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
 
