@@ -1,43 +1,36 @@
-# specify language
 language: node_js
-
-# specify NodeJS version
 node_js:
- - "10.15.0"
-
+- 10.15.0
 services:
-  - docker
-
+- docker
 jobs:
   include:
-    # - stage: test
-    #   # configure chrome
-    #   before_install:
-    #     - export CHROME_BIN=chromium-browser
-    #     - export DISPLAY=:99.0
-    #     - sh -e /etc/init.d/xvfb start
-    #   # install dependencies
-    #   install:
-    #     - npm install
-    #   # run unit tests only
-    #   script:
-    #     - npm run unit
+ - stage: test
+   # configure chrome
+   before_install:
+     - export CHROME_BIN=chromium-browser
+     - export DISPLAY=:99.0
+     - sh -e /etc/init.d/xvfb start
+   # install dependencies
+   install:
+     - npm install
+   # run unit tests only
+   script:
+     - npm run unit
 
-    - stage: deploy-dev
-          # if: branch = develop
-      # configure ansible
-
-      before_script:
-        - docker pull philm/ansible_playbook
-        - git clone https://github.com/biojs/biojs-backend-ansible.git
-        - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv -in biojs-backend-ansible/id_rsa.enc -out ~/.ssh/id_rsa -d
-      script:
-        - pwd
-        - ls
-        - ls biojs-backend-ansible
-        - cd biojs-backend-ansible && docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)":/ansible/playbooks -e DB_USER=ubuntu -e DB_PASSWORD=test philm/ansible_playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
-        # - cd biojs-backend-ansible && ansible-playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
-
-# get notified through email
+  - stage: deploy-dev
+    before_script:
+    - docker pull philm/ansible_playbook
+    - git clone https://github.com/biojs/biojs-backend-ansible.git
+    - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv
+      -in biojs-backend-ansible/id_rsa.enc -out ~/.ssh/id_rsa -d
+    script:
+    - docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa
+      -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks -e DB_USER=$DB_USER -e DB_PASSWORD=$DB_PASSWORD philm/ansible_playbook
+      dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
 notifications:
- email: true
+  email: true
+env:
+  global:
+  - secure: r3HCwCd5xPZtJBxXPNLMoi6B4EE5XzpeDMZl0kt+5o7H/L9C70TB+gADahxE/MXXORJVAAEVETcWNZDvAFxz7hFXEpnCtkhe+QPAcAPPma6IWve7HVdt5/dW1wYt2/nauHFZU40R2VgLcJR487TiI911nOnJSRnL3Wea3RdwtdDpIWH4jndQYxdzQY5Pso+g12+BZflWbDqXNg3zRt4gKLW2wz3DKXigVC5De43fEID2okmjLVJmqjPYr1lh1eEroytW64icMpVq7J8Hxc0WED0w9WDqG5MAlfPuj2GvEEEh0CFchv15SeJXkrcv/32IPuCqJthnw4Pp/F67YeYLAOPKI2N5ihyc9qCs6/mTSrSn+M3I1mgVqJwZqS7Sf1aHWAB+d42WOAPvzsGP2XZqfnl14z9z708nV7aleMRBJgclnmAIeaCsVDXZRvrxpNWuYz0WWfWfRV2fhmWkPvpY1hqlPxpcCiCEZ7s2HDb5zumX89rfzjFRrFqzL2DRFOJbczKYaIeCpWFPuMQ0C0FmjAfugpTcmTNQ0VGiM4HoeGz6f7M5CEf/WYBe5Ul7MLsu3i5XmttSUk6w2qPBwUNe7cFmFlTpch1HSCx1W/cqaCnc5xapIhTI627GZ/d2L0bQ1pmPcjzOfOksNwM74VSZSfEMDh1hsHWY0L/9yOtalQg=
+  - secure: iY6aA7xsztmRP1YXvJhro2ys/N0f/84/fofU6Z659G7AtREqcWHqVE9yGVnjp6gRd1klaxuz5VBZ0DoxWQkLZle2wlf+HH7mPG/qPPvvhjt+L9eMbH4RHRy/COwo1CRD3e+PIpRE8Y6pMnWFZXnF3yPGfz9yfdTa0zuEKUnEW0IdiUSxeEbv2ycg+dAsQjsna4cfmFsNqkdU1RZ3tGANkLs8rINzeY1OuWPhlpubMZpDV+gIqjS1rBbvbVVTuRING4e0rLI/O09fAIPuppOR0OUWZ1rQh1ePMaLam2tbpKwFP60g3kUdk519X++/xqvtmwrfnLxnFozkqyC0bCETrqBqHbn5/pr71b7+tQJCI7vWbT9NF7nObLRdwxm/Stp65ueYEk6N5kkGKHFLjRhWqeTFy0VhsOODlGzgh/h52RDZsDw9kVbT63vGQ+Tr/Ldj1DcrsztkaH7Ds6lpFwjFfda11DwYSy/BwGDIFtStK/C7E3dwg9JQMydgGi7IXQ6dOftyaav9VZKUDxGjgBSMniYHc0h+XXdzUs1oEM6rt86w+hSbEdWMV3NcaueSHEX8fVQEnEYz860PGkQg6+AJdigB3Vl/uBNzo/vL8A+db0Ouyn2ve3dlxRCRCv7h/Tw0wuwT0STO4Bb3Rlxb3M9irimXNXcpxGUPM+4uXJ0RCYU=
