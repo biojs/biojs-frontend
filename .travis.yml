@@ -4,8 +4,9 @@ language: node_js
 # specify NodeJS version
 node_js:
  - "10.15.0"
-python:
-  - "3.6"
+
+services:
+  - docker
 
 jobs:
   include:
@@ -25,16 +26,13 @@ jobs:
     - stage: deploy-dev
           # if: branch = develop
       # configure ansible
-      before_install:
-        - sudo apt-get -y install python3-pip python-dev
-        - sudo pip3 install --upgrade -U setuptools
-        # - pip3 install -U virtualenvwrapper
-      install:
-        - sudo pip3 install -U ansible
+
       before_script:
+        - docker pull philm/ansible_playbook
         - git clone https://github.com/biojs/biojs-backend-ansible.git
       script:
-        - cd biojs-backend-ansible && ansible-playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
+        - docker run -it -v ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks -e DB_USER=ubuntu -e DB_PASSWORD=test philm/ansible_playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
+        # - cd biojs-backend-ansible && ansible-playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
 
 # get notified through email
 notifications:
