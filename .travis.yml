@@ -24,7 +24,7 @@ jobs:
     - docker pull philm/ansible_playbook
     - git clone https://github.com/biojs/biojs-backend-ansible.git
     - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv
-      -in biojs-backend-ansible/id_rsa.enc -out ~/.ssh/id_rsa -d
+      -in deployment-key.enc -out ~/.ssh/id_rsa -d
     script:
     - docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa
       -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks -e DB_USER=$DB_USER -e DB_PASSWORD=$DB_PASSWORD philm/ansible_playbook
@@ -36,7 +36,7 @@ jobs:
     - docker pull philm/ansible_playbook
     - git clone https://github.com/biojs/biojs-backend-ansible.git
     - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv
-      -in biojs-backend-ansible/id_rsa.enc -out ~/.ssh/id_rsa -d
+      -in deployment-key.enc -out ~/.ssh/id_rsa -d
     script:
     - docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa
       -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks -e DB_USER=$DB_USER -e DB_PASSWORD=$DB_PASSWORD philm/ansible_playbook
