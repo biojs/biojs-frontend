@@ -32,7 +32,7 @@ jobs:
       install:
         - sudo pip3 install -U ansible
       before_script:
-        - git clone git@github.com:biojs/biojs-backend-ansible.git
+        - git clone https://github.com/biojs/biojs-backend-ansible.git
       script:
         - cd biojs-backend-ansible && ansible-playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
 
