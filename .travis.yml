@@ -9,18 +9,18 @@ python:
 
 jobs:
   include:
-    - stage: test
-      # configure chrome
-      before_install:
-        - export CHROME_BIN=chromium-browser
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-      # install dependencies
-      install:
-        - npm install
-      # run unit tests only
-      script:
-        - npm run unit
+    # - stage: test
+    #   # configure chrome
+    #   before_install:
+    #     - export CHROME_BIN=chromium-browser
+    #     - export DISPLAY=:99.0
+    #     - sh -e /etc/init.d/xvfb start
+    #   # install dependencies
+    #   install:
+    #     - npm install
+    #   # run unit tests only
+    #   script:
+    #     - npm run unit
 
     - stage: deploy-dev
           # if: branch = develop
