@@ -23,7 +23,7 @@ jobs:
         - npm run unit
 
     - stage: deploy-dev
-          if: branch = develop
+          # if: branch = develop
       # configure ansible
       before_install:
         - sudo apt-get -y install python3-pip python-dev
