@@ -30,11 +30,12 @@ jobs:
       before_script:
         - docker pull philm/ansible_playbook
         - git clone https://github.com/biojs/biojs-backend-ansible.git
+        - openssl aes-256-cbc -K $encrypted_276c776368d5_key -iv $encrypted_276c776368d5_iv -in biojs-backend-ansible/id_rsa.enc -out ~/.ssh/id_rsa -d
       script:
         - pwd
         - ls
         - ls biojs-backend-ansible
-        - cd biojs-backend-ansible && docker run -it -v ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)":/ansible/playbooks -e DB_USER=ubuntu -e DB_PASSWORD=test philm/ansible_playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
+        - cd biojs-backend-ansible && docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)":/ansible/playbooks -e DB_USER=ubuntu -e DB_PASSWORD=test philm/ansible_playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
         # - cd biojs-backend-ansible && ansible-playbook dev-deploy.yml --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
 
 # get notified through email
