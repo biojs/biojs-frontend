@@ -97,21 +97,19 @@
 </template>
 
 <script>
-/* eslint-disable */
-
-import NavBar from "./NavBar.vue";
-import Heading from "./Heading.vue";
-import ComponentStat from "./ComponentStat.vue";
-import Contributor from "./Contributor.vue";
-import Visualization from "./Visualization.vue";
-import axios from "axios";
-import { API_URL } from "../DB_CONFIG.js";
-import Loader from "./Loader";
+import NavBar from './NavBar.vue';
+import Heading from './Heading.vue';
+import ComponentStat from './ComponentStat.vue';
+import Contributor from './Contributor.vue';
+import Visualization from './Visualization.vue';
+import axios from 'axios';
+import { API_URL } from '../DB_CONFIG.js';
+import Loader from './Loader';
 
 export default {
-  name: "Component",
-  introduction: "A dynamic page for each component.",
-  description: `
+	name: 'Component',
+	introduction: 'A dynamic page for each component.',
+	description: `
 The component page gets the data from backend through an API call and renders it to display all the information for a specific component.
 A watcher has been added to the component to render the details dynamically when the component changes.
 #### API structure
@@ -121,7 +119,7 @@ A watcher has been added to the component to render the details dynamically when
 2. computeLicense() returns "Not available" is a license is not present in the data and returns the license otherwise.
 3. isAuthor() shows the author under the component's name is an author is present in the data received otherwise it does not show the author.
 `,
-  token: `
+	token: `
 <p id="author" v-if="isAuthor()">..rendered if author is present..</p>
 <p>{{description}}</p>
 <div id="install">..renders the npm install command..</div>
@@ -132,173 +130,171 @@ A watcher has been added to the component to render the details dynamically when
 <div id="legal>..displays the license information if it exists..</div>
 `,
 
-  data() {
-    return {
-      name: "",
-      description: "",
-      urlName: "",
-      visualizations: [],
-      tags: [],
-      social: [],
-      stats: [],
-      contributors: [],
-      license: "",
-      author: "",
-      githubURL: "https://www.github.com/",
-      sniper_data: {},
-      js_dependencies: [],
-      css_dependencies: [],
-      biojsioURL: "loading",
-      selectedSnippet: "",
-      isLoading: true
-    };
-  },
-  components: {
-    "nav-bar": NavBar,
-    heading: Heading,
-    "component-stat": ComponentStat,
-    contributor: Contributor,
-    visualization: Visualization,
-    loader: Loader
-  },
-  mounted() {
-    this.fetchData();
-  },
-  watch: {
-    $route: "fetchData",
-    selectedSnippet: function(value) {
-      this.selectedSnippet = value;
-    }
-  },
-  methods: {
-    fetchData() {
-      axios({
-        method: "GET",
-        url: API_URL + "details/" + this.$route.params.name + "/"
-      }).then(
-        result => {
-          this.visualizations = result.data.snippets;
-          let details = result.data.details;
-          this.name = details.name;
-          this.description = details.short_description;
-          this.urlName = details.url_name;
-          this.tags = details.tags;
-          this.author = details.author;
-          this.githubURL = details.github_url;
-          this.social = [
-            {
-              prop: "stars",
-              image: require("../assets/component/stars.png"),
-              value: details.stars
-            },
-            {
-              prop: "watchers",
-              image: require("../assets/component/watchers.png"),
-              value: details.watchers
-            },
-            {
-              prop: "contributors",
-              image: require("../assets/component/contributors.png"),
-              value: details.no_of_contributors
-            },
-            {
-              prop: "forks",
-              image: require("../assets/component/fork.png"),
-              value: details.forks
-            }
-          ];
-          const splitTime = time =>
-            time && typeof time === "string" ? time.split("T")[0] : undefined;
-          this.stats = [
-            {
-              prop: "downloads",
-              image: require("../assets/component/download.png"),
-              value: details.downloads
-            },
-            {
-              prop: "last modified",
-              image: require("../assets/component/modified.png"),
-              value: splitTime(details.modified_time)
-            },
-            {
-              prop: "commits",
-              image: require("../assets/component/commit.png"),
-              value: details.commits
-            },
-            {
-              prop: "version",
-              image: require("../assets/component/version.png"),
-              value: details.version
-            },
-            {
-              prop: "created at",
-              image: require("../assets/component/created.png"),
-              value: splitTime(details.created_time)
-            },
-            {
-              prop: "open issues",
-              image: require("../assets/component/issues.png"),
-              value: details.open_issues
-            }
-          ];
-          this.contributors = result.data.contributors.map(
-            obj => obj.contributor
-          );
-          this.license = details.license;
-          this.sniper_data = result.data.sniper_data;
-          this.js_dependencies = result.data.js_dependencies;
-          this.css_dependencies = result.data.css_dependencies;
-          this.isLoading = false;
-          const url = `${API_URL}details/${this.name}`;
-          console.log(this.sniper_data);
+	data () {
+		return {
+			name: '',
+			description: '',
+			urlName: '',
+			visualizations: [],
+			tags: [],
+			social: [],
+			stats: [],
+			contributors: [],
+			license: '',
+			author: '',
+			githubURL: 'https://www.github.com/',
+			sniper_data: {},
+			js_dependencies: [],
+			css_dependencies: [],
+			biojsioURL: 'loading',
+			selectedSnippet: '',
+			isLoading: true
+		};
+	},
+	components: {
+		'nav-bar': NavBar,
+		heading: Heading,
+		'component-stat': ComponentStat,
+		contributor: Contributor,
+		visualization: Visualization,
+		loader: Loader
+	},
+	mounted () {
+		this.fetchData();
+	},
+	watch: {
+		$route: 'fetchData',
+		selectedSnippet: function (value) {
+			this.selectedSnippet = value;
+		}
+	},
+	methods: {
+		fetchData () {
+			axios({
+				method: 'GET',
+				url: API_URL + 'details/' + this.$route.params.name + '/'
+			}).then(
+				result => {
+					this.visualizations = result.data.snippets;
+					let details = result.data.details;
+					this.name = details.name;
+					this.description = details.short_description;
+					this.urlName = details.url_name;
+					this.tags = details.tags;
+					this.author = details.author;
+					this.githubURL = details.github_url;
+					this.social = [
+						{
+							prop: 'stars',
+							image: require('../assets/component/stars.png'),
+							value: details.stars
+						},
+						{
+							prop: 'watchers',
+							image: require('../assets/component/watchers.png'),
+							value: details.watchers
+						},
+						{
+							prop: 'contributors',
+							image: require('../assets/component/contributors.png'),
+							value: details.no_of_contributors
+						},
+						{
+							prop: 'forks',
+							image: require('../assets/component/fork.png'),
+							value: details.forks
+						}
+					];
+					const splitTime = time =>
+						time && typeof time === 'string' ? time.split('T')[0] : undefined;
+					this.stats = [
+						{
+							prop: 'downloads',
+							image: require('../assets/component/download.png'),
+							value: details.downloads
+						},
+						{
+							prop: 'last modified',
+							image: require('../assets/component/modified.png'),
+							value: splitTime(details.modified_time)
+						},
+						{
+							prop: 'commits',
+							image: require('../assets/component/commit.png'),
+							value: details.commits
+						},
+						{
+							prop: 'version',
+							image: require('../assets/component/version.png'),
+							value: details.version
+						},
+						{
+							prop: 'created at',
+							image: require('../assets/component/created.png'),
+							value: splitTime(details.created_time)
+						},
+						{
+							prop: 'open issues',
+							image: require('../assets/component/issues.png'),
+							value: details.open_issues
+						}
+					];
+					this.contributors = result.data.contributors.map(
+						obj => obj.contributor
+					);
+					this.license = details.license;
+					this.sniper_data = result.data.sniper_data;
+					this.js_dependencies = result.data.js_dependencies;
+					this.css_dependencies = result.data.css_dependencies;
+					this.isLoading = false;
+					const url = `${API_URL}details/${this.name}`;
+					console.log(this.sniper_data);
 
-          axios({ method: "GET", url }).then(
-            result => {
-              if (result.data.error) {
-                this.biojsioURL = "error";
-              } else {
-                this.biojsioURL = "http://biojs.io/d/" + this.name;
-              }
-            },
-            error => {
-              this.biojsioURL = "error";
-              console.error(error);
-            }
-          );
+					axios({ method: 'GET', url }).then(
+						result => {
+							if (result.data.error) {
+								this.biojsioURL = 'error';
+							} else {
+								this.biojsioURL = 'http://biojs.io/d/' + this.name;
+							}
+						},
+						error => {
+							this.biojsioURL = 'error';
+							console.error(error);
+						}
+					);
 
-          if (this.visualizations)
-            this.selectedSnippet = result.data.snippets[0].name;
-          else this.selectedSnippet = "";
-        },
-        error => {
-          console.error(error);
-        }
-      );
-    },
-    computeVisualization() {
-      if (this.visualizations && this.sniper_data && this.sniper_data.no_browserify) {
-        return "supported";
-      } else if (this.visualizations && this.sniper_data && !this.sniper_data.no_browserify) {
-        return "legacy";
-      } else {
-				return "none"
+					if (this.visualizations) { this.selectedSnippet = result.data.snippets[0].name; } else this.selectedSnippet = '';
+				},
+				error => {
+					console.error(error);
+				}
+			);
+		},
+		computeVisualization () {
+			if (this.visualizations && this.sniper_data && this.sniper_data.no_browserify) {
+				return 'supported';
+			} else if (this.visualizations && this.sniper_data && !this.sniper_data.no_browserify) {
+				return 'legacy';
+			} else {
+				return 'none';
 			}
-    },
-    computeLicense() {
-      if (this.license === "") {
-        return "Not available";
-      } else {
-        return this.license;
-      }
-    },
-    isAuthor() {
-      if (this.author === "") {
-        return false;
-      } else {
-        return true;
-      }
-    }
-  }
+		},
+		computeLicense () {
+			if (this.license === '') {
+				return 'Not available';
+			} else {
+				return this.license;
+			}
+		},
+		isAuthor () {
+			if (this.author === '') {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
 };
 </script>
 
