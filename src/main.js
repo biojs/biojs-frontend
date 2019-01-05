@@ -3,12 +3,19 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import Loader from './components/Loader';
+import InfiniteLoading from 'vue-infinite-loading';
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
-
-// importing and using bootstrap-vue
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+
 Vue.use(BootstrapVue);
+Vue.use(InfiniteLoading, {
+	slots: {
+		noMore: 'All components loaded.',
+		spinner: Loader
+	}
+});
 
 Vue.config.productionTip = false;
 

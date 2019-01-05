@@ -51,12 +51,13 @@
 							</div>
 							<div class="modified property">
 								<i class="material-icons">update</i>
-								{{ component.modified_time.split('T')[0] }}
+								{{ component.modified_time && component.modified_time.split('T')[0] }}
 							</div>
 						</div>
 					</div>
 				</div>
 			</router-link>
+			<infinite-loading @infinite="loadNextComponentsPage"></infinite-loading>
 		</div>
 		<div id="topComponents">
 			<component-table title="Top Downloads" components="top_dwnld" />
@@ -67,7 +68,6 @@
 </div>
 </template>
 <script>
-/* eslint-disable */ 
 import NavBar from './NavBar';
 import Heading from './Heading';
 import SearchComponent from './SearchComponent';
@@ -76,12 +76,11 @@ import axios from 'axios';
 import {API_URL} from '../DB_CONFIG.js';
 import Loader from './Loader';
 
-
 export default {
 	name: 'Components',
-	introduction: 'The components\' page',
-description: `
-The components\' page renders the top ten components (icon, name, author, description, tags, downloads, stars and last modified) from the data received by the API call.\nIt also has a search bar to search amongst all the components and displays top 3 component for each category.
+	introduction: 'The components page',
+	description: `
+The components page renders the top ten components (icon, name, author, description, tags, downloads, stars and last modified) from the data received by the API call.\nIt also has a search bar to search amongst all the components and displays top 3 component for each category.
 #### API Response
 <img src="https://raw.githubusercontent.com/biojs/biojs-frontend/guide-assets/guide-assets/Top10_API_Response.png" width="500px" alt="API Response">
 
@@ -89,7 +88,7 @@ The components\' page renders the top ten components (icon, name, author, descri
 A fuzzy search has been implemented. You can find the details of the search component in its documentation.
 
 `,
-token: `
+	token: `
 <div id="component" v-for="component in components">
 \t ..loop through the ten components..
 \t<div class="image"
@@ -105,7 +104,8 @@ token: `
 		return {
 			components: [],
 			randomComponentNum: 5,
-			isComponentsLoading: true
+			isComponentsLoading: true,
+			page: 1
 		};
 	},
 	components: {
@@ -120,16 +120,31 @@ token: `
 			return '/component/' + url;
 		},
 		generateRandom () {
-			return '/random/'+this.randomComponentNum;
+			return '/random/' + this.randomComponentNum;
+		},
+		loadNextComponentsPage (scrollState) {
+			return axios.get(`${API_URL}components?page=${this.page}`)
+				.then((response) => {
+					const components = response.data.components;
+					if (components.length) {
+						this.components = this.components.concat(components);
+						this.page += 1;
+						if (scrollState) {
+							scrollState.loaded();
+						}
+					} else {
+						if (scrollState) {
+							scrollState.complete();
+						}
+					}
+				});
 		}
 	},
 	mounted () {
-		axios({ method: 'GET', 'url': API_URL + 'top/' }).then(result => {
-			this.components = result.data.top_components;
-			this.isComponentsLoading = false;
-		}, error => {
-			console.error(error);
-		});
+		this.loadNextComponentsPage()
+			.then(() => {
+				this.isComponentsLoading = false;
+			});
 	}
 };
 </script>
