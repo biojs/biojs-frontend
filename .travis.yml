@@ -15,7 +15,7 @@ jobs:
     script:
     - npm run unit
   - stage: deploy-dev
-    if: branch = develop
+    if: branch = master
     before_script:
     - docker pull philm/ansible_playbook
     - git clone -b master https://github.com/biojs/biojs-backend-ansible.git
