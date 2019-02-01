@@ -15,7 +15,7 @@ jobs:
     script:
     - npm run unit
   - stage: deploy-dev
-    if: branch = master
+    if: branch = master AND type = push
     before_script:
     - docker pull philm/ansible_playbook
     - git clone -b master https://github.com/biojs/biojs-backend-ansible.git
@@ -30,7 +30,7 @@ jobs:
       philm/ansible_playbook dev-deploy.yml
       --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
   - stage: deploy-production
-    if: branch = production
+    if: branch = production AND type = push
     before_script:
     - docker pull philm/ansible_playbook
     - git clone -b production https://github.com/biojs/biojs-backend-ansible.git
