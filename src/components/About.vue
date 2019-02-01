@@ -30,6 +30,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #about {
+	min-height: 100vh;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
