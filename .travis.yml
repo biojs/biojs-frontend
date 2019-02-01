@@ -14,40 +14,36 @@ jobs:
     - npm install
     script:
     - npm run unit
-  - stage: testing-conditions
+  - stage: deploy-dev
     if: branch = master AND type = push
-    install:
-    - npm install
-  # - stage: deploy-dev
-  #   if: branch = master
-  #   before_script:
-  #   - docker pull philm/ansible_playbook
-  #   - git clone -b master https://github.com/biojs/biojs-backend-ansible.git
-  #   - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv
-  #     -in deployment-key.enc -out ~/.ssh/id_rsa -d
-  #   script:
-  #   - docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks
-  #     -e DB_USER=$DB_USER
-  #     -e DB_PASSWORD=$DB_PASSWORD
-  #     -e GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET
-  #     -e GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID
-  #     philm/ansible_playbook dev-deploy.yml
-  #     --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
-  # - stage: deploy-production
-  #   if: branch = production
-  #   before_script:
-  #   - docker pull philm/ansible_playbook
-  #   - git clone -b production https://github.com/biojs/biojs-backend-ansible.git
-  #   - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv
-  #     -in deployment-key.enc -out ~/.ssh/id_rsa -d
-  #   script:
-  #   - docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks
-  #     -e DB_USER=$DB_USER
-  #     -e DB_PASSWORD=$DB_PASSWORD
-  #     -e GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET
-  #     -e GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID
-  #     philm/ansible_playbook production-deploy.yml
-  #     --private-key=~/.ssh/id_rsa -u ubuntu -i production_hosts
+    before_script:
+    - docker pull philm/ansible_playbook
+    - git clone -b master https://github.com/biojs/biojs-backend-ansible.git
+    - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv
+      -in deployment-key.enc -out ~/.ssh/id_rsa -d
+    script:
+    - docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks
+      -e DB_USER=$DB_USER
+      -e DB_PASSWORD=$DB_PASSWORD
+      -e GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET
+      -e GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID
+      philm/ansible_playbook dev-deploy.yml
+      --private-key=~/.ssh/id_rsa -u ubuntu -i dev_hosts
+  - stage: deploy-production
+    if: branch = production AND type = push
+    before_script:
+    - docker pull philm/ansible_playbook
+    - git clone -b production https://github.com/biojs/biojs-backend-ansible.git
+    - openssl aes-256-cbc -K $encrypted_89f8a6cbe683_key -iv $encrypted_89f8a6cbe683_iv
+      -in deployment-key.enc -out ~/.ssh/id_rsa -d
+    script:
+    - docker run -it -v ~/.ssh/id_rsa:/root/.ssh/id_rsa -v "$(pwd)/biojs-backend-ansible":/ansible/playbooks
+      -e DB_USER=$DB_USER
+      -e DB_PASSWORD=$DB_PASSWORD
+      -e GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET
+      -e GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID
+      philm/ansible_playbook production-deploy.yml
+      --private-key=~/.ssh/id_rsa -u ubuntu -i production_hosts
 notifications:
   email: true
 env:
