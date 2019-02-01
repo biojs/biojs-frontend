@@ -195,6 +195,7 @@ export default {
 	top: 35px;
 	height: 40px;
 	width: 40px;
+	z-index: 100;
 	display: none;
 	img {
 		height: 100%;
