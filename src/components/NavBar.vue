@@ -22,7 +22,6 @@
 				<div id="mobileNavSocialLink">
 					<a href="https://github.com/biojs/biojs-frontend"><img src="../../static/github.png" alt="GitHub" class="mobileNavSocialLinkImg"></a>
 					<a href="https://twitter.com/biojslibrary?lang=en"><img src="../../static/twitter.png" alt="Twitter" class="mobileNavSocialLinkImg"></a>
-					<a href="https://plus.google.com/+BiojsNet1/posts"><img src="../../static/google-plus.png" alt="Google Plus" class="mobileNavSocialLinkImg"></a>
 					<a href="mailto:community@biojs.net"><img src="../../static/mail.png" alt="Mail" class="mobileNavSocialLinkImg"></a>
 				</div>
 			</div>
@@ -230,10 +229,10 @@ export default {
 		justify-content: flex-start;
 		background: #fff;
 		margin: 0;
-		-webkit-transition: 0.2s all ease-in;
-		-moz-transition: 0.2s all ease-in;
-		-o-transition: 0.2s all ease-in;
-		transition: 0.2s all ease-in;
+		-webkit-transition: 0.4s all cubic-bezier(1,0,0,1);
+		-moz-transition: 0.4s all cubic-bezier(1,0,0,1);
+		-o-transition: 0.4s all cubic-bezier(1,0,0,1);
+		transition: 0.4s all cubic-bezier(1,0,0,1);
 		span {
 			padding-left: 30px;
 			line-height: 60px;
