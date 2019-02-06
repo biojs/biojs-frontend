@@ -8,6 +8,9 @@
 			<router-link class="navLink" to="/">
 				<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
 			</router-link>
+			<div id="mobileNavHeading">
+				<h1 id="bio">Bio</h1><h1 id="js">JS</h1>
+			</div>
 			<router-link class="navLink" to="/components"><span>Components</span></router-link>
 			<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
 			<router-link class="navLink" to="/about"><span>About</span></router-link>
@@ -15,12 +18,22 @@
 			<div class="close">
 				<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
 			</div>
+			<div id="mobileNavBottom">
+				<div id="mobileNavSocialLink">
+					<a href="https://github.com/biojs/biojs-frontend"><img src="../../static/github.png" alt="GitHub" class="mobileNavSocialLinkImg"></a>
+					<a href="https://twitter.com/biojslibrary?lang=en"><img src="../../static/twitter.png" alt="Twitter" class="mobileNavSocialLinkImg"></a>
+					<a href="mailto:community@biojs.net"><img src="../../static/mail.png" alt="Mail" class="mobileNavSocialLinkImg"></a>
+				</div>
+			</div>
 		</div>
 		<div id="mobileNav">
 			<div class="hamburger" onclick="">
 				<img src="../../static/hamburger.png" alt="Open Menu" @click="openMenu()">
 			</div>
-			<h2>Bio<span>JS</span></h2>
+			
+			<router-link class="navLink logoLink" to="/">
+				<span><img src="../../static/logo.png" height="44px"></span>
+			</router-link>
 		</div>
 	</div>
 </div>
@@ -100,6 +113,7 @@ export default {
 	width: 80%;
 	display: flex;
 	justify-content: space-around;
+	background: #f7f9ff;
 	span {
 		font-size: 17px;
 		cursor: pointer;
@@ -123,16 +137,44 @@ export default {
 		display: none;
 	}
 }
+
+#mobileNavHeading{
+	display: none;
+	padding: 30px;
+	#bio{
+		color: #007E3A;
+	}
+	#js{
+		color: #000000;
+	}
+
+	#bio, #js{
+		font-weight: 700;
+		display: inline !important;
+	}
+}
+#mobileNavBottom{
+	display: none;
+	flex: 1;
+	align-items: flex-end;
+
+	#mobileNavSocialLink{
+		display: flex;
+		justify-content: center;
+		padding: 30px;
+		flex: 1;
+	}
+}
 #mobileNav {
 	display: none;
 	align-items: center;
-	h2 {
-		color: #007e3a;
-		margin: 0;
-		padding: 0;
+	width: 100%;
+	.logoLink {
+		margin-left: auto;
+		padding-right: 20px;
 	}
-	span {
-		color: #000;
+	.navLogo-m {
+		height: 44px;
 	}
 }
 .hamburger {
@@ -150,9 +192,10 @@ export default {
 .close {
 	position: absolute;
 	right: 20px;
-	top: 10px;
+	top: 35px;
 	height: 40px;
 	width: 40px;
+	z-index: 100;
 	display: none;
 	img {
 		height: 100%;
@@ -187,11 +230,10 @@ export default {
 		justify-content: flex-start;
 		background: #fff;
 		margin: 0;
-		padding-top: 80px;
-		-webkit-transition: 0.3s all ease-in;
-		-moz-transition: 0.3s all ease-in;
-		-o-transition: 0.3s all ease-in;
-		transition: 0.3s all ease-in;
+		-webkit-transition: 0.4s all cubic-bezier(1,0,0,1);
+		-moz-transition: 0.4s all cubic-bezier(1,0,0,1);
+		-o-transition: 0.4s all cubic-bezier(1,0,0,1);
+		transition: 0.4s all cubic-bezier(1,0,0,1);
 		span {
 			padding-left: 30px;
 			line-height: 60px;
@@ -212,11 +254,14 @@ export default {
 	#mobileNav {
 		display: flex;
 	}
-	.close {
+	#mobileNav, #mobileNavBottom, .close {
 		display: flex;
 	}
 	#homeLink {
 		order: -1;
+	}
+	#mobileNavHeading{
+		display: block;
 	}
 }
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
