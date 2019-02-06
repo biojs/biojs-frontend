@@ -1,5 +1,5 @@
 <template>
-	<b-card-groups class="testimonialContainer">
+	<b-card-group class="testimonialContainer">
 		<b-card v-for="testimonial in testimonials" class="testimonial" :key="testimonial.id">
 			<div id="hearts">
 				<i class="material-icons" v-for="n in testimonial.stars" :key="n" style="text-align: center; color: #dc3545;">favorite</i>
@@ -10,7 +10,7 @@
                 <footer class="blockquote-footer">{{ testimonial.author }}: <cite title="Source Title">{{ testimonial.specialization }}</cite></footer>
             </blockquote>
         </b-card>
-	</b-card-groups>
+	</b-card-group>
 </template>
 <script>
 export default {
