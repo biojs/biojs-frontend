@@ -12,7 +12,7 @@
 				<h1 id="bio">Bio</h1><h1 id="js">JS</h1>
 			</div>
 			<router-link class="navLink" to="/components"><span>Components</span></router-link>
-			<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
+			<a class="navLink" href="https://edu.biojs.net"><span>Guide</span></a>
 			<router-link class="navLink" to="/about"><span>About</span></router-link>
 			<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
 			<div class="close">
@@ -30,7 +30,7 @@
 			<div class="hamburger" onclick="">
 				<img src="../../static/hamburger.png" alt="Open Menu" @click="openMenu()">
 			</div>
-			
+
 			<router-link class="navLink logoLink" to="/">
 				<span><img src="../../static/logo.png" height="44px"></span>
 			</router-link>
