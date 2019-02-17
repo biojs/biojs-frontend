@@ -30,7 +30,7 @@
 			<div class="hamburger" onclick="">
 				<img src="../../static/hamburger.png" alt="Open Menu" @click="openMenu()">
 			</div>
-			
+
 			<router-link class="navLink logoLink" to="/">
 				<span><img src="../../static/logo.png" height="44px"></span>
 			</router-link>
