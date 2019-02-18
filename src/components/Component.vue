@@ -85,6 +85,11 @@
 					<contributor v-for="contributor in contributors" :key="contributor.id" :imageURL="contributor.avatar_url" :name="contributor.username" />
 				</div>
 			</div>
+			<div id="readme" class="section">
+				<div class="title">README</div>
+				<div class="content" v-html="computeReadme ()">
+				</div>
+			</div>
 			<div id="legal" class="section">
 				<div class="title">Legal</div>
 				<div class="content">
@@ -142,6 +147,7 @@ A watcher has been added to the component to render the details dynamically when
 			contributors: [],
 			license: '',
 			author: '',
+			readme: '',
 			githubURL: 'https://www.github.com/',
 			sniper_data: {},
 			js_dependencies: [],
@@ -205,6 +211,7 @@ A watcher has been added to the component to render the details dynamically when
 							value: details.forks
 						}
 					];
+					console.log(this.githubURL.slice(0, 8) + 'api.' + this.githubURL.slice(8, 18) + '/repos' + this.githubURL.slice(18) + '/contents/README.md');
 					const splitTime = time =>
 						time && typeof time === 'string' ? time.split('T')[0] : undefined;
 					this.stats = [
@@ -246,10 +253,37 @@ A watcher has been added to the component to render the details dynamically when
 					this.sniper_data = result.data.sniper_data;
 					this.js_dependencies = result.data.js_dependencies;
 					this.css_dependencies = result.data.css_dependencies;
-					this.isLoading = false;
 					const url = `${API_URL}details/${this.name}`;
 					console.log(this.sniper_data);
-
+					axios({
+						method: 'GET',
+						url: this.githubURL.slice(0, 8) + 'api.' + this.githubURL.slice(8, 18) + '/repos' + this.githubURL.slice(18) + '/contents/README.md'
+					}).then(
+						result => {
+							this.readme = result.data.content;
+							axios({
+								method: 'POST',
+								url: 'https://api.github.com/markdown/raw',
+								headers: {'Content-Type': 'text/plain'},
+								data: Buffer.from(result.data.content, 'base64').toString('ascii')
+							}).then(
+								result => {
+									this.readme = result.data;
+									this.isLoading = false;
+								},
+								error => {
+									this.readme = '';
+									this.isLoading = false;
+									console.log(error);
+								}
+							);
+						},
+						error => {
+							this.readme = '';
+							this.isLoading = false;
+							console.log(error);
+						}
+					);
 					axios({ method: 'GET', url }).then(
 						result => {
 							if (result.data.error) {
@@ -278,6 +312,13 @@ A watcher has been added to the component to render the details dynamically when
 				return 'legacy';
 			} else {
 				return 'none';
+			}
+		},
+		computeReadme () {
+			if (this.readme === '') {
+				return 'Not available';
+			} else {
+				return this.readme;
 			}
 		},
 		computeLicense () {
