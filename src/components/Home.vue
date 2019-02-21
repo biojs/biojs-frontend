@@ -170,7 +170,7 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	#search {
-		width: 35%;
+		width: 80%;
 	}
 }
 .tagName {
@@ -231,6 +231,7 @@ export default {
 	padding: 10px 7vw 30px 7vw;
 	justify-content: space-between;
 	#visAbout {
+		width: 40%;
 		margin-right: 5vw;
 	}
 	#visIframe {
@@ -269,6 +270,8 @@ export default {
 		flex-direction: column;
 	}
 	#visAbout {
+		width: 100% !important;
+		margin-right: 0 !important;
 		order: 2;
 	}
 	#visIframe {

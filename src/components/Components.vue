@@ -282,15 +282,12 @@ i::before {
 	}
 }
 #search {
-	width: 40%;
+	width: 80%;
 }
 @media (max-width: 800px) {
 	.image {
 		height: 200px;
 		width: 200px;
-	}
-	#search {
-		width: 90%;
 	}
 }
 @media (max-width: 700px) {

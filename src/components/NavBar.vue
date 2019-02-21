@@ -9,7 +9,7 @@
 				<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
 			</router-link>
 			<div id="mobileNavHeading">
-				<h1 id="bio">Bio</h1><h1 id="js">JS</h1>
+				<router-link to="/"><h1 id="bio">Bio</h1><h1 id="js">JS</h1></router-link>
 			</div>
 			<router-link class="navLink" to="/components"><span>Components</span></router-link>
 			<router-link class="navLink" to="/guide"><span>Guide</span></router-link>

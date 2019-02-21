@@ -125,7 +125,7 @@ A fuzzy search is implemented, more about which can be found here: https://githu
 	margin-top: -50px;
 }
 #resultsContent {
-	width: 60%;
+	width: 100%;
 	margin-bottom: 50px;
 	max-height: 300px;
 	overflow: auto;
@@ -184,11 +184,12 @@ A fuzzy search is implemented, more about which can be found here: https://githu
 	#searchForm {
 		align-items: center;
 		input {
+		width: 100%;
 		margin-bottom: 0 !important;
 		}
 	}
 	#resultsContent {
-		width: 80%;
+		width: 100%;
 	}
 }
 </style>
