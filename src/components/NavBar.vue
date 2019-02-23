@@ -5,8 +5,8 @@
 	</div>
 	<div class="navBar" :class="{ noShadow: !isShadow }">
 		<div id="nav" ref="nav">
-			<router-link class="navLink" to="/">
-				<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
+			<router-link class="navLink navLogo" to="/">
+				<span><img src="../../static/logo.png" height="50px"></span>
 			</router-link>
 			<div id="mobileNavHeading">
 				<h1 id="bio">Bio</h1><h1 id="js">JS</h1>
@@ -215,6 +215,12 @@ export default {
 	Responsive design
 */
 @media (max-width: 768px) {
+	.navLink{
+		span::after{
+			content: none!important;
+		}
+		padding: 30px 30px;
+	}
 	.navBar {
 		width: 100%;
 		height: 70px;
@@ -245,7 +251,6 @@ export default {
 		transition: 0.4s all cubic-bezier(1,0,0,1);
 		span {
 			padding-left: 30px;
-			line-height: 60px;
 			font-size: 20px;
 			cursor: pointer;
 			transition: 0.2s all ease-in-out;
@@ -279,7 +284,6 @@ export default {
 	#nav {
 		span {
 			font-size: 15px;
-			line-height: 40px;
 		}
 	}
 }
