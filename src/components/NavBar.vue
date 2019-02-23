@@ -221,6 +221,9 @@ export default {
 		}
 		padding: 30px 30px;
 	}
+	.navLink.active{
+		background-color: #efefef;
+	}
 	.navBar {
 		width: 100%;
 		height: 70px;
@@ -258,7 +261,7 @@ export default {
 		span:hover::after {
 			width: 0%;
 		}
-		.navlink:hover {
+		.navLink:hover {
 			background-color: #efefef;
 		}
 	}
