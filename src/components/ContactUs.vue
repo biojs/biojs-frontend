@@ -1,6 +1,6 @@
 <template>
 <div id="container">
-	<nav-bar />
+	<nav-bar  active="contact_us"/>
 	<heading title="Contact Us" />
 	<div id="content">
 		<p>

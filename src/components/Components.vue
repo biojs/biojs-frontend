@@ -1,6 +1,6 @@
 <template>
 <div id="components">
-	<navbar :isShadow="true" />
+	<navbar active="components" :isShadow="true" />
 	<heading title="Components" />
 	<div id="randomComponents" v-if="this.$route.query && this.$route.query.debug === 'true'">
 		<p id="">Generate</p>

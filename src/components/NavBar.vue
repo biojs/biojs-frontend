@@ -11,10 +11,10 @@
 			<div id="mobileNavHeading">
 				<h1 id="bio">Bio</h1><h1 id="js">JS</h1>
 			</div>
-			<router-link class="navLink" to="/components"><span>Components</span></router-link>
-			<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
-			<router-link class="navLink" to="/about"><span>About</span></router-link>
-			<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
+			<router-link class="navLink" :class="active=='components'?'active':''" to="/components"><span>Components</span></router-link>
+			<router-link class="navLink" :class="active=='guide'?'active':''" to="/guide"><span>Guide</span></router-link>
+			<router-link class="navLink" :class="active=='about'?'active':''" to="/about"><span>About</span></router-link>
+			<router-link class="navLink" :class="active=='contact_us'?'active':''" to="/contact"><span>Contact Us</span></router-link>
 			<div class="close">
 				<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
 			</div>
@@ -46,6 +46,11 @@ export default {
 	description: 'The navigation bar is made up with pure CSS. Vue-Router <router-link> has been used for links to various pages.',
 	token: '<div class="navBar">\n\t<div id="nav">\n\t\t<router-link to="/"><span>..</span></router-link>\n\t</div>\n</div>',
 	props: {
+		active: {
+			type: String,
+			required: false,
+			default: null
+		},
 		isShadow: {
 			type: Boolean,
 			required: false,
@@ -71,6 +76,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.active>span::after{
+	background: #007E3A;
+	width: 105%!important;
+}
 #nav-container {
 	width: 100%;
 	display: flex;
