@@ -264,6 +264,9 @@ i::before {
 		padding: 3px;
 	}
 }
+#topComponents {
+	max-width: 30%;
+}
 @media (max-width: 950px) {
 	#componentsContainer {
 		flex-direction: column;

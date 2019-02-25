@@ -187,6 +187,7 @@ export default {
 	}
 }
 .hamburger {
+	cursor: pointer;
 	display: none;
 	height: 40px;
 	width: 40px;
