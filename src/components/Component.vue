@@ -211,7 +211,6 @@ A watcher has been added to the component to render the details dynamically when
 							value: details.forks
 						}
 					];
-					console.log(this.githubURL.slice(0, 8) + 'api.' + this.githubURL.slice(8, 18) + '/repos' + this.githubURL.slice(18) + '/contents/README.md');
 					const splitTime = time =>
 						time && typeof time === 'string' ? time.split('T')[0] : undefined;
 					this.stats = [
@@ -255,9 +254,10 @@ A watcher has been added to the component to render the details dynamically when
 					this.css_dependencies = result.data.css_dependencies;
 					const url = `${API_URL}details/${this.name}`;
 					console.log(this.sniper_data);
+
 					axios({
 						method: 'GET',
-						url: this.githubURL.slice(0, 8) + 'api.' + this.githubURL.slice(8, 18) + '/repos' + this.githubURL.slice(18) + '/contents/README.md'
+						url: `https://api.github.com/repos/${this.githubURL.slice(19)}/contents/README.md`
 					}).then(
 						result => {
 							this.readme = result.data.content;
@@ -442,6 +442,11 @@ A watcher has been added to the component to render the details dynamically when
 #author {
   // margin-top: -20px;
   color: rgba(0, 0, 0, 0.7);
+}
+#readme {
+	* {
+		overflow-x: auto;
+	}
 }
 #biojsio {
   width: 80%;
