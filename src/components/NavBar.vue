@@ -122,7 +122,7 @@ export default {
 	width: 80%;
 	display: flex;
 	justify-content: space-around;
-	background: #f7f9ff;
+	background: #fff;
 	span {
 		font-size: 17px;
 		cursor: pointer;
