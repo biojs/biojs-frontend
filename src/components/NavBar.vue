@@ -5,16 +5,16 @@
 	</div>
 	<div class="navBar" :class="{ noShadow: !isShadow }">
 		<div id="nav" ref="nav">
-			<router-link class="navLink" to="/">
-				<span class="navLogo"><img src="../../static/logo.png" height="50px"></span>
+			<router-link class="navLink navLogo" to="/">
+				<span><img src="../../static/logo.png" height="50px"></span>
 			</router-link>
 			<div id="mobileNavHeading">
-				<h1 id="bio">Bio</h1><h1 id="js">JS</h1>
+				<router-link to="/"><h1 id="bio">Bio</h1><h1 id="js">JS</h1></router-link>
 			</div>
-			<router-link class="navLink" to="/components"><span>Components</span></router-link>
-			<router-link class="navLink" to="/guide"><span>Guide</span></router-link>
-			<router-link class="navLink" to="/about"><span>About</span></router-link>
-			<router-link class="navLink" to="/contact"><span>Contact Us</span></router-link>
+			<router-link class="navLink" :class="active=='components'?'active':''" to="/components"><span>Components</span></router-link>
+			<router-link class="navLink" :class="active=='guide'?'active':''" to="/guide"><span>Guide</span></router-link>
+			<router-link class="navLink" :class="active=='about'?'active':''" to="/about"><span>About</span></router-link>
+			<router-link class="navLink" :class="active=='contact_us'?'active':''" to="/contact"><span>Contact Us</span></router-link>
 			<div class="close">
 				<img @click="closeMenu()" src="../../static/close.png" alt="Close menu">
 			</div>
@@ -30,7 +30,7 @@
 			<div class="hamburger" onclick="">
 				<img src="../../static/hamburger.png" alt="Open Menu" @click="openMenu()">
 			</div>
-			
+
 			<router-link class="navLink logoLink" to="/">
 				<span><img src="../../static/logo.png" height="44px"></span>
 			</router-link>
@@ -46,6 +46,11 @@ export default {
 	description: 'The navigation bar is made up with pure CSS. Vue-Router <router-link> has been used for links to various pages.',
 	token: '<div class="navBar">\n\t<div id="nav">\n\t\t<router-link to="/"><span>..</span></router-link>\n\t</div>\n</div>',
 	props: {
+		active: {
+			type: String,
+			required: false,
+			default: null
+		},
 		isShadow: {
 			type: Boolean,
 			required: false,
@@ -71,6 +76,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.active>span::after{
+	background: #007E3A;
+	width: 105%!important;
+}
 #nav-container {
 	width: 100%;
 	display: flex;
@@ -113,7 +122,7 @@ export default {
 	width: 80%;
 	display: flex;
 	justify-content: space-around;
-	background: #f7f9ff;
+	background: #fff;
 	span {
 		font-size: 17px;
 		cursor: pointer;
@@ -178,6 +187,7 @@ export default {
 	}
 }
 .hamburger {
+	cursor: pointer;
 	display: none;
 	height: 40px;
 	width: 40px;
@@ -206,6 +216,15 @@ export default {
 	Responsive design
 */
 @media (max-width: 768px) {
+	.navLink{
+		span::after{
+			content: none!important;
+		}
+		padding: 30px 30px;
+	}
+	.navLink.active{
+		background-color: #efefef;
+	}
 	.navBar {
 		width: 100%;
 		height: 70px;
@@ -236,7 +255,6 @@ export default {
 		transition: 0.4s all cubic-bezier(1,0,0,1);
 		span {
 			padding-left: 30px;
-			line-height: 60px;
 			font-size: 20px;
 			cursor: pointer;
 			transition: 0.2s all ease-in-out;
@@ -244,7 +262,7 @@ export default {
 		span:hover::after {
 			width: 0%;
 		}
-		.navlink:hover {
+		.navLink:hover {
 			background-color: #efefef;
 		}
 	}
@@ -270,7 +288,6 @@ export default {
 	#nav {
 		span {
 			font-size: 15px;
-			line-height: 40px;
 		}
 	}
 }
