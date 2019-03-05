@@ -93,6 +93,7 @@
 			</div>
 		</div>
 	</div>
+	<app-footer/>
 </div>
 </template>
 
@@ -105,6 +106,7 @@ import Visualization from './Visualization.vue';
 import axios from 'axios';
 import { API_URL } from '../DB_CONFIG.js';
 import Loader from './Loader';
+import Footer from './Footer.vue';
 
 export default {
 	name: 'Component',
@@ -157,7 +159,8 @@ A watcher has been added to the component to render the details dynamically when
 		'component-stat': ComponentStat,
 		contributor: Contributor,
 		visualization: Visualization,
-		loader: Loader
+		loader: Loader,
+		'app-footer': Footer
 	},
 	mounted () {
 		this.fetchData();

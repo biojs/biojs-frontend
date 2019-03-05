@@ -13,11 +13,13 @@
 			</a>
 		</div>
 	</div>
+	<app-footer class="footer"/>
 </div>
 </template>
 <script>
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
+import Footer from './Footer.vue';
 
 export default {
 	data () {
@@ -27,7 +29,8 @@ export default {
 	},
 	components: {
 		'nav-bar': NavBar,
-		'heading': Heading
+		'heading': Heading,
+		'app-footer': Footer
 	}
 };
 </script>
@@ -49,5 +52,9 @@ export default {
 		font-weight: bold;
 		font-size: 18px;
 	}
+}
+.footer{
+	position: absolute;
+	bottom: 0px;
 }
 </style>

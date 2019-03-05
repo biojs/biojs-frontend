@@ -7,11 +7,13 @@
 		<router-link to="/components"><button type="button" class="btn btn-success btn-sm" id="btn">Explore</button></router-link>
 		<router-link to="/contact"><button type="button" class="btn btn-success btn-sm" id="btn">Contact Us</button></router-link>
 	</div>
+	<app-footer class="footer"/>
 </div>
 </template>
 <script>
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
+import Footer from './Footer.vue';
 
 export default {
 	name: 'About',
@@ -24,7 +26,8 @@ export default {
 	},
 	components: {
 		'heading': Heading,
-		'nav-bar': NavBar
+		'nav-bar': NavBar,
+		'app-footer': Footer
 	}
 };
 </script>
@@ -45,5 +48,9 @@ export default {
 	padding: 5px;
 	font-size: 20px;
 	margin: 10px;
+}
+.footer{
+	position: absolute;
+	bottom: 0px;
 }
 </style>

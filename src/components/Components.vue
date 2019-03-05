@@ -65,6 +65,7 @@
 			<component-table title="Most Recent" components="most_recent" />
 		</div>
 	</div>
+	<app-footer class="footer"/>
 </div>
 </template>
 <script>
@@ -75,6 +76,7 @@ import ComponentTable from './ComponentTable';
 import axios from 'axios';
 import {API_URL} from '../DB_CONFIG.js';
 import Loader from './Loader';
+import Footer from './Footer.vue';
 
 export default {
 	name: 'Components',
@@ -113,7 +115,8 @@ A fuzzy search has been implemented. You can find the details of the search comp
 		'heading': Heading,
 		'search-component': SearchComponent,
 		'component-table': ComponentTable,
-		'loader': Loader
+		'loader': Loader,
+		'app-footer': Footer
 	},
 	methods: {
 		computeURL (url) {
@@ -314,5 +317,9 @@ i::before {
 		flex-direction: column;
 		align-items: center;
 	}
+}
+.footer{
+	position: absolute;
+	bottom: 0px;
 }
 </style>

@@ -56,6 +56,7 @@
 		<prop-doc :component="SearchComponent"></prop-doc>
 		<prop-doc :component="Testimonial"></prop-doc>
 	</div>
+	<app-footer/>
 </div>
 </template>
 <script>
@@ -73,6 +74,7 @@ import Home from './Home.vue';
 import NavBar from './NavBar.vue';
 import SearchComponent from './SearchComponent.vue';
 import Testimonial from './Testimonial.vue';
+import Footer from './Footer.vue';
 
 export default {
 	name: 'Guide',
@@ -92,7 +94,8 @@ export default {
 		'home': Home,
 		'navbar': NavBar,
 		'searchComponent': SearchComponent,
-		'testimonial': Testimonial
+		'testimonial': Testimonial,
+		'app-footer': Footer
 	},
 	data () {
 		return {
@@ -107,7 +110,8 @@ export default {
 			Home,
 			NavBar,
 			SearchComponent,
-			Testimonial
+			Testimonial,
+			Footer
 		};
 	}
 };
