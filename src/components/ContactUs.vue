@@ -13,11 +13,13 @@
 			</a>
 		</div>
 	</div>
+	<foo-ter />
 </div>
 </template>
 <script>
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
+import Footer from './Footer.vue';
 
 export default {
 	data () {
@@ -27,7 +29,8 @@ export default {
 	},
 	components: {
 		'nav-bar': NavBar,
-		'heading': Heading
+		'heading': Heading,
+		'foo-ter': Footer
 	}
 };
 </script>
@@ -45,6 +48,7 @@ export default {
 }
 #contact {
 	font-weight: bold;
+	margin-bottom: 30px;
 	button {
 		font-weight: bold;
 		font-size: 18px;
