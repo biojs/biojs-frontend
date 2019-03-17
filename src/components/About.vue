@@ -1,6 +1,6 @@
 <template>
 <div id="about">
-	<nav-bar></nav-bar>
+	<nav-bar active="about"></nav-bar>
 	<heading title="About Us" />
 	<p id="aboutContent" v-html="about"></p>
 	<div>
