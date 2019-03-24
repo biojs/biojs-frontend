@@ -1,6 +1,6 @@
 <template>
 <div id="guide">
-	<navbar :isShadow="true" />
+	<navbar active="guide" :isShadow="true" />
 	<div id="documentation">
 		<heading title="Run BioJS Locally" />
 		<div id="build">

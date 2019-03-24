@@ -1,6 +1,6 @@
 <template>
 <div id="components">
-	<navbar :isShadow="true" />
+	<navbar active="components" :isShadow="true" />
 	<heading title="Components" />
 	<div id="randomComponents" v-if="this.$route.query && this.$route.query.debug === 'true'">
 		<p id="">Generate</p>
@@ -266,6 +266,9 @@ i::before {
 		border: 1px solid rgba(0,0,0,0.1);
 		padding: 3px;
 	}
+}
+#topComponents {
+	max-width: 30%;
 }
 @media (max-width: 950px) {
 	#componentsContainer {
