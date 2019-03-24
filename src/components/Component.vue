@@ -76,7 +76,7 @@
 			<div id="stats" class="section">
 				<div class="title">Stats</div>
 				<div id="statsContent" class="content">
-					<component-stat v-for="stat in stats" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" />
+					<component-stat v-for="stat in stats" :key="stat.id" :propName="stat.prop" :imageURL="stat.image" :propValue="stat.value" :statURL="stat.url"/>
 				</div>
 			</div>
 			<div id="contributors" class="section">
@@ -227,7 +227,8 @@ A watcher has been added to the component to render the details dynamically when
 						{
 							prop: 'commits',
 							image: require('../assets/component/commit.png'),
-							value: details.commits
+							value: details.commits,
+							url : details.github_url
 						},
 						{
 							prop: 'version',
