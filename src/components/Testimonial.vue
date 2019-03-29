@@ -2,8 +2,8 @@
 	<b-card-group class="testimonialContainer">
 		<b-card v-for="testimonial in testimonials" class="testimonial" :key="testimonial.id">
 			<div id="hearts">
-				<i class="material-icons" v-for="n in testimonial.stars" :key="n" style="text-align: center; color: #dc3545;">favorite</i>
-				<i class="material-icons" v-for="n in 5 - testimonial.stars" :key="n" style="text-align: center; color: #dc3545;">favorite_border</i>
+				<i class="material-icons" v-for="n in testimonial.stars" :key="n + '-a'" style="text-align: center; color: #dc3545;">favorite</i>
+				<i class="material-icons" v-for="n in 5 - testimonial.stars" :key="n + '-b'" style="text-align: center; color: #dc3545;">favorite_border</i>
 			</div>
             <blockquote class="blockquote mb-0">
                 <p style="font-size: 16px">{{ testimonial.testimonial }}</p>
