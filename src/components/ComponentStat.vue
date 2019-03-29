@@ -1,7 +1,9 @@
 <template>
 	<div id="stat">
-		<img :src="imageURL" :alt="propName" />
-		<span>{{ propValue }} {{ propName }}</span>
+		<a :href="statURL" :v-if="statURL" target="_blank">
+			<img :src="imageURL" :alt="propName" />
+		  <span>{{ propValue }} {{ propName }}</span>
+		</a>
 	</div>
 </template>
 <script>
@@ -36,6 +38,10 @@ export default {
 			required: true,
 			default: '',
 			note: 'Statistic of the property (a numerical in most cases).'
+		},
+		statURL: {
+			required: true,
+			note: 'Other links relevant to the stat'
 		}
 	}
 };
@@ -46,6 +52,19 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	margin: 15px;
+	img {
+		height: 50px;
+		margin: 10px;
+	}
+	span {
+		text-align: center;
+	}
+}
+
+#stat a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	img {
 		height: 50px;
 		margin: 10px;
