@@ -61,11 +61,11 @@ export default {
 #footer {
 	display: flex;
 	flex-direction: row;
-    width: 100%;
-    min-height: 200px;
+	width: 100%;
+	min-height: 200px;
 	font-size: 17px;
-    background: rgb(40,40,40);
-    color: white;
+	background: rgb(40,40,40);
+	color: white;
 	padding: 10px;
 	#description {
 		width: 40%;
