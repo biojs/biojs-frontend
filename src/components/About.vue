@@ -3,15 +3,17 @@
 	<nav-bar active="about"></nav-bar>
 	<heading title="About Us" />
 	<p id="aboutContent" v-html="about"></p>
-	<div>
+	<div id=buttons>
 		<router-link to="/components"><button type="button" class="btn btn-success btn-sm" id="btn">Explore</button></router-link>
 		<router-link to="/contact"><button type="button" class="btn btn-success btn-sm" id="btn">Contact Us</button></router-link>
 	</div>
+	<foo-ter />
 </div>
 </template>
 <script>
 import NavBar from './NavBar.vue';
 import Heading from './Heading.vue';
+import Footer from './Footer.vue';
 
 export default {
 	name: 'About',
@@ -24,7 +26,8 @@ export default {
 	},
 	components: {
 		'heading': Heading,
-		'nav-bar': NavBar
+		'nav-bar': NavBar,
+		'foo-ter': Footer
 	}
 };
 </script>
@@ -41,9 +44,12 @@ export default {
 	text-align: center;
 	font-size: 20px;
 }
-#btn {
-	padding: 5px;
-	font-size: 20px;
-	margin: 10px;
+#buttons {
+	margin-bottom: 20px;
+	#btn {
+		padding: 5px;
+		font-size: 20px;
+		margin: 10px;
+	}
 }
 </style>
