@@ -60,6 +60,7 @@
 				<router-link to="/guide"><button type="button" class="btn btn-success btn-sm">View Guide</button></router-link>
 			</div>
 		</div>
+		<foo-ter />
 	</div>
 </template>
 <script>
@@ -68,6 +69,7 @@ import Heading from './Heading.vue';
 import ComponentTable from './ComponentTable.vue';
 import Testimonial from './Testimonial.vue';
 import SearchComponent from './SearchComponent.vue';
+import Footer from './Footer.vue';
 export default {
 	name: 'Home',
 	introduction: 'The home component is a master component which combines most of the other components and renders the landing page.',
@@ -78,7 +80,8 @@ export default {
 		'heading': Heading,
 		'component-table': ComponentTable,
 		'testimonial': Testimonial,
-		'search-component': SearchComponent
+		'search-component': SearchComponent,
+		'foo-ter': Footer
 	},
 	data () {
 		return {

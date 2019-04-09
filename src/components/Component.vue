@@ -93,6 +93,7 @@
 			</div>
 		</div>
 	</div>
+	<foo-ter />
 </div>
 </template>
 
@@ -102,6 +103,7 @@ import Heading from './Heading.vue';
 import ComponentStat from './ComponentStat.vue';
 import Contributor from './Contributor.vue';
 import Visualization from './Visualization.vue';
+import Footer from './Footer.vue';
 import axios from 'axios';
 import { API_URL } from '../DB_CONFIG.js';
 import Loader from './Loader';
@@ -157,7 +159,8 @@ A watcher has been added to the component to render the details dynamically when
 		'component-stat': ComponentStat,
 		contributor: Contributor,
 		visualization: Visualization,
-		loader: Loader
+		loader: Loader,
+		'foo-ter': Footer
 	},
 	mounted () {
 		this.fetchData();

@@ -65,6 +65,7 @@
 			<component-table title="Most Recent" components="most_recent" />
 		</div>
 	</div>
+	<foo-ter />
 </div>
 </template>
 <script>
@@ -72,6 +73,7 @@ import NavBar from './NavBar';
 import Heading from './Heading';
 import SearchComponent from './SearchComponent';
 import ComponentTable from './ComponentTable';
+import Footer from './Footer.vue';
 import axios from 'axios';
 import {API_URL} from '../DB_CONFIG.js';
 import Loader from './Loader';
@@ -113,7 +115,8 @@ A fuzzy search has been implemented. You can find the details of the search comp
 		'heading': Heading,
 		'search-component': SearchComponent,
 		'component-table': ComponentTable,
-		'loader': Loader
+		'loader': Loader,
+		'foo-ter': Footer
 	},
 	methods: {
 		computeURL (url) {
