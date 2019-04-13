@@ -60,8 +60,8 @@
 </div>
 </template>
 <script>
-import propDoc from '@/../static/node_modules/propdoc';
-import '@/../static/node_modules/propdoc/style.scss';
+import propDoc from 'propdoc';
+import 'propdoc/style.scss';
 import About from './About.vue';
 import Component from './Component.vue';
 import Components from './Components.vue';
