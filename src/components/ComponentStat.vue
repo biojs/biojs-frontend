@@ -2,7 +2,7 @@
 	<div id="stat">
 		<a :href="statURL" :v-if="statURL" target="_blank">
 			<img :src="imageURL" :alt="propName" />
-		  <span>{{ propValue }} {{ propName }}</span>
+			<span>{{ propValue }} {{ propName }}</span>
 		</a>
 	</div>
 </template>

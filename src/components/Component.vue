@@ -231,7 +231,7 @@ A watcher has been added to the component to render the details dynamically when
 							prop: 'commits',
 							image: require('../assets/component/commit.png'),
 							value: details.commits,
-							url : details.github_url
+							url: details.github_url
 						},
 						{
 							prop: 'version',
