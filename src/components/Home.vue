@@ -9,11 +9,10 @@
 					<router-link to="/components"><button type="button" class="btn btn-success btn-sm">Explore</button></router-link>
 					<router-link to="/about"><button type="button" class="btn btn-success btn-sm">Learn More</button></router-link>
 				</div>
-				<img src="@/../static/phone.png" id="phone" />
 			</div>
 		</div>
 		<div id="visualize">
-			<heading title="Visualize" />
+			<heading title="Featured Visualization" />
 			<div id="visContent">
 				<div id="visAbout">
 					<router-link :to="'/component/' + visualization.url" id="visName"><h2>{{visualization.name}}</h2></router-link>
@@ -29,8 +28,6 @@
 					</div>
 					<router-link :to="'/component/' + visualization.url"><button type="button" class="btn btn-success btn-sm">Visit {{visualization.name}}</button></router-link>
 					<br><br>
-					<h2>Browse all components</h2>
-					<search-component />
 				</div>
 				<div id="visIframe">
 					<iframe src="@/../static/visualization/index.html" frameborder="0"></iframe>
@@ -48,18 +45,19 @@
 				<search-component />
 			</div>
 		</div>
+		<!--
 		<div id="testimonials">
 			<heading title="Why biologists love BioJS!" color="#FFFFFF" />
 			<testimonial />
-		</div>
-		<div id="about">
+		</div>-->
+		<!--<div id="about">
 			<heading title="Get to know BioJS" />
 			<p>{{ aboutBioJS }}</p>
 			<div id="aboutButtons">
 				<router-link to="/about"><button type="button" class="btn btn-success btn-sm">Learn More</button></router-link>
 				<router-link to="/guide"><button type="button" class="btn btn-success btn-sm">View Guide</button></router-link>
 			</div>
-		</div>
+		</div>-->
 		<foo-ter />
 	</div>
 </template>
@@ -85,7 +83,7 @@ export default {
 	},
 	data () {
 		return {
-			intro: 'BioJS is a library of over hundred JavaScript components enabling you to visualize and process data using current web technologies.',
+			intro: 'BioJS is a library of over hundred JavaScript components enabling you to visualize and process data using web technologies.',
 			aboutBioJS: 'BioJS unites users and developers from all around the globe to create outstanding biological data representations. The open-source character of the BioJS project makes it easy for anyone to follow and discuss current developments in the project, as well as to contribute and share their code with others.',
 			visualization: {
 				name: 'bio-pv',
@@ -105,14 +103,10 @@ export default {
 	background: #ffffff;
 }
 #coverContainer {
-	height: calc(100vh - 70px);
 	width: 100%;
 	display: flex;
-	align-items: center;
-	padding: 0 10% 0 10%;
-}
-#coverContent {
-	width: 40%;
+	align-items: top;
+	padding: 10%;
 }
 #coverContent {
 	h1 {

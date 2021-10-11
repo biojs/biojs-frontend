@@ -1,6 +1,6 @@
 <template>
 <div>
-	<h1 :style="{color: color}"><u>{{ title }}</u></h1>
+	<h1 :style="{color: color}">{{ title }}</h1>
 </div>
 </template>
 <script>
@@ -8,7 +8,7 @@ export default {
 	name: 'Heading',
 	introduction: 'The heading component is meant for all the headings in each section.',
 	description: 'Heading component is undoubtedly the most used component. It defines the heading for each section. It accepts two props: title and color.',
-	token: '<h1 :style="{color: color}">\n\t<u>{{ title }}</u>\n</h1>',
+	token: '<h1 :style="{color: color}">\n\t{{ title }}\n</h1>',
 	props: {
 		title: {
 			type: String,
